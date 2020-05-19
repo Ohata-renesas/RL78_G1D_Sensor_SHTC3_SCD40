@@ -75,6 +75,11 @@
       document.getElementById('temperatureData').innerHTML  = "TEMP: " + result.temperatureData + " °C"
       document.getElementById('humidityData').innerHTML     = "HUMI: " + result.humidityData + " %RH"
       document.getElementById('co2Data').innerHTML          = "CO2: " + result.co2Data 
+
+      console.log("Temperature: " + result.temperatureData)
+      console.log("Humidity: "    + result.temperatureData)
+      console.log("CO2: "         + result.temperatureData)
+      
       return result;
     }
 
