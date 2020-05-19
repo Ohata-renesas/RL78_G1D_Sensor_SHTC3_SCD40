@@ -77,9 +77,9 @@
       document.getElementById('co2Data').innerHTML          = "CO2: " + result.co2Data 
 
       console.log("Temperature: " + result.temperatureData)
-      console.log("Humidity: "    + result.temperatureData)
-      console.log("CO2: "         + result.temperatureData)
-      
+      console.log("Humidity: "    + result.humidityData)
+      console.log("CO2: "         + result.co2Data)
+
       return result;
     }
 
