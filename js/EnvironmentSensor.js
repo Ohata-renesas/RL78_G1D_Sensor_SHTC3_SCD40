@@ -1,20 +1,20 @@
 (function() {
   'use strict';
 
-  const DISCONNECT      = 0
-  const CONNECT         = 1
-  const CALIBRATION_NO  = 0
-  const CALIBRATION_YES = 1
+  const DISCONNECT      = 0;
+  const CONNECT         = 1;
+  const CALIBRATION_NO  = 0;
+  const CALIBRATION_YES = 1;
 
   class EnvironmentSensor {
     constructor() {
       this.device                   = null;
       this.server                   = null;
       this.characteristic           = null;
-      this.userDeviceName           = 'RL78G1D'
-      this.userServiceUUID          = '92b60060-fa5f-4dcc-9312-d8f3dad1675f'
-      this.userCharacteristicUUID   = '92b60125-fa5f-4dcc-9312-d8f3dad1675f'
-      this.connectionStatus         = DISCONNECT
+      this.userDeviceName           = 'RL78G1D';
+      this.userServiceUUID          = '92b60060-fa5f-4dcc-9312-d8f3dad1675f';
+      this.userCharacteristicUUID   = '92b60125-fa5f-4dcc-9312-d8f3dad1675f';
+      this.connectionStatus         = DISCONNECT;
     }
 
     connect() {      
@@ -25,43 +25,43 @@
         optionalServices: [this.userServiceUUID]      
         })
       .then(device => {
-        document.getElementById('statusText').innerHTML = "Connect the device"
+        document.getElementById('statusText').innerHTML = "Connect the device";
         this.device = device;
         this.device.addEventListener('gattserverdisconnected', this.onDisconnected);
         return device.gatt.connect();
       })
       .then(server => {
-        document.getElementById('statusText').innerHTML = "Get the service"
-        return server.getPrimaryService(this.userServiceUUID)
+        document.getElementById('statusText').innerHTML = "Get the service";
+        return server.getPrimaryService(this.userServiceUUID);
       })
       .then(service => {
-        document.getElementById('statusText').innerHTML = "Get the characateristic"
-        return service.getCharacteristic(this.userCharacteristicUUID)
+        document.getElementById('statusText').innerHTML = "Get the characateristic";
+        return service.getCharacteristic(this.userCharacteristicUUID);
       })
       .then(characteristic => {
-        this.characteristic = characteristic
-        document.getElementById('statusText').innerHTML = "Start notification"
-        return characteristic.startNotifications()
+        this.characteristic = characteristic;
+        document.getElementById('statusText').innerHTML = "Start notification";
+        return characteristic.startNotifications();
       })      
     }
 
     disconnect() {   
       if (!this.device) {
         var error = "No Bluetooth Device";
-        document.getElementById('statusText').innerHTML = error
+        document.getElementById('statusText').innerHTML = error;
         console.log('Error : ' + error);
         return;
       }
     
       if (this.device.gatt.connected) {
-        this.changeConnectionStatus()
+        this.changeConnectionStatus();
         console.log('Execute : disconnect');
         
         return this.device.gatt.disconnect();
       } 
       else {
        var error = "Bluetooth Device is already disconnected";
-       document.getElementById('statusText').innerHTML = error
+       document.getElementById('statusText').innerHTML = error;
        console.log('Error : ' + error);
        return;
       }   
@@ -69,32 +69,32 @@
     }
 
     onDisconnected(event) {
-      this.connectionStatus = DISCONNECT
-      document.getElementById('connectButton').innerHTML = "CONNECT"
-      document.getElementById('statusText').innerHTML = "Disconnect the device"
+      this.connectionStatus = DISCONNECT;
+      document.getElementById('connectButton').innerHTML = "CONNECT";
+      document.getElementById('statusText').innerHTML = "Disconnect the device";
     }
 
     isConnected() {
-      return this.connectionStatus
+      return this.connectionStatus;
     }
 
     changeConnectionStatus() {
       
       switch (this.connectionStatus) {
         case CONNECT :
-          this.connectionStatus = DISCONNECT
-          document.getElementById('connectButton').innerHTML = "CONNECT"
-          document.getElementById('statusText').innerHTML = "Disconnect the device"
+          this.connectionStatus = DISCONNECT;
+          document.getElementById('connectButton').innerHTML = "CONNECT";
+          document.getElementById('statusText').innerHTML = "Disconnect the device";
           break;
 
         case DISCONNECT :
-          this.connectionStatus = CONNECT
-          document.getElementById('connectButton').innerHTML = "DISCONNECT"
-          document.getElementById('statusText').innerHTML = "Measurement"
-          break
+          this.connectionStatus = CONNECT;
+          document.getElementById('connectButton').innerHTML = "DISCONNECT";
+          document.getElementById('statusText').innerHTML = "Measurement";
+          break;
 
         default :
-         break
+         break;
       }
     }
 
@@ -104,27 +104,27 @@
       let result = {}
       
       // Calculate sensor data
-      result.temperatureData  = (value.getUint8(0) << 8) + value.getUint8(1) + (value.getUint8(2) * 0.01)
-      result.humidityData     = (value.getUint8(3) << 8) + value.getUint8(4) + (value.getUint8(5) * 0.01)
-      result.co2Data          = (value.getUint8(6) << 8) + value.getUint8(7)
-      result.calibration      = value.getUint8(8)
+      result.temperatureData  = (value.getUint8(0) << 8) + value.getUint8(1) + (value.getUint8(2) * 0.01);
+      result.humidityData     = (value.getUint8(3) << 8) + value.getUint8(4) + (value.getUint8(5) * 0.01);
+      result.co2Data          = (value.getUint8(6) << 8) + value.getUint8(7);
+      result.calibration      = value.getUint8(8);
 
       // Set sensor data to text
-      document.getElementById('temperatureData').innerHTML  = "TEMP: " + result.temperatureData + " °C"
-      document.getElementById('humidityData').innerHTML     = "HUMI: " + result.humidityData + " %RH"
-      document.getElementById('co2Data').innerHTML          = "CO2: " + result.co2Data + " ppm"
+      document.getElementById('temperatureData').innerHTML  = "TEMP: " + result.temperatureData + " °C";
+      document.getElementById('humidityData').innerHTML     = "HUMI: " + result.humidityData + " %RH";
+      document.getElementById('co2Data').innerHTML          = "CO2: " + result.co2Data + " ppm";
       if (result.calibration == CALIBRATION_NO) {
-        document.getElementById('statusText').innerHTML = "Measurement"
+        document.getElementById('statusText').innerHTML     = "Measurement";
       }
       else {
-        document.getElementById('statusText').innerHTML      = "Calibration"
+        document.getElementById('statusText').innerHTML     = "Calibration";
       }
 
       // Log
-      console.log("Temperature: " + result.temperatureData)
-      console.log("Humidity: "    + result.humidityData)
-      console.log("CO2: "         + result.co2Data)
-      console.log("Calibration: " + result.calibration)
+      console.log("Temperature: " + result.temperatureData);
+      console.log("Humidity: "    + result.humidityData);
+      console.log("CO2: "         + result.co2Data);
+      console.log("Calibration: " + result.calibration);
 
       return result;
     }

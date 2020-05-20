@@ -10,18 +10,18 @@ button.addEventListener('click', function() {
   if (!environmentSensor.isConnected()) {
     environmentSensor.connect()
     .then(_ => {    
-      environmentSensor.changeConnectionStatus()
+      environmentSensor.changeConnectionStatus();
       environmentSensor.characteristic.addEventListener('characteristicvaluechanged', event => {
-        let result = environmentSensor.parseSensorData(event.target.value)
-        temperatureData.push(result.temperatureData)
-        humidityData.push(result.humidityData)
-        co2Data.push(result.co2Data)
+        let result = environmentSensor.parseSensorData(event.target.value);
+        temperatureData.push(result.temperatureData);
+        humidityData.push(result.humidityData);
+        co2Data.push(result.co2Data);
         drawSensorData();
       })
     })
     .catch(error => {
-      document.getElementById('statusText').innerHTML = error
-      console.log("error:" + error)
+      document.getElementById('statusText').innerHTML = error;
+      console.log("error:" + error);
     });
   } 
   else {
@@ -38,11 +38,15 @@ button.addEventListener('click', function() {
 
 function drawSensorData() {
   requestAnimationFrame(() => {
+
+    console.log(canvas.width + "px");
+    console.log(canvas.height + "px");
+
     canvas.width = parseInt(getComputedStyle(canvas).width.slice(0, -2)) * devicePixelRatio;
     canvas.height = parseInt(getComputedStyle(canvas).height.slice(0, -2)) * devicePixelRatio;
 
-    console.log(canvas.width + "px")
-    console.log(canvas.height + "px")
+    console.log(canvas.width + "px");
+    console.log(canvas.height + "px");
 
     let context = canvas.getContext('2d');
     let margin = 2;
