@@ -78,7 +78,7 @@
     }
 
     isConnected() {
-      return connectionStatus
+      return this.connectionStatus
     }
 
     changeConnectionStatus() {
