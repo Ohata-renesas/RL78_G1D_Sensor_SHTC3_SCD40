@@ -7,7 +7,7 @@ let mode            = 'meter';
 
 button.addEventListener('click', function() {
 
-  if (!environmentSensor.device.gatt.connected) {
+  if (!environmentSensor.device) {
     environmentSensor.connect()
     .then(_ => {
       document.getElementById('connectButton').innerHTML = "DISCONNECT"

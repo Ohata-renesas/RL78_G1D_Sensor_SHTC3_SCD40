@@ -24,7 +24,7 @@
       .then(device => {
         document.getElementById('statusText').innerHTML = "Connect the device"
         this.device = device;
-        this.device.addEventListener('gattserverdisconnected', this.disconnect);
+        this.device.addEventListener('gattserverdisconnected', this.onDisconnected);
         return device.gatt.connect();
       })
       .then(server => {
@@ -64,6 +64,16 @@
        return;
       }   
 
+    }
+
+    onDisconnected(event) {
+      if (this.device) {
+        document.getElementById('connectButton').innerHTML = "CONNECT"
+        document.getElementById('statusText').innerHTML = "Disconnect the device"
+      }
+      else {
+        // nothing
+      }
     }
 
     parseSensorData(value) {
