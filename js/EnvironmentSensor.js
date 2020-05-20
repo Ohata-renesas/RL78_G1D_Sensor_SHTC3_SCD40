@@ -10,7 +10,7 @@
     constructor() {
       this.device                   = null;
       this.server                   = null;
-      this.characteristic           = null
+      this.characteristic           = null;
       this.userDeviceName           = 'RL78G1D'
       this.userServiceUUID          = '92b60060-fa5f-4dcc-9312-d8f3dad1675f'
       this.userCharacteristicUUID   = '92b60125-fa5f-4dcc-9312-d8f3dad1675f'
@@ -85,11 +85,13 @@
       value = value.buffer ? value : new DataView(value);
       let result = {}
       
+      // Calculate sensor data
       result.temperatureData  = (value.getUint8(0) << 8) + value.getUint8(1) + (value.getUint8(2) * 0.01)
       result.humidityData     = (value.getUint8(3) << 8) + value.getUint8(4) + (value.getUint8(5) * 0.01)
       result.co2Data          = (value.getUint8(6) << 8) + value.getUint8(7)
       result.calibration      = value.getUint8(8)
 
+      // Set sensor data to text
       document.getElementById('temperatureData').innerHTML  = "TEMP: " + result.temperatureData + " °C"
       document.getElementById('humidityData').innerHTML     = "HUMI: " + result.humidityData + " %RH"
       document.getElementById('co2Data').innerHTML          = "CO2: " + result.co2Data + " ppm"
@@ -100,6 +102,7 @@
         document.getElementById('statusText').innerHTML      = "Calibration"
       }
 
+      // Log
       console.log("Temperature: " + result.temperatureData)
       console.log("Humidity: "    + result.humidityData)
       console.log("CO2: "         + result.co2Data)
@@ -109,9 +112,9 @@
     }
   }
 
-  window.environmentSensor = new EnvironmentSensor();
-  window.sensorIsConnected       = CONNECT;
-  window.sensorIsDisconnected    = DISCONNECT;
+  window.environmentSensor    = new EnvironmentSensor();
+  window.sensorIsConnected    = CONNECT;
+  window.sensorIsDisconnected = DISCONNECT;
 
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').then(function(registration) {
