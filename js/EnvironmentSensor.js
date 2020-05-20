@@ -71,14 +71,22 @@
       result.temperatureData  = (value.getUint8(0) << 8) + value.getUint8(1) + (value.getUint8(2) * 0.01)
       result.humidityData     = (value.getUint8(3) << 8) + value.getUint8(4) + (value.getUint8(5) * 0.01)
       result.co2Data          = (value.getUint8(6) << 8) + value.getUint8(7)
+      result.calibration      = value.getUint8(8)
 
       document.getElementById('temperatureData').innerHTML  = "TEMP: " + result.temperatureData + " °C"
       document.getElementById('humidityData').innerHTML     = "HUMI: " + result.humidityData + " %RH"
       document.getElementById('co2Data').innerHTML          = "CO2: " + result.co2Data 
+      if (result.calibration == 0) {
+        document.getElementById('calibration').innerHTML      = "Calibration: NO"
+      }
+      else {
+        document.getElementById('calibration').innerHTML      = "Calibration: YES"
+      }
 
       console.log("Temperature: " + result.temperatureData)
       console.log("Humidity: "    + result.humidityData)
       console.log("CO2: "         + result.co2Data)
+      console.log("Calibration: " + result.calibration)
 
       return result;
     }
