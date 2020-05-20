@@ -34,6 +34,7 @@
       })
       .then(characteristic => {
         characteristic.startNotifications().then(_ => {
+          this.changeConnectionStatus(CONNECT)
           document.getElementById('connectButton').innerHTML = "DISCONNECT"
           characteristic.addEventListener('characteristicvaluechanged', event => {
             let result = this.parseSensorData(event.target.value)
@@ -51,6 +52,7 @@
       }
     
       if (this.device.gatt.connected) {
+        this.changeConnectionStatus(DISCONNECT)
         console.log('Execute : disconnect');
         document.getElementById('connectButton').innerHTML = "CONNECT"
         return this.device.gatt.disconnect();
