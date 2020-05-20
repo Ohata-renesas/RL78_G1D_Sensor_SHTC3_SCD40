@@ -7,34 +7,55 @@ let mode            = 'meter';
 
 button.addEventListener('click', function() {
 
-  switch (environmentSensor.connectionStatus)
-  {
-    case sensorIsDisconnected :
-      environmentSensor.connect()
-      .then(_ => {
-        environmentSensor.changeConnectionStatus(sensorIsConnected)
-        document.getElementById('statusText').innerHTML = "Measurement"
-        environmentSensor.characteristic.addEventListener('characteristicvaluechanged', event => {
-          let result = environmentSensor.parseSensorData(event.target.value)
-          temperatureData.push(result.temperatureData)
-          humidityData.push(result.humidityData)
-          co2Data.push(result.co2Data)
-          drawSensorData();
-        })
+  if (!environmentSensor.device.gatt.connected) {
+    environmentSensor.connect()
+    .then(_ => {
+      document.getElementById('connectButton').innerHTML = "DISCONNECT"
+      document.getElementById('statusText').innerHTML = "Measurement"
+      environmentSensor.characteristic.addEventListener('characteristicvaluechanged', event => {
+        let result = environmentSensor.parseSensorData(event.target.value)
+        temperatureData.push(result.temperatureData)
+        humidityData.push(result.humidityData)
+        co2Data.push(result.co2Data)
+        drawSensorData();
       })
-      .catch(error => {
-        document.getElementById('statusText').innerHTML = error
-        console.log("error:" + error)
-      });
-      break;
-
-    case sensorIsConnected :
-      environmentSensor.disconnect(); 
-      break;
-
-    default :
-    break;
+    })
+    .catch(error => {
+      document.getElementById('statusText').innerHTML = error
+      console.log("error:" + error)
+    });
+  } 
+  else {
+    environmentSensor.disconnect(); 
   }
+  // switch (environmentSensor.connectionStatus)
+  // {
+  //   case sensorIsDisconnected :
+  //     environmentSensor.connect()
+  //     .then(_ => {
+  //       environmentSensor.changeConnectionStatus(sensorIsConnected)
+  //       document.getElementById('statusText').innerHTML = "Measurement"
+  //       environmentSensor.characteristic.addEventListener('characteristicvaluechanged', event => {
+  //         let result = environmentSensor.parseSensorData(event.target.value)
+  //         temperatureData.push(result.temperatureData)
+  //         humidityData.push(result.humidityData)
+  //         co2Data.push(result.co2Data)
+  //         drawSensorData();
+  //       })
+  //     })
+  //     .catch(error => {
+  //       document.getElementById('statusText').innerHTML = error
+  //       console.log("error:" + error)
+  //     });
+  //     break;
+
+  //   case sensorIsConnected :
+  //     environmentSensor.disconnect(); 
+  //     break;
+
+  //   default :
+  //   break;
+  // }
 });
 
 

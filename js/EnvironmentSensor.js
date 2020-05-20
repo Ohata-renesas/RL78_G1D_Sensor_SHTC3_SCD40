@@ -1,8 +1,6 @@
 (function() {
   'use strict';
 
-  const CONNECT         = 1
-  const DISCONNECT      = 0
   const CALIBRATION_NO  = 0
   const CALIBRATION_YES = 1
 
@@ -14,7 +12,6 @@
       this.userDeviceName           = 'RL78G1D'
       this.userServiceUUID          = '92b60060-fa5f-4dcc-9312-d8f3dad1675f'
       this.userCharacteristicUUID   = '92b60125-fa5f-4dcc-9312-d8f3dad1675f'
-      this.connectionStatus         = DISCONNECT
     }
 
     connect() {      
@@ -45,7 +42,7 @@
       })      
     }
 
-    disconnect() {      
+    disconnect() {   
       if (!this.device) {
         var error = "No Bluetooth Device";
         document.getElementById('statusText').innerHTML = error
@@ -54,7 +51,7 @@
       }
     
       if (this.device.gatt.connected) {
-        this.changeConnectionStatus(DISCONNECT)
+        document.getElementById('connectButton').innerHTML = "CONNECT"
         document.getElementById('statusText').innerHTML = "Disconnect the device"
         console.log('Execute : disconnect');
         
@@ -65,25 +62,8 @@
        document.getElementById('statusText').innerHTML = error
        console.log('Error : ' + error);
        return;
-      }
-    }
+      }   
 
-    onDisconnected() {
-      this.changeConnectionStatus(DISCONNECT)
-      document.getElementById('statusText').innerHTML = "Disconnect the device"
-    }
-
-    changeConnectionStatus(status) {
-      switch (status) {
-        case CONNECT :
-          document.getElementById('connectButton').innerHTML = "DISCONNECT"
-          break
-        
-        case DISCONNECT :
-          document.getElementById('connectButton').innerHTML = "CONNECT"
-          break;
-      }
-      this.connectionStatus = status
     }
 
     parseSensorData(value) {
@@ -119,8 +99,6 @@
   }
 
   window.environmentSensor    = new EnvironmentSensor();
-  window.sensorIsConnected    = CONNECT;
-  window.sensorIsDisconnected = DISCONNECT;
 
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').then(function(registration) {
