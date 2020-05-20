@@ -16,9 +16,9 @@ button.addEventListener('click', function() {
         document.getElementById('statusText').innerHTML = "Measurement"
         environmentSensor.characteristic.addEventListener('characteristicvaluechanged', event => {
           let result = environmentSensor.parseSensorData(event.target.value)
-          temperatureData.put(result.temperatureData)
-          humidityData.put(result.humidityData)
-          co2Data.put(result.co2Data)
+          temperatureData.push(result.temperatureData)
+          humidityData.push(result.humidityData)
+          co2Data.push(result.co2Data)
           drawSensorData();
         })
       })
