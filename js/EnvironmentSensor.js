@@ -69,12 +69,7 @@
     }
 
     onDisconnected(event) {
-      if (this.device) {
-        this.changeConnectionStatus()
-      }
-      else {
-        // nothing
-      }
+      this.changeConnectionStatus()
     }
 
     isConnected() {
