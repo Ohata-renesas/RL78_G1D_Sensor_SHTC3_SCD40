@@ -110,8 +110,8 @@
   }
 
   window.environmentSensor = new EnvironmentSensor();
-  window.isConnected       = CONNECT;
-  window.isDisconnected    = DISCONNECT;
+  window.sensorIsConnected       = CONNECT;
+  window.sensorIsDisconnected    = DISCONNECT;
 
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').then(function(registration) {
