@@ -45,6 +45,7 @@
     disconnect() {      
       if (!this.device) {
         var error = "No Bluetooth Device";
+        document.getElementById('errorLog').innerHTML = error
         console.log('Error : ' + error);
         return;
       }
@@ -56,6 +57,7 @@
       } 
       else {
        var error = "Bluetooth Device is already disconnected";
+       document.getElementById('errorLog').innerHTML = error
        console.log('Error : ' + error);
        return;
       }
