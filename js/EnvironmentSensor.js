@@ -71,7 +71,7 @@
     onDisconnected(event) {
       this.connectionStatus = DISCONNECT
       document.getElementById('connectButton').innerHTML = "CONNECT"
-      document.getElementById('statusText').innerHTML = "Disconnect the device!!!!!"
+      document.getElementById('statusText').innerHTML = "Disconnect the device"
     }
 
     isConnected() {
