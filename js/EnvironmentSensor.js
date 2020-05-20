@@ -27,6 +27,7 @@
       .then(device => {
         document.getElementById('statusText').innerHTML = "Connect the device"
         this.device = device;
+        this.device.addEventLister('gattserverdisconnected', this.onDisconnected);
         return device.gatt.connect();
       })
       .then(server => {
@@ -65,6 +66,11 @@
        console.log('Error : ' + error);
        return;
       }
+    }
+
+    onDisconnected() {
+      this.changeConnectionStatus(DISCONNECT)
+      document.getElementById('statusText').innerHTML = "Disconnect the device"
     }
 
     changeConnectionStatus(status) {
