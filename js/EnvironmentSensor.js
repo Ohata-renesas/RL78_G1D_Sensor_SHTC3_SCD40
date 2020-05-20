@@ -1,6 +1,8 @@
 (function() {
   'use strict';
 
+  const DISCONNECT      = 0
+  const CONNECT         = 1
   const CALIBRATION_NO  = 0
   const CALIBRATION_YES = 1
 
@@ -12,6 +14,7 @@
       this.userDeviceName           = 'RL78G1D'
       this.userServiceUUID          = '92b60060-fa5f-4dcc-9312-d8f3dad1675f'
       this.userCharacteristicUUID   = '92b60125-fa5f-4dcc-9312-d8f3dad1675f'
+      this.connectionStatus         = DISCONNECT
     }
 
     connect() {      
@@ -51,8 +54,7 @@
       }
     
       if (this.device.gatt.connected) {
-        document.getElementById('connectButton').innerHTML = "CONNECT"
-        document.getElementById('statusText').innerHTML = "Disconnect the device"
+        this.changeConnectionStatus()
         console.log('Execute : disconnect');
         
         return this.device.gatt.disconnect();
@@ -68,11 +70,34 @@
 
     onDisconnected(event) {
       if (this.device) {
-        document.getElementById('connectButton').innerHTML = "CONNECT"
-        document.getElementById('statusText').innerHTML = "Disconnect the device"
+        this.changeConnectionStatus()
       }
       else {
         // nothing
+      }
+    }
+
+    isConnected() {
+      return connectionStatus
+    }
+
+    changeConnectionStatus() {
+      
+      switch (this.connectionStatus) {
+        case CONNECT :
+          this.connectionStatus = DISCONNECT
+          document.getElementById('connectButton').innerHTML = "CONNECT"
+          document.getElementById('statusText').innerHTML = "Disconnect the device"
+          break;
+
+        case DISCONNECT :
+          this.connectionStatus = CONNECT
+          document.getElementById('connectButton').innerHTML = "DISCONNECT"
+          document.getElementById('statusText').innerHTML = "Measurement"
+          break
+
+        default :
+         break
       }
     }
 

@@ -7,11 +7,10 @@ let mode            = 'meter';
 
 button.addEventListener('click', function() {
 
-  if (!environmentSensor.device) {
+  if (!environmentSensor.isConnected()) {
     environmentSensor.connect()
-    .then(_ => {
-      document.getElementById('connectButton').innerHTML = "DISCONNECT"
-      document.getElementById('statusText').innerHTML = "Measurement"
+    .then(_ => {    
+      environmentSensor.changeConnectionStatus()
       environmentSensor.characteristic.addEventListener('characteristicvaluechanged', event => {
         let result = environmentSensor.parseSensorData(event.target.value)
         temperatureData.push(result.temperatureData)
