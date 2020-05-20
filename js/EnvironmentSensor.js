@@ -10,10 +10,10 @@
     constructor() {
       this.device                   = null;
       this.server                   = null;
+      this.characteristic           = null
       this.userDeviceName           = 'RL78G1D'
       this.userServiceUUID          = '92b60060-fa5f-4dcc-9312-d8f3dad1675f'
       this.userCharacteristicUUID   = '92b60125-fa5f-4dcc-9312-d8f3dad1675f'
-      this._characteristics         = new Map();
       this.connectionStatus         = DISCONNECT
     }
 
@@ -25,48 +25,43 @@
         optionalServices: [this.userServiceUUID]      
         })
       .then(device => {
-        document.getElementById('errorLog').innerHTML = "Connect the device"
+        document.getElementById('statusText').innerHTML = "Connect the device"
         this.device = device;
         return device.gatt.connect();
       })
       .then(server => {
-        document.getElementById('errorLog').innerHTML = "Get the service"
+        document.getElementById('statusText').innerHTML = "Get the service"
         return server.getPrimaryService(this.userServiceUUID)
       })
       .then(service => {
-        document.getElementById('errorLog').innerHTML = "Get the characateristic"
+        document.getElementById('statusText').innerHTML = "Get the characateristic"
         return service.getCharacteristic(this.userCharacteristicUUID)
       })
       .then(characteristic => {
-        document.getElementById('errorLog').innerHTML = "Start notification"
-        return characteristic.startNotifications().then(_ => {
-          this.changeConnectionStatus(CONNECT)
-          document.getElementById('errorLog').innerHTML = "Now measurement"
-          characteristic.addEventListener('characteristicvaluechanged', event => {
-            let result = this.parseSensorData(event.target.value)
-          })
-        })
+        this.characteristic = characteristic
+        document.getElementById('statusText').innerHTML = "Start notification"
+        return characteristic.startNotifications()
       })      
     }
 
     disconnect() {      
       if (!this.device) {
         var error = "No Bluetooth Device";
-        document.getElementById('errorLog').innerHTML = error
+        document.getElementById('statusText').innerHTML = error
         console.log('Error : ' + error);
         return;
       }
     
       if (this.device.gatt.connected) {
         this.changeConnectionStatus(DISCONNECT)
-        document.getElementById('errorLog').innerHTML = "Disconnect the device"
+        document.getElementById('statusText').innerHTML = "Disconnect the device"
         console.log('Execute : disconnect');
         
         return this.device.gatt.disconnect();
       } 
       else {
        var error = "Bluetooth Device is already disconnected";
-       document.getElementById('errorLog').innerHTML = error
+       document.getElementById('statusText').innerHTML = error
        console.log('Error : ' + error);
        return;
       }
@@ -99,10 +94,10 @@
       document.getElementById('humidityData').innerHTML     = "HUMI: " + result.humidityData + " %RH"
       document.getElementById('co2Data').innerHTML          = "CO2: " + result.co2Data + " ppm"
       if (result.calibration == CALIBRATION_NO) {
-        document.getElementById('calibration').innerHTML      = "Calibration: NO"
+        document.getElementById('statusText').innerHTML = "Measurement"
       }
       else {
-        document.getElementById('calibration').innerHTML      = "Calibration: YES"
+        document.getElementById('statusText').innerHTML      = "Calibration"
       }
 
       console.log("Temperature: " + result.temperatureData)
@@ -111,24 +106,6 @@
       console.log("Calibration: " + result.calibration)
 
       return result;
-    }
-
-    /* Utils */
-    _setCharacteristic(characteristicUuid, characteristic) {
-      return this._characteristics.set(characteristicUuid, characteristic);
-    }
-    
-    _startNotifications(characteristicUuid) {
-      let characteristic = this._characteristics.get(characteristicUuid);
-      return characteristic.startNotifications()
-    }
-
-    _stopNotifications(characteristicUuid) {
-      let characteristic = this._characteristics.get(characteristicUuid);
-      // Returns characteristic to remove characteristicvaluechanged event
-      // handlers in the resolved promise.
-      return characteristic.stopNotifications()
-      .then(() => characteristic);
     }
   }
 
