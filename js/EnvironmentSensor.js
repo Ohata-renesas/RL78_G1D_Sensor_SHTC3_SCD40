@@ -69,12 +69,15 @@
     }
 
     onDisconnected(event) {
-      if (this.device) {
-        this.changeConnectionStatus()
-      }
-      else {
-        // nothing
-      }
+      this.connectionStatus = CONNECT
+      document.getElementById('connectButton').innerHTML = "DISCONNECT"
+      document.getElementById('statusText').innerHTML = "Measurement"
+      // if (this.device) {
+      //   this.changeConnectionStatus()
+      // }
+      // else {
+      //   // nothing
+      // }
     }
 
     isConnected() {
