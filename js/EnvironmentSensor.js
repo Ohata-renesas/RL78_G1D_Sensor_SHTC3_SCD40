@@ -34,6 +34,7 @@
       })
       .then(characteristic => {
         characteristic.startNotifications().then(_ => {
+          document.getElementById('connectButton').innerHTML = "DISCONNECT"
           characteristic.addEventListener('characteristicvaluechanged', event => {
             let result = this.parseSensorData(event.target.value)
           })
@@ -50,6 +51,7 @@
     
       if (this.device.gatt.connected) {
         console.log('Execute : disconnect');
+        document.getElementById('connectButton').innerHTML = "CONNECT"
         return this.device.gatt.disconnect();
       } 
       else {
@@ -75,7 +77,7 @@
 
       document.getElementById('temperatureData').innerHTML  = "TEMP: " + result.temperatureData + " °C"
       document.getElementById('humidityData').innerHTML     = "HUMI: " + result.humidityData + " %RH"
-      document.getElementById('co2Data').innerHTML          = "CO2: " + result.co2Data 
+      document.getElementById('co2Data').innerHTML          = "CO2: " + result.co2Data + " ppm"
       if (result.calibration == 0) {
         document.getElementById('calibration').innerHTML      = "Calibration: NO"
       }
