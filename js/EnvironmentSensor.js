@@ -1,8 +1,10 @@
 (function() {
   'use strict';
 
-  const CONNECT     = 1
-  const DISCONNECT  = 0
+  const CONNECT         = 1
+  const DISCONNECT      = 0
+  const CALIBRATION_NO  = 0
+  const CALIBRATION_YES = 1
 
   class EnvironmentSensor {
     constructor() {
@@ -23,18 +25,23 @@
         optionalServices: [this.userServiceUUID]      
         })
       .then(device => {
+        document.getElementById('errorLog').innerHTML = "Connect the device"
         this.device = device;
         return device.gatt.connect();
       })
       .then(server => {
+        document.getElementById('errorLog').innerHTML = "Get the service"
         return server.getPrimaryService(this.userServiceUUID)
       })
       .then(service => {
+        document.getElementById('errorLog').innerHTML = "Get the characateristic"
         return service.getCharacteristic(this.userCharacteristicUUID)
       })
       .then(characteristic => {
-        characteristic.startNotifications().then(_ => {
+        document.getElementById('errorLog').innerHTML = "Start notification"
+        return characteristic.startNotifications().then(_ => {
           this.changeConnectionStatus(CONNECT)
+          document.getElementById('errorLog').innerHTML = "Now measurement"
           characteristic.addEventListener('characteristicvaluechanged', event => {
             let result = this.parseSensorData(event.target.value)
           })
@@ -52,6 +59,7 @@
     
       if (this.device.gatt.connected) {
         this.changeConnectionStatus(DISCONNECT)
+        document.getElementById('errorLog').innerHTML = "Disconnect the device"
         console.log('Execute : disconnect');
         
         return this.device.gatt.disconnect();
@@ -90,7 +98,7 @@
       document.getElementById('temperatureData').innerHTML  = "TEMP: " + result.temperatureData + " °C"
       document.getElementById('humidityData').innerHTML     = "HUMI: " + result.humidityData + " %RH"
       document.getElementById('co2Data').innerHTML          = "CO2: " + result.co2Data + " ppm"
-      if (result.calibration == 0) {
+      if (result.calibration == CALIBRATION_NO) {
         document.getElementById('calibration').innerHTML      = "Calibration: NO"
       }
       else {
