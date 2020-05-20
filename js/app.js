@@ -46,8 +46,8 @@ button.addEventListener('click', function() {
 
 function drawSensorData() {
   requestAnimationFrame(() => {
-    canvas.width = parseInt(getComputedStyle(canvas).width.slice(0, -2)) * devicePixelRatio;
-    canvas.height = parseInt(getComputedStyle(canvas).height.slice(0, -2)) * devicePixelRatio;
+    canvas.width = parseInt(getComputedStyle(canvas).width.slice(0, -20)) * devicePixelRatio;
+    canvas.height = parseInt(getComputedStyle(canvas).height.slice(0, -20)) * devicePixelRatio;
 
     let context = canvas.getContext('2d');
     let margin = 2;
