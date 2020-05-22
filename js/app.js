@@ -147,9 +147,9 @@ function drawMeterGraph(context, width, height) {
     // draw circle and arc
     for (step = 0; step < numberOfSensor; step++) {
       x0 += (margin + radiusOfCircle);
-      context.lineWidth = 10;
+      context.lineWidth = radiusOfCircle / 15;
       drawCanvas.drawCircle(context, x0, y0, radiusOfCircle);
-      context.lineWidth = 30;
+      context.lineWidth = radiusOfCircle / 5;
       drawCanvas.drawArc(context, x0, y0, radiusOfArc, startAngle, startAngle + convertValueToAngle(step));
       drawSensorText(step, context, x0, y0, radiusOfCircle);
       x0 += radiusOfCircle;
