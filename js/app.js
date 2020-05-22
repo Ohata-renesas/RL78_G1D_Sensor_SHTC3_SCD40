@@ -150,9 +150,11 @@ function drawMeterGraph(context, width, height) {
       context.lineWidth = radiusOfCircle / 30;
       context.strokeStyle = "brack";
       drawCanvas.drawCircle(context, x0, y0, radiusOfCircle);
+      console.log("Circle:" + context.strokeStyle);
       // draw arc
       context.lineWidth = radiusOfCircle / 10;
       context.strokeStyle = "blue";
+      console.log("Arc:" + context.strokeStyle);
       drawCanvas.drawArc(context, x0, y0, radiusOfArc, startAngle, startAngle + convertValueToAngle(step));
       // draw text
       drawSensorText(step, context, x0, y0, radiusOfCircle);
