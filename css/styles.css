@@ -27,6 +27,20 @@
   -webkit-user-select: none;
 }
 
+#connectButton {
+  width: 100%;
+  height: 15%;
+  text-align: center;
+  background-color: coral;
+}
+
+#statusText {
+  width: 100%;
+  height: 5%;
+  text-align: center;
+  background-color: darkblue;
+}
+
 #sensorData {
   background-color: chartreuse;
   width: 100%;
