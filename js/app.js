@@ -196,13 +196,13 @@ function convertValueToAngle(id) {
 
   switch (id) {
     case sensorInfo.temperature.sensorID :
-      angle = calculateAngle(sensorInfo.temperature.text.value.toFixed(2),
+      angle = calculateAngle(parseFloat(sensorInfo.temperature.text.value),
                              sensorInfo.temperature.maxValue,
                              sensorInfo.temperature.minValue);
     break;
 
     case sensorInfo.humidity.sensorID :
-      angle = calculateAngle(sensorInfo.humidity.text.value.toFixed(2),
+      angle = calculateAngle(parseFloat(sensorInfo.humidity.text.value),
                              sensorInfo.humidity.maxValue,
                              sensorInfo.humidity.minValue);
     break;
