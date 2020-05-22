@@ -35,6 +35,7 @@ let dataPosition      = 0;
 
 /* Initialization */
 // canvas
+console.log("width: " + canvas.width + "px" + "," + "height: " + canvas.height + "px");
 drawCanvas.setCanvas(canvas);
 context.fillStyle = "rgb(255,0,0)";
 drawCanvas.setContext(context);
