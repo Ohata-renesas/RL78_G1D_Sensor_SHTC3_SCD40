@@ -147,9 +147,9 @@ function drawMeterGraph(context, width, height) {
     // draw circle and arc
     for (step = 0; step < numberOfSensor; step++) {
       x0 += (margin + radiusOfCircle);
-      context.lineWidth = radiusOfCircle / 15;
+      context.lineWidth = radiusOfCircle / 30;
       drawCanvas.drawCircle(context, x0, y0, radiusOfCircle);
-      context.lineWidth = radiusOfCircle / 5;
+      context.lineWidth = radiusOfCircle / 10;
       drawCanvas.drawArc(context, x0, y0, radiusOfArc, startAngle, startAngle + convertValueToAngle(step));
       drawSensorText(step, context, x0, y0, radiusOfCircle);
       x0 += radiusOfCircle;
@@ -160,11 +160,11 @@ function drawMeterGraph(context, width, height) {
 /* Draw sensor text */
 function drawSensorText(id, context, x, y, radius) {
   let fontSizeOfName     = String(Math.round(radius / 6));
-  let fontSizeOfValue    = String(Math.round(radius / 4));
+  let fontSizeOfValue    = String(Math.round(radius / 3));
   let fontSizeOfUnit     = String(Math.round(radius / 6));
-  let yCoordinateOfName  = y - radius / 2 + parseInt(fontSizeOfName) / 2;
+  let yCoordinateOfName  = y - radius / 4 + parseInt(fontSizeOfName) / 2;
   let yCoordinateOfValue = y + parseInt(fontSizeOfValue) / 2;
-  let yCoordinateOfUnit  = y + radius / 2 + parseInt(fontSizeOfUnit) / 2;
+  let yCoordinateOfUnit  = y + radius / 4 + parseInt(fontSizeOfUnit) / 2;
 
   switch(id) {
     case sensorInfo.temperature.sensorID :
