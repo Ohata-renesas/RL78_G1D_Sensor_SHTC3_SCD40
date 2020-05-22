@@ -97,6 +97,7 @@ function drawSensorData() {
     canvas.height = drawCanvas.getHeight(canvas);
 
     let context = canvas.getContext('2d');
+    context.fillStyle = "orange";
 
     // クリア
     drawCanvas.clearAllFigure(context, canvas.width, canvas.height);
