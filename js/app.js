@@ -92,8 +92,9 @@ function setSensorValue(data) {
 function drawSensorData() {
   requestAnimationFrame(() => {
 
-    console.log(sensorInfo.temperature.values);
-    
+    console.log(dataPosition);
+    console.log(sensorInfo.temperature.values[dataPosition]);
+
     //CanvasのWidthとHeightを取得
     canvas.width  = drawCanvas.getWidth(canvas);
     canvas.height = drawCanvas.getHeight(canvas);
