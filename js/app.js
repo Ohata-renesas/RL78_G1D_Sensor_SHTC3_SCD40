@@ -37,7 +37,7 @@ let dataPosition      = 0;
 // canvas
 drawCanvas.setCanvas(canvas);
 drawCanvas.setContext(context);
-// drawSensorData();
+drawSensorData();
 
 /* Click connect button */
 button.addEventListener('click', function() {
