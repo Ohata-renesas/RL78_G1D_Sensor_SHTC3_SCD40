@@ -62,6 +62,8 @@ function handleEnvironmentSensor(event) {
   if (sensorInfo.dataIsChanged != result.dataIsChanged) {
     sensorInfo.dataIsChanged = result.dataIsChanged;
     setSensorValue(result);
+    context.strokeStyle = "brack"
+    context.save();
     drawSensorData();
   }
   else {
@@ -143,15 +145,12 @@ function drawMeterGraph(context, width, height) {
     x0              = 0;
     y0              = height / 2;
 
-    context.lineWidth = radiusOfCircle / 30;
-    context.strokeStyle = "brack"
-    context.save();
-
     // draw circle and arc
     for (step = 0; step < numberOfSensor; step++) {
       x0 += (margin + radiusOfCircle);
       // draw circle
       context.restore();      
+      context.lineWidth = radiusOfCircle / 30;
       drawCanvas.drawCircle(context, x0, y0, radiusOfCircle);
       console.log(context.strokeStyle);
       // draw arc
