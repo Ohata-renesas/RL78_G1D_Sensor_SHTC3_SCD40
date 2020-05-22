@@ -63,13 +63,6 @@ function handleEnvironmentSensor(event) {
     sensorInfo.dataIsChanged = result.dataIsChanged;
     setSensorValue(result);
     drawSensorData();
-
-    if (dataPosition < (dataMaxLength - 1)) {
-      dataPosition++;
-    }
-    else {
-      dataPosition = 0;
-    }
   }
   else {
     // nothing
@@ -82,6 +75,12 @@ function setSensorValue(data) {
   sensorInfo.temperature.values[dataPosition]   = data.temperatureValue;
   sensorInfo.humidity.values[dataPosition]      = data.humidityValue;
   sensorInfo.co2.values[dataPosition]           = data.co2Value;
+  if (dataPosition < (dataMaxLength - 1)) {
+    dataPosition++;
+  }
+  else {
+    dataPosition = 0;
+  }
   // set text
   sensorInfo.temperature.text.value = String(data.temperatureValue);
   sensorInfo.humidity.text.value    = String(data.humidityValue);
@@ -197,19 +196,19 @@ function convertValueToAngle(id) {
 
   switch (id) {
     case sensorInfo.temperature.sensorID :
-      angle = calculateAngle(sensorInfo.temperature.values[dataPosition],
+      angle = calculateAngle(sensorInfo.temperature.text.value.toFixed(2),
                              sensorInfo.temperature.maxValue,
                              sensorInfo.temperature.minValue);
     break;
 
     case sensorInfo.humidity.sensorID :
-      angle = calculateAngle(sensorInfo.humidity.values[dataPosition],
+      angle = calculateAngle(sensorInfo.humidity.text.value.toFixed(2),
                              sensorInfo.humidity.maxValue,
                              sensorInfo.humidity.minValue);
     break;
 
     case sensorInfo.co2.sensorID :
-      angle = calculateAngle(sensorInfo.co2.values[dataPosition],
+      angle = calculateAngle(parseInt(sensorInfo.co2.text.value),
                              sensorInfo.co2.maxValue,
                              sensorInfo.co2.minValue);
     break;
