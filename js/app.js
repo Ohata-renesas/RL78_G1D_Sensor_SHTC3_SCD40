@@ -36,6 +36,7 @@ let dataPosition      = 0;
 /* Initialization */
 // canvas
 console.log("BEFORE => width: " + canvas.width + "px" + "," + "height: " + canvas.height + "px");
+console.log("MID => width: " + getComputedStyle(canvas).width + "," + "height: " + getComputedStyle(canvas).height);
 console.log("AFTER => width: " + drawCanvas.getWidth(canvas) + "px" + "," + "height: " + drawCanvas.getHeight(canvas) + "px");
 drawCanvas.setCanvas(canvas);
 drawCanvas.setContext(context);
@@ -103,8 +104,8 @@ function drawSensorData() {
     let width  = drawCanvas.getWidth(canvas);
     let height = drawCanvas.getHeight(canvas);
 
-    console.log(devicePixelRatio);
     console.log("BEFORE => width: " + canvas.width + "px" + "," + "height: " + canvas.height + "px");
+    console.log("MID => width: " + getComputedStyle(canvas).width + "," + "height: " + getComputedStyle(canvas).height);
     console.log("AFTER => width: " + drawCanvas.getWidth(canvas) + "px" + "," + "height: " + drawCanvas.getHeight(canvas) + "px");
 
     // クリア
