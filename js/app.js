@@ -119,6 +119,8 @@ function drawMeterGraph(context, width, height) {
   let x0;
   let y0;
   let startAngle = mathPI / 2;
+  let contextOfCircle = context;
+  let contextOfArc    = context;
 
   if (heightIsLonger) {
     radiusOfCircle  = height / 8;
@@ -147,13 +149,13 @@ function drawMeterGraph(context, width, height) {
     for (step = 0; step < numberOfSensor; step++) {
       x0 += (margin + radiusOfCircle);
       // draw circle
-      context.lineWidth = radiusOfCircle / 30;
-      drawCanvas.drawCircle(context, x0, y0, radiusOfCircle);
-      console.log("Circle:" + context.strokeStyle);
+      contextOfCircle.lineWidth = radiusOfCircle / 30;
+      contextOfCircle.strokeStyle = "brack"
+      drawCanvas.drawCircle(contextOfCircle, x0, y0, radiusOfCircle);
       // draw arc
-      context.lineWidth = radiusOfCircle / 10;
-      console.log("Arc:" + context.strokeStyle);
-      drawCanvas.drawArc(context, x0, y0, radiusOfArc, startAngle, startAngle + convertValueToAngle(step));
+      contextOfArc.lineWidth = radiusOfCircle / 10;
+      contextOfArc.strokeStyle = "blue";
+      drawCanvas.drawArc(contextOfArc, x0, y0, radiusOfArc, startAngle, startAngle + convertValueToAngle(step));
       // draw text
       drawSensorText(step, context, x0, y0, radiusOfCircle);
 
