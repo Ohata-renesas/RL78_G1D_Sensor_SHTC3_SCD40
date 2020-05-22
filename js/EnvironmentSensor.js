@@ -127,6 +127,7 @@
       console.log("Humidity: "    + result.humidityValue);
       console.log("CO2: "         + result.co2Value);
       console.log("Calibration: " + result.calibration);
+      console.log("dataISChanged: " + result.dataIsChanged);
 
       return result;
     }

@@ -9,6 +9,9 @@
   font-family: Roboto;
 }
 
+#canvavs {
+  background-color: chartreuse;
+}
 #status {
   position: absolute;
   bottom: 50%;
