@@ -35,7 +35,8 @@
         }
     
         drawCircle(context, x, y, r) {
-            if (context) {                
+            if (context) {         
+                context.beginPath();       
                 context.arc(x, y, r, 0, Math.PI * 2);
                 context.stroke();
             }
@@ -46,7 +47,7 @@
           
         drawArc(context, x, y, r, startAngle, endAngle) {
             if (context) {
-                // context.beginPath();
+                context.beginPath();
                 context.arc(x, y, r, startAngle, endAngle);
                 context.stroke();
             }
