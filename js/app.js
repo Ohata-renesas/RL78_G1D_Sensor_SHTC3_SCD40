@@ -138,7 +138,7 @@ function drawMeterGraph(context, width, height) {
   }
   else {
     radiusOfCircle  = width / 8;
-    radiusOfArc     = radiusOfCircle * 0.8;
+    radiusOfArc     = radiusOfCircle * 0.85;
     margin          = radiusOfCircle / 2;
     x0              = 0;
     y0              = height / 2;
@@ -146,13 +146,17 @@ function drawMeterGraph(context, width, height) {
     // draw circle and arc
     for (step = 0; step < numberOfSensor; step++) {
       x0 += (margin + radiusOfCircle);
+      // draw circle
       context.lineWidth = radiusOfCircle / 30;
       context.strokeStyle = "brack";
       drawCanvas.drawCircle(context, x0, y0, radiusOfCircle);
+      // draw arc
       context.lineWidth = radiusOfCircle / 10;
-      context.strokeStyle = "orange";
+      context.strokeStyle = "blue";
       drawCanvas.drawArc(context, x0, y0, radiusOfArc, startAngle, startAngle + convertValueToAngle(step));
+      // draw text
       drawSensorText(step, context, x0, y0, radiusOfCircle);
+
       x0 += radiusOfCircle;
     }
   }
