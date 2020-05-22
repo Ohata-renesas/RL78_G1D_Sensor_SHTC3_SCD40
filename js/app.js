@@ -103,6 +103,7 @@ function drawSensorData() {
     let width  = drawCanvas.getWidth(canvas);
     let height = drawCanvas.getHeight(canvas);
 
+    console.log(devicePixelRatio);
     console.log("BEFORE => width: " + canvas.width + "px" + "," + "height: " + canvas.height + "px");
     console.log("AFTER => width: " + drawCanvas.getWidth(canvas) + "px" + "," + "height: " + drawCanvas.getHeight(canvas) + "px");
 
