@@ -39,6 +39,7 @@
   cursor: pointer;
   text-align: center;
   background-color: coral;
+  display: block;
 }
 
 #statusText {
@@ -52,6 +53,7 @@
   height: 5%;
   text-align: center;
   background-color: gold;
+  display: block;
 }
 
 #sensorData {
