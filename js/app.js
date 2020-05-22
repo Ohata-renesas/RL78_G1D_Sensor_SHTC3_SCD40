@@ -147,7 +147,9 @@ function drawMeterGraph(context, width, height) {
     // draw circle and arc
     for (step = 0; step < numberOfSensor; step++) {
       x0 += (margin + radiusOfCircle);
+      context.lineWidth = 10;
       drawCanvas.drawCircle(context, x0, y0, radiusOfCircle);
+      context.lineWidth = 30;
       drawCanvas.drawArc(context, x0, y0, radiusOfArc, startAngle, startAngle + convertValueToAngle(step));
       drawSensorText(step, context, x0, y0, radiusOfCircle);
       x0 += radiusOfCircle;
@@ -155,6 +157,7 @@ function drawMeterGraph(context, width, height) {
   }
 }
 
+/* Draw sensor text */
 function drawSensorText(id, context, x, y, radius) {
   let fontSizeOfName     = String(Math.round(radius / 6));
   let fontSizeOfValue    = String(Math.round(radius / 4));
