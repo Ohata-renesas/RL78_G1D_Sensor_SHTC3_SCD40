@@ -36,6 +36,7 @@ let dataPosition      = 0;
 /* Initialization */
 // canvas
 drawCanvas.setCanvas(canvas);
+context.fillStyle = "rgb(255,0,0)";
 drawCanvas.setContext(context);
 context.fillStyle = "rgb(0,0,255)";
 drawCanvas.drawCircle(drawCanvas.getWidth() / 4, drawCanvas.getHeight() / 4, drawCanvas.getWidth() / 4);

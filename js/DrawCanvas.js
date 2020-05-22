@@ -54,6 +54,7 @@
     
         drawCircle(x, y, r) {
             if (this.context) {
+                this.context.beginPath();
                 this.context.arc(x, y, r, 0, Math.PI * 2);
                 this.context.stroke();
             }
