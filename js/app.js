@@ -39,7 +39,7 @@ drawCanvas.setCanvas(canvas);
 context.fillStyle = "rgb(255,0,0)";
 drawCanvas.setContext(context);
 context.fillStyle = "rgb(0,0,255)";
-drawCanvas.drawCircle(context, drawCanvas.getWidth() / 4, drawCanvas.getHeight() / 4, drawCanvas.getWidth() / 4);
+drawCanvas.drawCircle(context, drawCanvas.getWidth(canvas) / 4, drawCanvas.getHeight(canvas) / 4, drawCanvas.getWidth(canvas) / 4);
 // drawSensorData();
 
 /* Click connect button */

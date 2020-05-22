@@ -23,7 +23,7 @@
         getWidth(canvas) {
             if (canvas) {
                 // slice(0, -2)で単位のpxを削除
-                this.canvasWidth = parseInt(getComputedStyle(this.canvas).width.slice(0, -2)) * devicePixelRatio;
+                this.canvasWidth = parseInt(getComputedStyle(canvas).width.slice(0, -2)) * devicePixelRatio;
                 return this.canvasWidth;
             } 
             else {
