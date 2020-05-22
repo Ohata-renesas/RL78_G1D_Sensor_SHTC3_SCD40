@@ -33,7 +33,7 @@ let dataPosition      = 0;
 
 
 /* Initialization */
-drawSensorData();
+// drawSensorData();
 
 /* Click connect button */
 button.addEventListener('click', function() {
@@ -157,9 +157,9 @@ function drawSensorText(id, context, x, y, radius) {
   let fontSizeOfName     = String(Math.round(radius / 6));
   let fontSizeOfValue    = String(Math.round(radius / 4));
   let fontSizeOfUnit     = String(Math.round(radius / 6));
-  let yCoordinateOfName  = y - radius / 2 + fontSizeOfName / 2;
-  let yCoordinateOfValue = y + fontSizeOfValue / 2;
-  let yCoordinateOfUnit  = y + radius / 2 + fontSizeOfUnit / 2;
+  let yCoordinateOfName  = y - radius / 2 + parseInt(fontSizeOfName) / 2;
+  let yCoordinateOfValue = y + parseInt(fontSizeOfValue) / 2;
+  let yCoordinateOfUnit  = y + radius / 2 + parseInt(fontSizeOfUnit) / 2;
 
 
   context.textAlign = "center";
