@@ -46,7 +46,7 @@
           
         drawArc(context, x, y, r, startAngle, endAngle) {
             if (context) {
-                context.beginPath();
+                // context.beginPath();
                 context.arc(x, y, r, startAngle, endAngle);
                 context.stroke();
             }
