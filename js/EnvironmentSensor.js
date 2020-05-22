@@ -60,7 +60,9 @@
         return this.device.gatt.disconnect();
       } 
       else {
-       var error = "Bluetooth Device is already disconnected";
+       var error = "Please click again.";
+       this.connectionStatus = DISCONNECT;
+       document.getElementById('connectButton').innerHTML = "CONNECT";
        document.getElementById('statusText').innerHTML = error;
        console.log('Error : ' + error);
        return;
@@ -69,7 +71,6 @@
     }
 
     onDisconnected(event) {
-      this.connectionStatus = DISCONNECT;
       document.getElementById('connectButton').innerHTML = "CONNECT";
       document.getElementById('statusText').innerHTML = "Disconnect the device";
     }
@@ -104,15 +105,16 @@
       let result = {}
       
       // Calculate sensor data
-      result.temperatureData  = (value.getUint8(0) << 8) + value.getUint8(1) + (value.getUint8(2) * 0.01);
-      result.humidityData     = (value.getUint8(3) << 8) + value.getUint8(4) + (value.getUint8(5) * 0.01);
-      result.co2Data          = (value.getUint8(6) << 8) + value.getUint8(7);
-      result.calibration      = value.getUint8(8);
+      result.temperatureValue   = (value.getUint8(0) << 8) + value.getUint8(1) + (value.getUint8(2) * 0.01);
+      result.humidityValue      = (value.getUint8(3) << 8) + value.getUint8(4) + (value.getUint8(5) * 0.01);
+      result.co2Value           = (value.getUint8(6) << 8) + value.getUint8(7);
+      result.calibration        = value.getUint8(8);
+      result.dataIsChanged      = value.getUint8(9);
 
-      // Set sensor data to text
-      document.getElementById('temperatureData').innerHTML  = "TEMP: " + result.temperatureData + " °C";
-      document.getElementById('humidityData').innerHTML     = "HUMI: " + result.humidityData + " %RH";
-      document.getElementById('co2Data').innerHTML          = "CO2: " + result.co2Data + " ppm";
+      // // Set sensor data to text
+      // document.getElementById('temperatureData').innerHTML  = "TEMP: " + result.temperatureValue + " °C";
+      // document.getElementById('humidityData').innerHTML     = "HUMI: " + result.humidityValue + " %RH";
+      // document.getElementById('co2Data').innerHTML          = "CO2: " + result.co2Value + " ppm";
       if (result.calibration == CALIBRATION_NO) {
         document.getElementById('statusText').innerHTML     = "Measurement";
       }
@@ -121,9 +123,9 @@
       }
 
       // Log
-      console.log("Temperature: " + result.temperatureData);
-      console.log("Humidity: "    + result.humidityData);
-      console.log("CO2: "         + result.co2Data);
+      console.log("Temperature: " + result.temperatureValue);
+      console.log("Humidity: "    + result.humidityValue);
+      console.log("CO2: "         + result.co2Value);
       console.log("Calibration: " + result.calibration);
 
       return result;

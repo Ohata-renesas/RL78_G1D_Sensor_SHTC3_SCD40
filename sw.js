@@ -7,6 +7,7 @@ const urlsToCache = [
   'css/styles.css',
   // 'img/sprite.png',
   'js/EnvironmentSensor.js',
+  'js/DrawCanvas.js',
   'js/app.js'
 ];
 
