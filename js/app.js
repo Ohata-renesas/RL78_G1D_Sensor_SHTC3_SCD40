@@ -97,10 +97,6 @@ function drawSensorData() {
 
     let context = canvas.getContext('2d');
 
-    // console.log("BEFORE => width: " + canvas.width + "px" + "," + "height: " + canvas.height + "px");
-    // console.log("MID => width: " + getComputedStyle(canvas).width + "," + "height: " + getComputedStyle(canvas).height);
-    // console.log("AFTER => width: " + drawCanvas.getWidth(canvas) + "px" + "," + "height: " + drawCanvas.getHeight(canvas) + "px");
-
     // クリア
     drawCanvas.clearAllFigure(context, canvas.width, canvas.height);
 
@@ -163,6 +159,8 @@ function drawSensorText(id, context, x, y, radius) {
   let fontSizeOfName    = String(Math.round(radius / 6));
   let fontSizeOfValue   = String(Math.round(radius / 4));
   let fontSizeOfUnit    = String(Math.round(radius / 6));
+  
+  context.textAlign = "center";
 
   switch(id) {
     case sensorInfo.temperature.sensorID :
