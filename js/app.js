@@ -101,8 +101,8 @@ function drawSensorData() {
   requestAnimationFrame(() => {
     console.log("request Animation!");
     //CanvasのWidthとHeightを取得
-    let width  = drawCanvas.getWidth(canvas);
-    let height = drawCanvas.getHeight(canvas);
+    canvas.width  = drawCanvas.getWidth(canvas);
+    canvas.height = drawCanvas.getHeight(canvas);
 
     console.log("BEFORE => width: " + canvas.width + "px" + "," + "height: " + canvas.height + "px");
     console.log("MID => width: " + getComputedStyle(canvas).width + "," + "height: " + getComputedStyle(canvas).height);
@@ -112,10 +112,10 @@ function drawSensorData() {
     drawCanvas.clearAllFigure(context);
 
     if (graphMode === 'meter') {
-      drawMeterGraph(width, height);
+      drawMeterGraph(canvas.width, canvas.height);
     }
     else {
-      drawLineGraph(width, height);
+      drawLineGraph(canvas.width, canvas.height);
     }
   });
 }
