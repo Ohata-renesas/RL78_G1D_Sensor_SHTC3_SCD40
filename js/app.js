@@ -33,7 +33,8 @@ let dataPosition      = 0;
 
 
 /* Initialization */
-// drawSensorData();
+console.log(sensorInfo.temperature.values[0]);
+ drawSensorData();
 
 /* Click connect button */
 button.addEventListener('click', function() {
