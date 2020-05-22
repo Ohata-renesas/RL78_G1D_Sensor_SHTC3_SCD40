@@ -1,6 +1,8 @@
 #container {
   background-color: darkorange;
   position: absolute;
+  width: 100%;
+  height: 100%;
   top: 0;
   right: 0;
   left: 0;
@@ -9,9 +11,6 @@
   font-family: Roboto;
 }
 
-#canvavs {
-  background-color: chartreuse;
-}
 #status {
   position: absolute;
   bottom: 50%;
@@ -29,7 +28,8 @@
 }
 
 #sensorData {
+  background-color: chartreuse;
   width: 100%;
-  height: 100%;
+  height: 80%;
   display: block;
 }
