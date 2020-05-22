@@ -11,11 +11,13 @@
 
         setCanvas(canvas) {
             this.canvas = canvas;
+            console.log("set canvas!");
         }
 
         setContext(context) {
             this.context = context;
             this.context.textAlign = "center";
+            console.log("set context!");
         }
     
         getWidth() {
