@@ -9,7 +9,7 @@
   font-family: Roboto;
 }
 
-#statustext {
+#status {
   position: absolute;
   bottom: 50%;
   left: 0;
