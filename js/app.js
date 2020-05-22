@@ -152,6 +152,7 @@ function drawMeterGraph(context, width, height) {
       contextOfCircle.lineWidth = radiusOfCircle / 30;
       contextOfCircle.strokeStyle = "brack"
       drawCanvas.drawCircle(contextOfCircle, x0, y0, radiusOfCircle);
+      console.log(contextOfCircle.strokeStyle);
       // draw arc
       contextOfArc.lineWidth = radiusOfCircle / 10;
       contextOfArc.strokeStyle = "blue";
