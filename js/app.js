@@ -39,7 +39,7 @@ drawCanvas.setCanvas(canvas);
 context.fillStyle = "rgb(255,0,0)";
 drawCanvas.setContext(context);
 context.fillStyle = "rgb(0,0,255)";
-drawCanvas.drawCircle(drawCanvas.getWidth() / 4, drawCanvas.getHeight() / 4, drawCanvas.getWidth() / 4);
+drawCanvas.drawCircle(context, drawCanvas.getWidth() / 4, drawCanvas.getHeight() / 4, drawCanvas.getWidth() / 4);
 // drawSensorData();
 
 /* Click connect button */
@@ -101,11 +101,11 @@ function drawSensorData() {
   requestAnimationFrame(() => {
     console.log("request Animation!");
     //CanvasのWidthとHeightを取得
-    let width  = drawCanvas.getWidth();
-    let height = drawCanvas.getHeight();
+    let width  = drawCanvas.getWidth(canvas);
+    let height = drawCanvas.getHeight(canvas);
 
     // クリア
-    drawCanvas.clearAllFigure();
+    drawCanvas.clearAllFigure(context);
 
     if (graphMode === 'meter') {
       drawMeterGraph(width, height);
@@ -136,8 +136,8 @@ function drawMeterGraph(width, height) {
     // draw circle and arc
     for (step = 0; step < numberOfSensor; step++) {
       y0 += (margin + radiusOfCircle);
-      drawCanvas.drawCircle(x0, y0, radiusOfCircle);
-      drawCanvas.drawArc(x0, y0, radiusOfArc, startAngle, startAngle + convertValueToAngle(step));
+      drawCanvas.drawCircle(context, x0, y0, radiusOfCircle);
+      drawCanvas.drawArc(context, x0, y0, radiusOfArc, startAngle, startAngle + convertValueToAngle(step));
       drawSensorText(step, x0, y0, radiusOfCircle);
       y0 += radiusOfCircle;
     }
@@ -152,8 +152,8 @@ function drawMeterGraph(width, height) {
     // draw circle and arc
     for (step = 0; step < numberOfSensor; step++) {
       x0 += (margin + radiusOfCircle);
-      drawCanvas.drawCircle(x0, y0, radiusOfCircle);
-      drawCanvas.drawArc(x0, y0, radiusOfArc, startAngle, startAngle + convertValueToAngle(step));
+      drawCanvas.drawCircle(context, x0, y0, radiusOfCircle);
+      drawCanvas.drawArc(context, x0, y0, radiusOfArc, startAngle, startAngle + convertValueToAngle(step));
       drawSensorText(step, x0, y0, radiusOfCircle);
       x0 += radiusOfCircle;
     }
@@ -169,21 +169,21 @@ function drawSensorText(id, x, y, radius) {
 
   switch(id) {
     case sensorInfo.temperature.sensorID :
-      drawCanvas.drawText(sensorInfo.temperature.text.name,  x, yCoordinateOfName, fontSizeOfName);
-      drawCanvas.drawText(sensorInfo.temperature.text.value, x, y,                 fontSizeOfValue);
-      drawCanvas.drawText(sensorInfo.temperature.text.unit,  x, yCoordinateOfUnit, fontSizeOfUnit);
+      drawCanvas.drawText(context, sensorInfo.temperature.text.name,  x, yCoordinateOfName, fontSizeOfName);
+      drawCanvas.drawText(context, sensorInfo.temperature.text.value, x, y,                 fontSizeOfValue);
+      drawCanvas.drawText(context, sensorInfo.temperature.text.unit,  x, yCoordinateOfUnit, fontSizeOfUnit);
     break;
 
     case sensorInfo.humidity.sensorID :
-      drawCanvas.drawText(sensorInfo.humidity.text.name,  x, yCoordinateOfName, fontSizeOfName);
-      drawCanvas.drawText(sensorInfo.humidity.text.value, x, y,                 fontSizeOfValue);
-      drawCanvas.drawText(sensorInfo.humidity.text.unit,  x, yCoordinateOfUnit, fontSizeOfUnit);
+      drawCanvas.drawText(context, sensorInfo.humidity.text.name,  x, yCoordinateOfName, fontSizeOfName);
+      drawCanvas.drawText(context, sensorInfo.humidity.text.value, x, y,                 fontSizeOfValue);
+      drawCanvas.drawText(context, sensorInfo.humidity.text.unit,  x, yCoordinateOfUnit, fontSizeOfUnit);
     break;
 
     case sensorInfo.co2.sensorID :
-      drawCanvas.drawText(sensorInfo.co2.text.name,  x, yCoordinateOfName, fontSizeOfName);
-      drawCanvas.drawText(sensorInfo.co2.text.value, x, y,                 fontSizeOfValue);
-      drawCanvas.drawText(sensorInfo.co2.text.unit,  x, yCoordinateOfUnit, fontSizeOfUnit);
+      drawCanvas.drawText(context, sensorInfo.co2.text.name,  x, yCoordinateOfName, fontSizeOfName);
+      drawCanvas.drawText(context, sensorInfo.co2.text.value, x, y,                 fontSizeOfValue);
+      drawCanvas.drawText(context, sensorInfo.co2.text.unit,  x, yCoordinateOfUnit, fontSizeOfUnit);
     break;
 
     default :

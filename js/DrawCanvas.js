@@ -20,8 +20,8 @@
             console.log("set context!");
         }
     
-        getWidth() {
-            if (this.canvas) {
+        getWidth(canvas) {
+            if (canvas) {
                 // slice(0, -2)で単位のpxを削除
                 this.canvasWidth = parseInt(getComputedStyle(this.canvas).width.slice(0, -2)) * devicePixelRatio;
                 return this.canvasWidth;
@@ -31,8 +31,8 @@
             }
         }
     
-        getHeight() {
-            if (this.canvas) {
+        getHeight(canvas) {
+            if (canvas) {
                 // slice(0, -2)で単位のpxを削除
                 this.canvasHeight = parseInt(getComputedStyle(canvas).height.slice(0, -2)) * devicePixelRatio;
                 return this.canvasHeight;
@@ -42,31 +42,31 @@
             }
         }
 
-        drawText(text, x, y, fontSize) {
-            if (this.context) {
-                this.context.font = fontSize + "px" + " " + "sans-serif";
-                this.context.fillText(text, x, y);
+        drawText(context, text, x, y, fontSize) {
+            if (context) {
+                context.font = fontSize + "px" + " " + "sans-serif";
+                context.fillText(text, x, y);
             }
             else {
                 console.log("Context is not set.");
             }
         }
     
-        drawCircle(x, y, r) {
-            if (this.context) {
-                this.context.beginPath();
-                this.context.arc(x, y, r, 0, Math.PI * 2);
-                this.context.stroke();
+        drawCircle(context, x, y, r) {
+            if (context) {
+                context.beginPath();
+                context.arc(x, y, r, 0, Math.PI * 2);
+                context.stroke();
             }
             else {
                 console.log("Context is not set.");
             }
         }
           
-        drawArc(x, y, r, startAngle, endAngle) {
-            if (this.context) {
-                this.context.arc(x, y, r, startAngle, endAngle);
-                this.context.stroke();
+        drawArc(context, x, y, r, startAngle, endAngle) {
+            if (context) {
+                context.arc(x, y, r, startAngle, endAngle);
+                context.stroke();
             }
             else {
                 console.log("Context is not set.");
@@ -92,9 +92,9 @@
             }            
         }
         
-        clearAllFigure() {
-            if (this.context) {
-                this.context.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+        clearAllFigure(context) {
+            if (context) {
+                context.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
             }
             else {
                 console.log("Context is not set.");
