@@ -57,7 +57,7 @@
 }
 
 #sensorData {
-  position: absolute;
+  position: relative;
   background-color: chartreuse;
   width: 100%;
   height: 80%;
