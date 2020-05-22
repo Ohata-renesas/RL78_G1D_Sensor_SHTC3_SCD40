@@ -32,8 +32,7 @@ let graphMode         = 'meter';
 let dataPosition      = 0;
 
 
-/* Initialization */
-console.log(sensorInfo.temperature.values[0]);
+/* Initial drawing */
  drawSensorData();
 
 /* Click connect button */
@@ -92,12 +91,16 @@ function setSensorValue(data) {
 /* Draw Sensor Data */
 function drawSensorData() {
   requestAnimationFrame(() => {
+
+    console.log(sensorInfo.temperature.values);
+    
     //CanvasのWidthとHeightを取得
     canvas.width  = drawCanvas.getWidth(canvas);
     canvas.height = drawCanvas.getHeight(canvas);
 
     let context = canvas.getContext('2d');
     context.fillStyle = "orange";
+    context.textAlign = "center";
 
     // クリア
     drawCanvas.clearAllFigure(context, canvas.width, canvas.height);
@@ -162,9 +165,6 @@ function drawSensorText(id, context, x, y, radius) {
   let yCoordinateOfName  = y - radius / 2 + parseInt(fontSizeOfName) / 2;
   let yCoordinateOfValue = y + parseInt(fontSizeOfValue) / 2;
   let yCoordinateOfUnit  = y + radius / 2 + parseInt(fontSizeOfUnit) / 2;
-
-
-  context.textAlign = "center";
 
   switch(id) {
     case sensorInfo.temperature.sensorID :
