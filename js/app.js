@@ -38,10 +38,8 @@ let dataPosition      = 0;
 console.log("BEFORE => width: " + canvas.width + "px" + "," + "height: " + canvas.height + "px");
 console.log("AFTER => width: " + drawCanvas.getWidth(canvas) + "px" + "," + "height: " + drawCanvas.getHeight(canvas) + "px");
 drawCanvas.setCanvas(canvas);
-context.fillStyle = "rgb(255,0,0)";
 drawCanvas.setContext(context);
-context.fillStyle = "rgb(0,0,255)";
-// drawSensorData();
+drawSensorData();
 
 /* Click connect button */
 button.addEventListener('click', function() {
@@ -104,6 +102,9 @@ function drawSensorData() {
     //CanvasのWidthとHeightを取得
     let width  = drawCanvas.getWidth(canvas);
     let height = drawCanvas.getHeight(canvas);
+
+    console.log("BEFORE => width: " + canvas.width + "px" + "," + "height: " + canvas.height + "px");
+    console.log("AFTER => width: " + drawCanvas.getWidth(canvas) + "px" + "," + "height: " + drawCanvas.getHeight(canvas) + "px");
 
     // クリア
     drawCanvas.clearAllFigure(context);
