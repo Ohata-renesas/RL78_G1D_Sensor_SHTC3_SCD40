@@ -37,8 +37,8 @@ let dataPosition      = 0;
 // canvas
 drawCanvas.setCanvas(canvas);
 drawCanvas.setContext(context);
-context.fillStyle = rgb(0,0,255);
-drawCanvas.drawCircle(100, 100, 25);
+context.fillStyle = "rgb(0,0,255)";
+drawCanvas.drawCircle(drawCanvas.getWidth() / 4, drawCanvas.getHeight() / 4, drawCanvas.getWidth() / 4);
 // drawSensorData();
 
 /* Click connect button */
