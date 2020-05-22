@@ -94,8 +94,9 @@ function setSensorValue(data) {
 
 /* Draw Sensor Data */
 function drawSensorData() {
+  console.log("draw Canvas!");
   requestAnimationFrame(() => {
-
+    console.log("request Animation!");
     //CanvasのWidthとHeightを取得
     let width  = drawCanvas.getWidth();
     let height = drawCanvas.getHeight();
