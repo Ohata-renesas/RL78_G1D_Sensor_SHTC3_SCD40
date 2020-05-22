@@ -28,18 +28,11 @@ let sensorInfo = {
 };
 let button            = document.getElementById('connectButton');
 let canvas            = document.getElementById('sensorData');
-let context           = canvas.getContext('2d');
 let graphMode         = 'meter';
 let dataPosition      = 0;
 
 
 /* Initialization */
-// canvas
-console.log("BEFORE => width: " + canvas.width + "px" + "," + "height: " + canvas.height + "px");
-console.log("MID => width: " + getComputedStyle(canvas).width + "," + "height: " + getComputedStyle(canvas).height);
-console.log("AFTER => width: " + drawCanvas.getWidth(canvas) + "px" + "," + "height: " + drawCanvas.getHeight(canvas) + "px");
-drawCanvas.setCanvas(canvas);
-drawCanvas.setContext(context);
 drawSensorData();
 
 /* Click connect button */
@@ -97,31 +90,31 @@ function setSensorValue(data) {
 
 /* Draw Sensor Data */
 function drawSensorData() {
-  console.log("draw Canvas!");
   requestAnimationFrame(() => {
-    console.log("request Animation!");
     //CanvasのWidthとHeightを取得
     canvas.width  = drawCanvas.getWidth(canvas);
     canvas.height = drawCanvas.getHeight(canvas);
 
-    console.log("BEFORE => width: " + canvas.width + "px" + "," + "height: " + canvas.height + "px");
-    console.log("MID => width: " + getComputedStyle(canvas).width + "," + "height: " + getComputedStyle(canvas).height);
-    console.log("AFTER => width: " + drawCanvas.getWidth(canvas) + "px" + "," + "height: " + drawCanvas.getHeight(canvas) + "px");
+    let context = canvas.getContext('2d');
+
+    // console.log("BEFORE => width: " + canvas.width + "px" + "," + "height: " + canvas.height + "px");
+    // console.log("MID => width: " + getComputedStyle(canvas).width + "," + "height: " + getComputedStyle(canvas).height);
+    // console.log("AFTER => width: " + drawCanvas.getWidth(canvas) + "px" + "," + "height: " + drawCanvas.getHeight(canvas) + "px");
 
     // クリア
-    drawCanvas.clearAllFigure(context);
+    drawCanvas.clearAllFigure(context, canvas.width, canvas.height);
 
     if (graphMode === 'meter') {
-      drawMeterGraph(canvas.width, canvas.height);
+      drawMeterGraph(context, canvas.width, canvas.height);
     }
     else {
-      drawLineGraph(canvas.width, canvas.height);
+      drawLineGraph(context, canvas.width, canvas.height);
     }
   });
 }
 
 /* Draw meter graph */
-function drawMeterGraph(width, height) {
+function drawMeterGraph(context, width, height) {
   let heightIsLonger = (width <= height) ? 1 : 0;
   let margin;
   let radiusOfCircle;
@@ -142,7 +135,7 @@ function drawMeterGraph(width, height) {
       y0 += (margin + radiusOfCircle);
       drawCanvas.drawCircle(context, x0, y0, radiusOfCircle);
       drawCanvas.drawArc(context, x0, y0, radiusOfArc, startAngle, startAngle + convertValueToAngle(step));
-      drawSensorText(step, x0, y0, radiusOfCircle);
+      drawSensorText(step, context, x0, y0, radiusOfCircle);
       y0 += radiusOfCircle;
     }
   }
@@ -158,13 +151,13 @@ function drawMeterGraph(width, height) {
       x0 += (margin + radiusOfCircle);
       drawCanvas.drawCircle(context, x0, y0, radiusOfCircle);
       drawCanvas.drawArc(context, x0, y0, radiusOfArc, startAngle, startAngle + convertValueToAngle(step));
-      drawSensorText(step, x0, y0, radiusOfCircle);
+      drawSensorText(step, context, x0, y0, radiusOfCircle);
       x0 += radiusOfCircle;
     }
   }
 }
 
-function drawSensorText(id, x, y, radius) {
+function drawSensorText(id, context, x, y, radius) {
   let yCoordinateOfName = y - radius / 2;
   let yCoordinateOfUnit = y + radius / 2;
   let fontSizeOfName    = String(Math.round(radius / 6));

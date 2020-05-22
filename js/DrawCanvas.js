@@ -2,29 +2,12 @@
     'use strict';
 
     class DrawCanvas {
-        constructor() {
-            this.canvas         = null;
-            this.context        = null;
-            this.canvasWidth    = 0;
-            this.canvasHeight   = 0;
-        }
-
-        setCanvas(canvas) {
-            this.canvas = canvas;
-            console.log("set canvas!");
-        }
-
-        setContext(context) {
-            this.context = context;
-            this.context.textAlign = "center";
-            console.log("set context!");
-        }
+        constructor() {}
     
         getWidth(canvas) {
             if (canvas) {
                 // slice(0, -2)で単位のpxを削除
-                this.canvasWidth = parseInt(getComputedStyle(canvas).width.slice(0, -2)) * devicePixelRatio;
-                return this.canvasWidth;
+                return parseInt(getComputedStyle(canvas).width.slice(0, -2)) * devicePixelRatio;
             } 
             else {
                 console.log("Canvas is not set.");
@@ -34,8 +17,7 @@
         getHeight(canvas) {
             if (canvas) {
                 // slice(0, -2)で単位のpxを削除
-                this.canvasHeight = parseInt(getComputedStyle(canvas).height.slice(0, -2)) * devicePixelRatio;
-                return this.canvasHeight;
+                return parseInt(getComputedStyle(canvas).height.slice(0, -2)) * devicePixelRatio;
             } 
             else {
                 console.log("Canvas is not set.");
@@ -84,17 +66,17 @@
         }
         
         clearEachFigure(x, y, width, height) {
-            if (this.context) {
-                this.context.clearRect(x, y, width, height);
+            if (context) {
+                context.clearRect(x, y, width, height);
             }
             else {
                 console.log("Context is not set.");
             }            
         }
         
-        clearAllFigure(context) {
+        clearAllFigure(context, width, height) {
             if (context) {
-                context.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+                context.clearRect(0, 0, width, height);
             }
             else {
                 console.log("Context is not set.");
