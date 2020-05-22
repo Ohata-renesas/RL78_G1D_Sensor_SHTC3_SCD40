@@ -35,12 +35,12 @@ let dataPosition      = 0;
 
 /* Initialization */
 // canvas
-console.log("width: " + canvas.width + "px" + "," + "height: " + canvas.height + "px");
+console.log("BEFORE => width: " + canvas.width + "px" + "," + "height: " + canvas.height + "px");
+console.log("AFTER => width: " + drawCanvas.getWidth(canvas) + "px" + "," + "height: " + drawCanvas.getHeight(canvas) + "px");
 drawCanvas.setCanvas(canvas);
 context.fillStyle = "rgb(255,0,0)";
 drawCanvas.setContext(context);
 context.fillStyle = "rgb(0,0,255)";
-drawCanvas.drawCircle(context, drawCanvas.getWidth(canvas) / 4, drawCanvas.getHeight(canvas) / 4, drawCanvas.getWidth(canvas) / 4);
 // drawSensorData();
 
 /* Click connect button */
