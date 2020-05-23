@@ -33,7 +33,6 @@ h1 {
 .headline-list {
   text-align: center;
   margin: 0 auto 5 auto;
-  margin-bottom: 10%;
   padding: 0%;
 }
 
@@ -76,6 +75,7 @@ h1 {
 .text-wrapper #connectButton {
   position: relative;
   display: block;
+  margin: 0 auto;
   margin-bottom: 10%;
   width: 50%;
   height: 50%;
