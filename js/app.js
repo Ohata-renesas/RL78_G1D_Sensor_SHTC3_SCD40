@@ -246,7 +246,7 @@ connectButton.addEventListener('click', function() {
       environmentSensor.characteristic.addEventListener('characteristicvaluechanged', handleEnvironmentSensor);
     })
     .catch(error => {
-      document.getElementById('statusText').innerHTML = error;
+      document.getElementById('statusText').innerHTML = "Status: " + error;
       console.log("error:" + error);
     });
   } 
@@ -270,15 +270,15 @@ function handleEnvironmentSensor(event) {
 
   switch (result.calibration) {
     case CALIBRATION_NO :
-      document.getElementById('statusText').innerHTML = "Measurement";
+      document.getElementById('statusText').innerHTML = "Status: Measurement";
     break;
 
     case CALIBRATION_YES :
-      document.getElementById('statusText').innerHTML = "Calibration";
+      document.getElementById('statusText').innerHTML = "Status: Calibration";
     break;
 
     default :
-      document.getElementById('statusText').innerHTML = "Calibration Data Error";
+      document.getElementById('statusText').innerHTML = "Status: Calibration Data Error";
     break;
   }
 }
