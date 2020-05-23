@@ -115,7 +115,8 @@ function drawFgCanvasForAnimation(canvas) {
   for (let step = 0; step < maxNumberOfSensor; step++) {
     currentEndAngle[step] = startAngle + convertValueToAngle(step);
   }
-  
+
+  console.log(context);
   drawFgGraph(context, canvas.width, canvas.height);
 }
 
