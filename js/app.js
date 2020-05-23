@@ -31,8 +31,8 @@ let sensorInfo = {
 let connectButton           = document.getElementById('connectButton');
 let bgCanvas                = document.getElementById('backgroundCanvas');
 let fgCanvasForValueText    = document.getElementById('foregroundCanvasForValueText');
-let fgCanvasForeAnimation   = document.getElementById('foregroundCanvasForAnimation');
-let fgContextForeAnimation  = fgCanvasForeAnimation.getContext('2d');
+let fgCanvasForAnimation   = document.getElementById('foregroundCanvasForAnimation');
+let fgContextForAnimation  = fgCanvasForAnimation.getContext('2d');
 let graphMode               = 'meter';
 let dataPosition            = 0;
 let oldEndAngle             = new Array(maxNumberOfSensor).fill(startAngle);
@@ -49,7 +49,7 @@ redrawAllCanvas();
 function drawBgCanvas(canvas) {
   canvas = updateWidthAndHeightOfCanvas(canvas);
   let context = canvas.getContext('2d');
-  drawCanvas.clearAllFigure(context, canvas.width, canvas,height);
+  drawCanvas.clearAllFigure(context, canvas.width, canvas.height);
   drawBgGraph(context, canvas.width, canvas.height);
 }
 
@@ -108,8 +108,8 @@ function drawBgText(id, context, x0, y0, radius) {
 /* Foreground Canvas for Animation */
 // Draw foreground canvas for value text
 function drawFgCanvasForAnimation() {
-  fgCanvasForeAnimation   = updateWidthAndHeightOfCanvas(fgCanvasForeAnimation);
-  fgContextForeAnimation  = fgCanvasForeAnimation.getContext('2d');
+  fgCanvasForAnimation   = updateWidthAndHeightOfCanvas(fgCanvasForAnimation);
+  fgContextForAnimation  = fgCanvasForAnimation.getContext('2d');
 
   for (let step = 0; step < maxNumberOfSensor; step++) {
     currentEndAngle[step] = startAngle + convertValueToAngle(step);
@@ -120,13 +120,13 @@ function drawFgCanvasForAnimation() {
 
 // Draw foreground graph
 function drawFgGraph() {
-  drawCanvas.clearAllFigure(fgContextForeAnimation, fgCanvasForeAnimation.width, fgCanvasForeAnimation.height);
+  drawCanvas.clearAllFigure(fgContextForAnimation, fgCanvasForAnimation.width, fgCanvasForAnimation.height);
   
   if (graphMode === 'meter') {
-    calculateCoordinates(fgContextForeAnimation, fgCanvasForeAnimation.width, fgCanvasForeAnimation.height, drawFgMeterGraph);
+    calculateCoordinates(fgContextForAnimation, fgCanvasForAnimation.width, fgCanvasForAnimation.height, drawFgMeterGraph);
   }
   else {
-    drawFgLineGraph(fgContextForeAnimation, fgCanvasForeAnimation.width, fgCanvasForeAnimation.height);
+    drawFgLineGraph(fgContextForAnimation, fgCanvasForAnimation.width, fgCanvasForAnimation.height);
   }
 
   if (countOfRepetition < maxNumberOfRepetition) {
@@ -195,7 +195,7 @@ function calculateAngle(currentValue, maxValue, minValue) {
 function drawFgCanvasForValueText(canvas) {
   canvas = updateWidthAndHeightOfCanvas(canvas);
   let context = canvas.getContext('2d');
-  drawCanvas.clearAllFigure(context, canvas.width, canvas,height);
+  drawCanvas.clearAllFigure(context, canvas.width, canvas.height);
   drawFgText(context, canvas.width, canvas.height);
 }
 
