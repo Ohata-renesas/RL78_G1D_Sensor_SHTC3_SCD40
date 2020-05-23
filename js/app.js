@@ -121,8 +121,8 @@ function drawFgCanvasForAnimation(canvas) {
 
 // Draw foreground graph
 function drawFgGraph(context, width, height) {
-  drawCanvas.clearAllFigure(context, width, height);
-  
+  // drawCanvas.clearAllFigure(context, width, height);
+
   if (graphMode === 'meter') {
     calculateCoordinates(context, width, height, drawFgMeterGraph);
   }
@@ -132,7 +132,7 @@ function drawFgGraph(context, width, height) {
 
   if (countOfRepetition < maxNumberOfRepetition) {
     countOfRepetition++;
-    requestID = requestAnimationFrame(drawFgGraph);
+    requestID = requestAnimationFrame(drawFgGraph(context, width, height));
   }
   else {
     countOfRepetition = 0;
