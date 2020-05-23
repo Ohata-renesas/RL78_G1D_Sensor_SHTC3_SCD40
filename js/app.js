@@ -114,7 +114,7 @@ function drawFgCanvasForAnimation() {
   for (let step = 0; step < maxNumberOfSensor; step++) {
     currentEndAngle[step] = startAngle + convertValueToAngle(step);
   }
-
+  countOfRepetition = 0;
   drawFgGraph();
 }
 

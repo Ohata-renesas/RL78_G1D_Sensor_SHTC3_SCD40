@@ -13,6 +13,7 @@
 
 .canvas-wropper {
   position: relative;
+  display: block;
   width: 100%;
   height: 85%;
 }
@@ -21,7 +22,7 @@
   display: block;
 } */
 
-#backgroundCanvas {
+.canvas {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -30,28 +31,6 @@
   width: 100%;
   height : 85%
 }
-
-#foregroundCanvasForValueText {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height : 85%
-}
-
-#foregroundCanvasForAnimation {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height : 85%
-}
-
-
 
 #connectButton {
   position: relative;
