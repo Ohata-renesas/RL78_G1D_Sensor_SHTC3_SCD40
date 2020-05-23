@@ -50,7 +50,7 @@ function drawBgCanvas(canvas) {
   canvas = updateWidthAndHeightOfCanvas(canvas);
   let context = canvas.getContext('2d');
 
-  drawBgGraph(context, canvas.width, canvas,height);
+  drawBgGraph(context, canvas.width, canvas.height);
 }
 
 // Draw background graph
