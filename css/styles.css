@@ -71,7 +71,7 @@ header {
   position: relative;
   display: block;
   margin: 0 auto;
-  width: 40%;
+  width: 30%;
   height: 70%;
   cursor: pointer;
   font-size: 200%;
@@ -83,7 +83,7 @@ header {
   margin: 0 auto;
   width: 50%;
   height: 30%;
-  font-size: 50%;
+  font-size: 100%;
 }
 
 /* #connectButton {
