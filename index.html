@@ -17,19 +17,21 @@
     </ul>
   </header>
 
-  <div id="container">
-    <!-- Sensor Data on canvas -->
-    <div class="canvas-wropper">
-      <canvas id="backgroundCanvas"></canvas>
-      <canvas id="foregroundCanvas"></canvas>
+  <main>
+    <div id="container">
+      <!-- Sensor Data on canvas -->
+      <div class="canvas-wropper">
+        <canvas id="backgroundCanvas"></canvas>
+        <canvas id="foregroundCanvas"></canvas>
+      </div>
+  
+      <!-- Connect BLE Button -->
+      <div id="connectButton">CONNECT</div>
+      <!-- Status -->
+      <div id="statusText">Initial</div>
+  
     </div>
-
-    <!-- Connect BLE Button -->
-    <div id="connectButton">CONNECT</div>
-    <!-- Status -->
-    <div id="statusText">Initial</div>
-
-  </div>
+  </main>
   <script src="https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/js/EnvironmentSensor.js"></script>
   <script src="https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/js/DrawCanvas.js"></script>
   <script src="https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/js/app.js"></script>
