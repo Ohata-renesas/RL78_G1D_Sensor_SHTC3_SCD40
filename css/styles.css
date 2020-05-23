@@ -72,6 +72,7 @@ header {
   margin: 0 auto;
   width: 50%;
   height: 70%;
+  top: 50%;
   cursor: pointer;
 }
 
@@ -81,6 +82,7 @@ header {
   margin: 0 auto;
   width: 50%;
   height: 30%;
+  top: 50%;
 }
 
 /* #connectButton {
