@@ -43,6 +43,9 @@ let requestID;
 /* Initial drawing */
 drawBgCanvas(bgCanvas);
 drawFgCanvasForValueText(fgCanvasForValueText);
+console.log(sensorInfo.temperature.text.value);
+console.log(sensorInfo.humidity.text.value);
+console.log(sensorInfo.co2.text.value);
 
 /* Backgroud Canvas */
 // Draw background canvas
