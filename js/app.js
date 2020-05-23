@@ -116,12 +116,13 @@ function drawFgCanvasForAnimation(canvas) {
     currentEndAngle[step] = startAngle + convertValueToAngle(step);
   }
 
-  console.log(context);
   drawFgGraph(context, canvas.width, canvas.height);
 }
 
 // Draw foreground graph
 function drawFgGraph(context, width, height) {
+  drawCanvas.clearAllFigure(context, width, height);
+  
   if (graphMode === 'meter') {
     calculateCoordinates(context, width, height, drawFgMeterGraph);
   }

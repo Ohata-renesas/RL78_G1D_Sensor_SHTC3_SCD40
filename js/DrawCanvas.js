@@ -38,6 +38,7 @@
             if (context) {         
                 context.beginPath();       
                 context.arc(x, y, r, 0, Math.PI * 2);
+                context.clothPath();
                 context.stroke();
             }
             else {
