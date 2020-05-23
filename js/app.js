@@ -86,18 +86,18 @@ function drawBgText(id, context, x0, y0, radius) {
 
   switch(id) {
     case sensorInfo.temperature.sensorID :
-      drawCanvas.drawText(context, sensorInfo.temperature.text.name,  x0, yCoordinateOfName,  fontSizeOfName, true);
-      drawCanvas.drawText(context, sensorInfo.temperature.text.unit,  x0, yCoordinateOfUnit,  fontSizeOfUnit, false);
+      drawCanvas.drawText(context, sensorInfo.temperature.text.name,  x0, yCoordinateOfName,  fontSizeOfName);
+      drawCanvas.drawText(context, sensorInfo.temperature.text.unit,  x0, yCoordinateOfUnit,  fontSizeOfUnit);
     break;
 
     case sensorInfo.humidity.sensorID :
-      drawCanvas.drawText(context, sensorInfo.humidity.text.name,  x0, yCoordinateOfName,  fontSizeOfName, true);
-      drawCanvas.drawText(context, sensorInfo.humidity.text.unit,  x0, yCoordinateOfUnit,  fontSizeOfUnit, false);
+      drawCanvas.drawText(context, sensorInfo.humidity.text.name,  x0, yCoordinateOfName,  fontSizeOfName);
+      drawCanvas.drawText(context, sensorInfo.humidity.text.unit,  x0, yCoordinateOfUnit,  fontSizeOfUnit);
     break;
 
     case sensorInfo.co2.sensorID :
-      drawCanvas.drawText(context, sensorInfo.co2.text.name,  x0, yCoordinateOfName,  fontSizeOfName, true);
-      drawCanvas.drawText(context, sensorInfo.co2.text.unit,  x0, yCoordinateOfUnit,  fontSizeOfUnit, false);
+      drawCanvas.drawText(context, sensorInfo.co2.text.name,  x0, yCoordinateOfName,  fontSizeOfName);
+      drawCanvas.drawText(context, sensorInfo.co2.text.unit,  x0, yCoordinateOfUnit,  fontSizeOfUnit);
     break;
 
     default :
@@ -214,15 +214,15 @@ function drawFgTextOfValue(id, context, x0, y0, radius) {
 
   switch(id) {
     case sensorInfo.temperature.sensorID :
-      drawCanvas.drawText(context, sensorInfo.temperature.text.value, x0, yCoordinateOfValue, fontSizeOfValue, false);
+      drawCanvas.drawText(context, sensorInfo.temperature.text.value, x0, yCoordinateOfValue, fontSizeOfValue);
     break;
 
     case sensorInfo.humidity.sensorID :
-      drawCanvas.drawText(context, sensorInfo.humidity.text.value, x0, yCoordinateOfValue, fontSizeOfValue, false);
+      drawCanvas.drawText(context, sensorInfo.humidity.text.value, x0, yCoordinateOfValue, fontSizeOfValue);
     break;
 
     case sensorInfo.co2.sensorID :
-      drawCanvas.drawText(context, sensorInfo.co2.text.value, x0, yCoordinateOfValue, fontSizeOfValue, false);
+      drawCanvas.drawText(context, sensorInfo.co2.text.value, x0, yCoordinateOfValue, fontSizeOfValue);
     break;
 
     default :

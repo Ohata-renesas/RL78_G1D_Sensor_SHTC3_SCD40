@@ -24,15 +24,9 @@
             }
         }
 
-        drawText(context, text, x, y, fontSize, boldIsTrue) {
+        drawText(context, text, x, y, fontSize) {
             if (context) {
-                if (boldIsTrue) {
-                    context.font = "bold" + " " + fontSize + "px" + " " + "sans-serif";
-                }
-                else {
-                    context.font = fontSize + "px" + " " + "sans-serif";
-                }
-                
+                context.font = fontSize + "px" + " " + "sans-serif";
                 context.fillText(text, x, y);
             }
             else {
@@ -44,7 +38,6 @@
             if (context) {         
                 context.beginPath();       
                 context.arc(x, y, r, 0, Math.PI * 2);
-                // context.clothPath();
                 context.stroke();
             }
             else {
