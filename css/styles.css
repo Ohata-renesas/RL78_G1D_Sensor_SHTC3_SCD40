@@ -5,6 +5,8 @@ header {
   width: 100%;
   height: 20%;
   text-align: center;
+  font-family: sans-serif;
+  display: block;
 }
 
 .headline-list {
@@ -35,7 +37,8 @@ header {
   right: 0;
   left: 0;
   bottom: 0;
-  font-family: Roboto;
+  font-family: sans-serif;
+  display: block;
 }
 
 .canvas-wropper {
