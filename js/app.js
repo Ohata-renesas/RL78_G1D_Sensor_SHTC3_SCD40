@@ -145,11 +145,11 @@ function drawFgGraph() {
 
 // Draw foreground meter graph
 function drawFgMeterGraph(id, context, x0, y0, radius) {
-  let rangeOfAngle = (currentEndAngle[id] - oldEndAngle[id]) / (countOfRepetition + 1);
+  let rangeOfAngle = (currentEndAngle[id] - oldEndAngle[id]) / maxNumberOfRepetition;
   radius     *= 0.85;
   context.lineWidth = radius / 10;
   context.strokeStyle = "blue";
-  drawCanvas.drawArc(context, x0, y0, radius, startAngle, currentEndAngle[id] + rangeOfAngle);
+  drawCanvas.drawArc(context, x0, y0, radius, startAngle, oldEndAngle[id] + rangeOfAngle * (countOfRepetition + 1));
 }
 
 // Convert sensor value to angle
