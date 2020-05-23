@@ -10,21 +10,21 @@ let sensorInfo = {
                      values   : new Array(dataMaxLength),
                      text     : {name  : "Temperature", 
                                  value : "000.00", 
-                                 unit  : "°C"}},
+                                 unit  : "[°C]"}},
   humidity        : {sensorID : 1, 
                      maxValue : 100,    
                      minValue : 0, 
                      values   : new Array(dataMaxLength), 
                      text     : {name  : "Humidity", 
                                  value : "000.00", 
-                                 unit  : "%RH"}},
+                                 unit  : "[%RH]"}},
   co2             : {sensorID : 2, 
                      maxValue : 10000,  
                      minValue : 0, 
                      values   : new Array(dataMaxLength), 
                      text     : {name  : "CO2", 
                                  value : "00000", 
-                                 unit  : "ppm"}},
+                                 unit  : "[ppm]"}},
   calibration     : 0,
   dataIsChanged   : 1,
 };
@@ -49,7 +49,7 @@ redrawAllCanvas();
 function drawBgCanvas(canvas) {
   canvas = updateWidthAndHeightOfCanvas(canvas);
   let context = canvas.getContext('2d');
-  drawCanvas.clearAllFigure(context, canvas.width, canvas.height);
+  // drawCanvas.clearAllFigure(context, canvas.width, canvas.height);
   drawBgGraph(context, canvas.width, canvas.height);
 }
 
@@ -120,7 +120,7 @@ function drawFgCanvasForAnimation() {
 
 // Draw foreground graph
 function drawFgGraph() {
-  drawCanvas.clearAllFigure(fgContextForAnimation, fgCanvasForAnimation.width, fgCanvasForAnimation.height);
+  // drawCanvas.clearAllFigure(fgContextForAnimation, fgCanvasForAnimation.width, fgCanvasForAnimation.height);
   
   if (graphMode === 'meter') {
     calculateCoordinates(fgContextForAnimation, fgCanvasForAnimation.width, fgCanvasForAnimation.height, drawFgMeterGraph);
@@ -195,7 +195,8 @@ function calculateAngle(currentValue, maxValue, minValue) {
 function drawFgCanvasForValueText(canvas) {
   canvas = updateWidthAndHeightOfCanvas(canvas);
   let context = canvas.getContext('2d');
-  drawCanvas.clearAllFigure(context, canvas.width, canvas.height);
+
+  // drawCanvas.clearAllFigure(context, canvas.width, canvas.height);
   drawFgText(context, canvas.width, canvas.height);
 }
 
