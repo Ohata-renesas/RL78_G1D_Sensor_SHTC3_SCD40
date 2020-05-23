@@ -112,9 +112,6 @@
       result.dataIsChanged      = value.getUint8(9);
 
       // // Set sensor data to text
-      // document.getElementById('temperatureData').innerHTML  = "TEMP: " + result.temperatureValue + " °C";
-      // document.getElementById('humidityData').innerHTML     = "HUMI: " + result.humidityValue + " %RH";
-      // document.getElementById('co2Data').innerHTML          = "CO2: " + result.co2Value + " ppm";
       if (result.calibration == CALIBRATION_NO) {
         document.getElementById('statusText').innerHTML     = "Measurement";
       }

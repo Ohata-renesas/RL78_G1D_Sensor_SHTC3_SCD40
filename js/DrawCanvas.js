@@ -66,7 +66,7 @@
         
         }
         
-        clearAllFigure(context, width, height) {
+        clearCanvas(context, width, height) {
             if (context) {
                 context.clearRect(0, 0, width, height);
             }
