@@ -8,6 +8,10 @@ header {
   font-family: sans-serif;
 }
 
+.headaline {
+  margin: auto;
+}
+
 .headline-list {
   text-align: center;
   margin: auto;
