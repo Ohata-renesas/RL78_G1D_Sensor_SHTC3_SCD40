@@ -60,6 +60,7 @@ header {
 
 .text-wrapper {
   position: relative;
+  color: #333333;
   display: block;
   width: 100%;
   height: 15%;
@@ -69,10 +70,11 @@ header {
 .text-wrapper #connectButton {
   position: relative;
   display: block;
-  margin: 10% auto;
+  margin: 0 auto;
   width: 50%;
-  height: 50%;
+  height: 70%;
   cursor: pointer;
+  font-size: 200%;
 }
 
 .text-wrapper #statusText {
@@ -81,6 +83,7 @@ header {
   margin: 0 auto;
   width: 50%;
   height: 30%;
+  font-size: 200%;
 }
 
 /* #connectButton {
