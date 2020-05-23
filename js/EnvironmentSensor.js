@@ -15,6 +15,8 @@
       this.userServiceUUID          = '92b60060-fa5f-4dcc-9312-d8f3dad1675f';
       this.userCharacteristicUUID   = '92b60125-fa5f-4dcc-9312-d8f3dad1675f';
       this.connectionStatus         = DISCONNECT;
+      this.statusText               = document.getElementById('statusText');
+      this.connectButton            = document.getElementById('connectButton');
     }
 
     connect() {      
@@ -25,22 +27,22 @@
         optionalServices: [this.userServiceUUID]      
         })
       .then(device => {
-        document.getElementById('statusText').innerHTML = "Connect the device";
+        this.statusText.innerHTML = "Connect the device";
         this.device = device;
         this.device.addEventListener('gattserverdisconnected', this.onDisconnected);
         return device.gatt.connect();
       })
       .then(server => {
-        document.getElementById('statusText').innerHTML = "Get the service";
+        this.statusText.innerHTML = "Get the service";
         return server.getPrimaryService(this.userServiceUUID);
       })
       .then(service => {
-        document.getElementById('statusText').innerHTML = "Get the characateristic";
+        this.statusText.innerHTML = "Get the characateristic";
         return service.getCharacteristic(this.userCharacteristicUUID);
       })
       .then(characteristic => {
         this.characteristic = characteristic;
-        document.getElementById('statusText').innerHTML = "Start notification";
+        this.statusText.innerHTML = "Start notification";
         return characteristic.startNotifications();
       })      
     }
@@ -48,7 +50,7 @@
     disconnect() {   
       if (!this.device) {
         var error = "No Bluetooth Device";
-        document.getElementById('statusText').innerHTML = error;
+        this.statusText.innerHTML = error;
         console.log('Error : ' + error);
         return;
       }
@@ -63,7 +65,7 @@
        var error = "Please click again.";
        this.connectionStatus = DISCONNECT;
        document.getElementById('connectButton').innerHTML = "CONNECT";
-       document.getElementById('statusText').innerHTML = error;
+       this.statusText.innerHTML = error;
        console.log('Error : ' + error);
        return;
       }   
@@ -72,7 +74,7 @@
 
     onDisconnected(event) {
       document.getElementById('connectButton').innerHTML = "CONNECT";
-      document.getElementById('statusText').innerHTML = "Disconnect the device";
+      this.statusText.innerHTML = "Disconnect the device";
     }
 
     isConnected() {
@@ -85,13 +87,13 @@
         case CONNECT :
           this.connectionStatus = DISCONNECT;
           document.getElementById('connectButton').innerHTML = "CONNECT";
-          document.getElementById('statusText').innerHTML = "Disconnect the device";
+          this.statusText.innerHTML = "Disconnect the device";
           break;
 
         case DISCONNECT :
           this.connectionStatus = CONNECT;
           document.getElementById('connectButton').innerHTML = "DISCONNECT";
-          document.getElementById('statusText').innerHTML = "Measurement";
+          this.statusText.innerHTML = "Measurement";
           break;
 
         default :
@@ -113,10 +115,10 @@
 
       // // Set sensor data to text
       if (result.calibration == CALIBRATION_NO) {
-        document.getElementById('statusText').innerHTML     = "Measurement";
+        this.statusText.innerHTML     = "Measurement";
       }
       else {
-        document.getElementById('statusText').innerHTML     = "Calibration";
+        this.statusText.innerHTML     = "Calibration";
       }
 
       // Log
