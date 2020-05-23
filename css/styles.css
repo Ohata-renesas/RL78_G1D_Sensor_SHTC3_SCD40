@@ -22,13 +22,15 @@ header {
   display: block;
 }
 
+h1 {
+  margin: 0 0 0 0;
+}
+
 .headaline {
-  height: 75%;
   margin-bottom: 0%;
 }
 
 .headline-list {
-  height: 75%;
   text-align: center;
   margin: 0 auto;
   padding: 0%;
@@ -86,5 +88,5 @@ header {
   margin: 0 auto;
   width: 100%;
   height: 50%;
-  font-size: 70%;
+  font-size: 80%;
 }
