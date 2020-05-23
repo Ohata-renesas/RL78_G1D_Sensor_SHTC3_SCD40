@@ -1,5 +1,5 @@
 header {
-  /* position: relative; */
+  position: absolute;
   background-color: white;  
   color: #333333;
   width: 100%;
@@ -31,19 +31,9 @@ header {
   color: #66CC33;
 }
 
-main {
-  /* position: relative; */
-  background-color: white;  
-  color: #333333;
-  width: 100%;
-  height: 80%;
-  text-align: center;
-  font-family: sans-serif;
-}
-
 #container {
   position: absolute;
-  /* background-color: white;
+  background-color: white;
   width: 100%;
   height: 80%;
   top: 0;
@@ -51,7 +41,7 @@ main {
   left: 0;
   bottom: 0;
   font-family: sans-serif;
-  display: block; */
+  /* display: block; */
 }
 
 .canvas-wropper {
