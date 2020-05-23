@@ -26,6 +26,10 @@ h1 {
   margin-bottom: 0%;
 }
 
+.headline {
+  font-size: 150%;
+}
+
 .headline-list {
   text-align: center;
   margin: 0 auto;
