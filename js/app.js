@@ -1,6 +1,6 @@
 const dataMaxLength  = 10;
 const maxNumberOfSensor = 3;
-const maxNumberOfRepetition = 5;
+const maxNumberOfRepetition = 15;
 const mathPI = Math.PI;
 const startAngle = mathPI / 2;
 let sensorInfo = {
