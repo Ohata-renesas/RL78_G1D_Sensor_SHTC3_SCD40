@@ -72,7 +72,7 @@ header {
   position: relative;
   display: block;
   margin: 0 auto;
-  width: 30%;
+  width: 50%;
   height: 50%;
   cursor: pointer;
   font-size: 200%;
@@ -86,32 +86,3 @@ header {
   height: 30%;
   font-size: 100%;
 }
-
-/* #connectButton {
-  position: relative;
-  background-color: coral;
-  margin: auto;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: 10%;
-  cursor: pointer;
-  text-align: center;
-  display: block;
-} */
-
-/* #statusText {
-  position: relative;
-  background-color: gold;
-  margin: auto;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: 5%;
-  text-align: center;
-  display: block;
-} */
