@@ -24,9 +24,15 @@
             }
         }
 
-        drawText(context, text, x, y, fontSize) {
+        drawText(context, text, x, y, fontSize, boldIsTrue) {
             if (context) {
-                context.font = fontSize + "px" + " " + "sans-serif";
+                if (boldIsTrue) {
+                    context.font = "bold" + fontSize + "px" + " " + "sans-serif";
+                }
+                else {
+                    context.font = fontSize + "px" + " " + "sans-serif";
+                }
+                
                 context.fillText(text, x, y);
             }
             else {
