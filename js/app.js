@@ -165,7 +165,6 @@ function drawFgMeterGraph(id, context, x0, y0, radius) {
 
 // Convert sensor value to angle
 function convertValueToAngle(id) {
-
   switch (id) {
     case sensorInfo.temperature.sensorID :
       return calculateAngle(parseFloat(sensorInfo.temperature.text.value),

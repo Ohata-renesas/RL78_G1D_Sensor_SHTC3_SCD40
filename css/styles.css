@@ -1,3 +1,19 @@
+header {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+}
+
+.headline-list {
+  text-align: center;
+  margin: auto;
+}
+
+.headline-list-item {
+  list-style: none;
+  display: inline-block;
+}
+
 #container {
   position: absolute;
   background-color: white;
