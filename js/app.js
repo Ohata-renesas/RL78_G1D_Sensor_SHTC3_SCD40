@@ -28,16 +28,17 @@ let sensorInfo = {
   calibration     : 0,
   dataIsChanged   : 1,
 };
-let connectButton         = document.getElementById('connectButton');
-let bgCanvas              = document.getElementById('backgroundCanvas');
-let fgCanvasForValueText  = document.getElementById('foregroundCanvasForValueText');
-let fgCanvasForeAnimation = document.getElementById('foregroundCanvasForAnimation');
-let graphMode             = 'meter';
-let dataPosition          = 0;
-let oldEndAngle           = new Array(maxNumberOfSensor).fill(startAngle);
-let currentEndAngle       = new Array(maxNumberOfSensor).fill(startAngle);
-let countOfRepetition     = 0;
-let requestID;
+let connectButton           = document.getElementById('connectButton');
+let bgCanvas                = document.getElementById('backgroundCanvas');
+let fgCanvasForValueText    = document.getElementById('foregroundCanvasForValueText');
+let fgCanvasForeAnimation   = document.getElementById('foregroundCanvasForAnimation');
+let fgContextForeAnimation  = fgCanvasForeAnimation.getContext('2d');
+let graphMode               = 'meter';
+let dataPosition            = 0;
+let oldEndAngle             = new Array(maxNumberOfSensor).fill(startAngle);
+let currentEndAngle         = new Array(maxNumberOfSensor).fill(startAngle);
+let countOfRepetition       = 0;
+let requestID               = null;
 
 
 /* Initial drawing */
@@ -108,31 +109,31 @@ function drawBgText(id, context, x0, y0, radius) {
 
 /* Foreground Canvas for Animation */
 // Draw foreground canvas for value text
-function drawFgCanvasForAnimation(canvas) {
-  canvas = updateWidthAndHeightOfCanvas(canvas);
-  let context = canvas.getContext('2d');
+function drawFgCanvasForAnimation() {
+  fgCanvasForeAnimation   = updateWidthAndHeightOfCanvas(fgCanvasForeAnimation);
+  fgContextForeAnimation  = fgCanvasForeAnimation.getContext('2d');
 
   for (let step = 0; step < maxNumberOfSensor; step++) {
     currentEndAngle[step] = startAngle + convertValueToAngle(step);
   }
 
-  drawFgGraph(context, canvas.width, canvas.height);
+  drawFgGraph();
 }
 
 // Draw foreground graph
-function drawFgGraph(context, width, height) {
+function drawFgGraph() {
   // drawCanvas.clearAllFigure(context, width, height);
 
   if (graphMode === 'meter') {
-    calculateCoordinates(context, width, height, drawFgMeterGraph);
+    calculateCoordinates(fgContextForeAnimation, fgCanvasForeAnimation.width, fgCanvasForeAnimation.height, drawFgMeterGraph);
   }
   else {
-    drawFgLineGraph(context, width, height);
+    drawFgLineGraph(fgContextForeAnimation, fgCanvasForeAnimation.width, fgCanvasForeAnimation.height);
   }
 
   if (countOfRepetition < maxNumberOfRepetition) {
     countOfRepetition++;
-    requestID = requestAnimationFrame(drawFgGraph(context, width, height));
+    requestID = requestAnimationFrame(drawFgGraph);
   }
   else {
     countOfRepetition = 0;
@@ -142,6 +143,7 @@ function drawFgGraph(context, width, height) {
     cancelAnimationFrame(requestID);
   }  
 }
+
 
 // Draw foreground meter graph
 function drawFgMeterGraph(id, context, x0, y0, radius) {
@@ -297,7 +299,7 @@ function handleEnvironmentSensor(event) {
   if (sensorInfo.dataIsChanged != result.dataIsChanged) {
     sensorInfo.dataIsChanged = result.dataIsChanged;
     setSensorValue(result);
-    drawFgCanvasForAnimation(fgCanvasForeAnimation);
+    drawFgCanvasForAnimation();
   }
   else {
     // nothing
@@ -342,5 +344,5 @@ document.addEventListener("visibilitychange", () => {
 function redrawAllCanvas() {
   drawBgCanvas(bgCanvas);
   drawFgCanvasForValueText(fgCanvasForValueText);
-  drawFgCanvasForAnimation(fgCanvasForeAnimation);
+  drawFgCanvasForAnimation();
 }
