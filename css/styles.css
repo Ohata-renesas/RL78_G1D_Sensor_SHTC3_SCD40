@@ -17,9 +17,9 @@
   height: 85%;
 }
 
-.canvas-wropper canvas {
+/* .canvas-wropper canvas {
   display: block;
-}
+} */
 
 #backgroundCanvas {
   position: absolute;
