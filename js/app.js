@@ -6,7 +6,7 @@ const maxNumberOfRepetition = 15;
 const mathPI                = Math.PI;
 const startAngle            = mathPI / 2;
 const renesasBlue           = "blue";
-const renesasGray           = "dimgray";
+const renesasGray           = "#333333";
 let sensorInfo = {
   temperature     : {sensorID : 0,
                      maxValue : 100,
