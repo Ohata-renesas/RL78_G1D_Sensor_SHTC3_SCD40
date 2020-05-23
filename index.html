@@ -10,7 +10,11 @@
 <body>
   <div id="container">
     <!-- Sensor Data on canvas -->
-    <canvas id="sensorData"></canvas>
+    <div class="canvas-wropper">
+      <canvas id="backgroundCanvas"></canvas>
+      <canvas id="foregroundCanvasForValueText"></canvas>
+      <canvas id="foregroundCanvasForAnimation"></canvas>
+    </div>
 
     <!-- Connect BLE Button -->
     <div id="connectButton">CONNECT</div>

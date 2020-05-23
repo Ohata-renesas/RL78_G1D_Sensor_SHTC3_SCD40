@@ -1,6 +1,8 @@
 const dataMaxLength  = 10;
-const numberOfSensor = 3;
+const maxNumberOfSensor = 3;
+const maxNumberOfRepetition = 5;
 const mathPI = Math.PI;
+const startAngle = mathPI / 2;
 let sensorInfo = {
   temperature     : {sensorID : 0,
                      maxValue : 100,
@@ -26,171 +28,76 @@ let sensorInfo = {
   calibration     : 0,
   dataIsChanged   : 1,
 };
-let button            = document.getElementById('connectButton');
-let canvas            = document.getElementById('sensorData');
-let graphMode         = 'meter';
-let dataPosition      = 0;
+let connectButton         = document.getElementById('connectButton');
+let bgCanvas              = document.getElementById('backgroundCanvas');
+let fgCanvasForValueText  = document.getElementById('foregroundCanvasForValueText');
+let fgCanvasForeAnimation = document.getElementById('foregroundCanvasForAnimation');
+let graphMode             = 'meter';
+let dataPosition          = 0;
+let oldEndAngle           = new Array(maxNumberOfSensor).fill(startAngle);
+let currentEndAngle       = new Array(maxNumberOfSensor).fill(startAngle);
+let countOfRepetition     = 0;
+let requestID;
 
 
 /* Initial drawing */
- drawSensorData();
+drawBgCanvas(bgCanvas);
+drawFgCanvasForValueText(fgCanvasForValueText);
 
-/* Click connect button */
-button.addEventListener('click', function() {
+/* Backgroud Canvas */
+// Draw background canvas
+function drawBgCanvas(canvas) {
+  canvas = updateWidthAndHeightOfCanvas(canvas);
+  let context = canvas.getContext('2d');
 
-  if (!environmentSensor.isConnected()) {
-    dataPosition = 0;
-    environmentSensor.connect()
-    .then(_ => {    
-      environmentSensor.changeConnectionStatus();
-      environmentSensor.characteristic.addEventListener('characteristicvaluechanged', handleEnvironmentSensor);
-    })
-    .catch(error => {
-      document.getElementById('statusText').innerHTML = error;
-      console.log("error:" + error);
-    });
-  } 
-  else {
-    environmentSensor.disconnect(); 
-  }
-});
+  drawBgGraph(context, canvas.width, canvas,height);
+}
 
-/* Handle environment sensor */
-function handleEnvironmentSensor(event) {
-  let result = environmentSensor.parseSensorData(event.target.value);
-
-  if (sensorInfo.dataIsChanged != result.dataIsChanged) {
-    sensorInfo.dataIsChanged = result.dataIsChanged;
-    setSensorValue(result);
-    context.strokeStyle = "brack"
-    context.save();
-    drawSensorData();
+// Draw background graph
+function drawBgGraph(context, width, height) {
+  if (graphMode === 'meter') {
+    calculateCoordinates(context, width, height, drawBgMeterGraph);
   }
   else {
-    // nothing
+    drawBgLineGraph(context, width, height);
   }
 }
 
-/* Set sensor value */
-function setSensorValue(data) {
-  // set value
-  sensorInfo.temperature.values[dataPosition]   = data.temperatureValue;
-  sensorInfo.humidity.values[dataPosition]      = data.humidityValue;
-  sensorInfo.co2.values[dataPosition]           = data.co2Value;
-  if (dataPosition < (dataMaxLength - 1)) {
-    dataPosition++;
-  }
-  else {
-    dataPosition = 0;
-  }
-  // set text
-  sensorInfo.temperature.text.value = String(data.temperatureValue);
-  sensorInfo.humidity.text.value    = String(data.humidityValue);
-  sensorInfo.co2.text.value         = String(data.co2Value);
+// Draw background meter graph
+function drawBgMeterGraph(id, context, x0, y0, radius) {
+  drawBgCircle(context, x0, y0, radius);
+  drawBgText(id, context, x0, y0, radius);
 }
 
-/* Draw Sensor Data */
-function drawSensorData() {
-  requestAnimationFrame(() => {
-
-    //CanvasのWidthとHeightを取得
-    canvas.width  = drawCanvas.getWidth(canvas);
-    canvas.height = drawCanvas.getHeight(canvas);
-
-    let context = canvas.getContext('2d');
-    context.textAlign = "center";
-
-    // クリア
-    drawCanvas.clearAllFigure(context, canvas.width, canvas.height);
-
-    if (graphMode === 'meter') {
-      drawMeterGraph(context, canvas.width, canvas.height);
-    }
-    else {
-      drawLineGraph(context, canvas.width, canvas.height);
-    }
-  });
+// Draw background circle
+function drawBgCircle(context, x0, y0, radius) {
+  context.lineWidth = radius / 30;
+  drawCanvas.drawCircle(context, x0, y0, radius);
 }
 
-/* Draw meter graph */
-function drawMeterGraph(context, width, height) {
-  let heightIsLonger = (width <= height) ? 1 : 0;
-  let margin;
-  let radiusOfCircle;
-  let radiusOfArc;
-  let x0;
-  let y0;
-  let startAngle = mathPI / 2;
-
-  if (heightIsLonger) {
-    radiusOfCircle  = height / 8;
-    radiusOfArc     = radiusOfCircle * 0.85;
-    margin          = radiusOfCircle / 2;
-    x0              = width / 2;
-    y0              = 0;
-
-    // draw circle and arc
-    for (step = 0; step < numberOfSensor; step++) {
-      y0 += (margin + radiusOfCircle);
-      drawCanvas.drawCircle(context, x0, y0, radiusOfCircle);
-      drawCanvas.drawArc(context, x0, y0, radiusOfArc, startAngle, startAngle + convertValueToAngle(step));
-      drawSensorText(step, context, x0, y0, radiusOfCircle);
-      y0 += radiusOfCircle;
-    }
-  }
-  else {
-    radiusOfCircle  = width / 8;
-    radiusOfArc     = radiusOfCircle * 0.85;
-    margin          = radiusOfCircle / 2;
-    x0              = 0;
-    y0              = height / 2;
-
-    // draw circle and arc
-    for (step = 0; step < numberOfSensor; step++) {
-      x0 += (margin + radiusOfCircle);
-      // draw circle
-      context.restore();      
-      context.lineWidth = radiusOfCircle / 30;
-      drawCanvas.drawCircle(context, x0, y0, radiusOfCircle);
-      console.log(context.strokeStyle);
-      // draw arc
-      context.lineWidth = radiusOfCircle / 10;
-      context.strokeStyle = "blue";
-      drawCanvas.drawArc(context, x0, y0, radiusOfArc, startAngle, startAngle + convertValueToAngle(step));
-      // draw text
-      drawSensorText(step, context, x0, y0, radiusOfCircle);
-
-      x0 += radiusOfCircle;
-    }
-  }
-}
-
-/* Draw sensor text */
-function drawSensorText(id, context, x, y, radius) {
+// Draw background text
+function drawBgText(id, context, x0, y0, radius) {
   let fontSizeOfName     = String(Math.round(radius / 6));
-  let fontSizeOfValue    = String(Math.round(radius / 3));
   let fontSizeOfUnit     = String(Math.round(radius / 6));
-  let yCoordinateOfName  = y - radius / 3 + parseInt(fontSizeOfName) / 2;
-  let yCoordinateOfValue = y + parseInt(fontSizeOfValue) / 2;
-  let yCoordinateOfUnit  = y + radius / 3 + parseInt(fontSizeOfUnit) / 2;
+  let yCoordinateOfName  = y0 - radius / 3 + parseInt(fontSizeOfName) / 2;
+  let yCoordinateOfUnit  = y0 + radius / 3 + parseInt(fontSizeOfUnit) / 2;
+
+  context.textAlign = "center";
 
   switch(id) {
     case sensorInfo.temperature.sensorID :
-      drawCanvas.drawText(context, sensorInfo.temperature.text.name,  x, yCoordinateOfName,  fontSizeOfName);
-      drawCanvas.drawText(context, sensorInfo.temperature.text.value, x, yCoordinateOfValue, fontSizeOfValue);
-      drawCanvas.drawText(context, sensorInfo.temperature.text.unit,  x, yCoordinateOfUnit,  fontSizeOfUnit);
+      drawCanvas.drawText(context, sensorInfo.temperature.text.name,  x0, yCoordinateOfName,  fontSizeOfName);
+      drawCanvas.drawText(context, sensorInfo.temperature.text.unit,  x0, yCoordinateOfUnit,  fontSizeOfUnit);
     break;
 
     case sensorInfo.humidity.sensorID :
-      drawCanvas.drawText(context, sensorInfo.humidity.text.name,  x, yCoordinateOfName,  fontSizeOfName);
-      drawCanvas.drawText(context, sensorInfo.humidity.text.value, x, yCoordinateOfValue, fontSizeOfValue);
-      drawCanvas.drawText(context, sensorInfo.humidity.text.unit,  x, yCoordinateOfUnit,  fontSizeOfUnit);
+      drawCanvas.drawText(context, sensorInfo.humidity.text.name,  x0, yCoordinateOfName,  fontSizeOfName);
+      drawCanvas.drawText(context, sensorInfo.humidity.text.unit,  x0, yCoordinateOfUnit,  fontSizeOfUnit);
     break;
 
     case sensorInfo.co2.sensorID :
-      drawCanvas.drawText(context, sensorInfo.co2.text.name,  x, yCoordinateOfName,  fontSizeOfName);
-      drawCanvas.drawText(context, sensorInfo.co2.text.value, x, yCoordinateOfValue, fontSizeOfValue);
-      drawCanvas.drawText(context, sensorInfo.co2.text.unit,  x, yCoordinateOfUnit,  fontSizeOfUnit);
+      drawCanvas.drawText(context, sensorInfo.co2.text.name,  x0, yCoordinateOfName,  fontSizeOfName);
+      drawCanvas.drawText(context, sensorInfo.co2.text.unit,  x0, yCoordinateOfUnit,  fontSizeOfUnit);
     break;
 
     default :
@@ -198,7 +105,51 @@ function drawSensorText(id, context, x, y, radius) {
   }
 }
 
-/* Convert sensor value to angle */
+/* Foreground Canvas for Animation */
+// Draw foreground canvas for value text
+function drawFgCanvasForAnimation(canvas) {
+  canvas = updateWidthAndHeightOfCanvas(canvas);
+  let context = canvas.getContext('2d');
+
+  for (let step = 0; step < maxNumberOfSensor; step++) {
+    currentEndAngle[step] = startAngle + convertValueToAngle(step);
+  }
+  
+  drawFgGraph(context, canvas.width, canvas,height);
+}
+
+// Draw foreground graph
+function drawFgGraph(context, width, height) {
+  if (graphMode === 'meter') {
+    calculateCoordinates(context, width, height, drawFgMeterGraph);
+  }
+  else {
+    drawFgLineGraph(context, width, height);
+  }
+
+  if (countOfRepetition < maxNumberOfRepetition) {
+    countOfRepetition++;
+    requestID = requestAnimationFrame(drawFgGraph);
+  }
+  else {
+    countOfRepetition = 0;
+    for (let step = 0; step < maxNumberOfSensor; step++) {
+      oldEndAngle[step] = currentEndAngle[step];
+    }
+    cancelAnimationFrame(requestID);
+  }  
+}
+
+// Draw foreground meter graph
+function drawFgMeterGraph(id, context, x0, y0, radius) {
+  let rangeOfAngle = (currentEndAngle[id] - oldEndAngle[id]) / (countOfRepetition + 1);
+  radius     *= 0.85;
+  context.lineWidth = radius / 10;
+  context.strokeStyle = "blue";
+  drawCanvas.drawArc(context, x0, y0, radius, startAngle, currentEndAngle[id] + rangeOfAngle);
+}
+
+// Convert sensor value to angle
 function convertValueToAngle(id) {
   let angle;
 
@@ -236,9 +187,136 @@ function calculateAngle(currentValue, maxValue, minValue) {
   else                                  return (currentValue - minValue) * 2 * mathPI / (maxValue - minValue);
 }
 
-/* Draw line graph */
-function drawLineGraph(width, height) {
-  // ここから！
+/* Foreground Canvas for Value Text */
+// Draw foreground canvas for value text
+function drawFgCanvasForValueText(canvas) {
+  canvas = updateWidthAndHeightOfCanvas(canvas);
+  let context = canvas.getContext('2d');
+
+  drawFgText(context, canvas.width, canvas.height);
+}
+
+// Draw foreground text
+function drawFgText(context, width, height) {
+  calculateCoordinates(context, width, height, drawFgTextOfValue);
+}
+
+// Draw foreground text of value
+function drawFgTextOfValue(id, context, x0, y0, radius) {
+  let fontSizeOfValue    = String(Math.round(radius / 3));
+  let yCoordinateOfValue = y0 + parseInt(fontSizeOfValue) / 2;
+
+  context.textAlign = "center";
+
+  switch(id) {
+    case sensorInfo.temperature.sensorID :
+      drawCanvas.drawText(context, sensorInfo.temperature.text.value, x0, yCoordinateOfValue, fontSizeOfValue);
+    break;
+
+    case sensorInfo.humidity.sensorID :
+      drawCanvas.drawText(context, sensorInfo.humidity.text.value, x0, yCoordinateOfValue, fontSizeOfValue);
+    break;
+
+    case sensorInfo.co2.sensorID :
+      drawCanvas.drawText(context, sensorInfo.co2.text.value, x0, yCoordinateOfValue, fontSizeOfValue);
+    break;
+
+    default :
+    break;
+  }
+}
+
+ /* Update width and height of canvas */
+function updateWidthAndHeightOfCanvas(canvas) {
+  canvas.width = drawCanvas.getWidth(canvas);
+  canvas.height = drawCanvas.getHeight(canvas);
+  return canvas;
+}
+
+/* Calculate coordinates and call a function */
+function calculateCoordinates(context, width, height, func) {
+  let heightIsLonger = (width <= height) ? 1 : 0;
+  let margin;
+  let x0;
+  let y0;
+  let radius;
+
+  if (heightIsLonger) {
+    radius = height / 8;
+    margin = radius / 2;
+    x0     = width / 2;
+    y0     = 0;
+
+    for (let step = 0; step < maxNumberOfSensor; step++) {
+      y0 += (margin + radius);
+      func(step, context, x0, y0, radius);
+      y0 += radius;
+    }
+  }
+  else {
+    radius = width / 8;
+    margin = radius / 2;
+    x0     = 0;
+    y0     = height / 2;
+
+    for (let step = 0; step < maxNumberOfSensor; step++) {
+      x0 += (margin + radius);
+      func(step, context, x0, y0, radius);
+      x0 += radius;
+    }
+  }
+}
+
+/* Click connect button */
+connectButton.addEventListener('click', function() {
+
+  if (!environmentSensor.isConnected()) {
+    dataPosition = 0;
+    environmentSensor.connect()
+    .then(_ => {    
+      environmentSensor.changeConnectionStatus();
+      environmentSensor.characteristic.addEventListener('characteristicvaluechanged', handleEnvironmentSensor);
+    })
+    .catch(error => {
+      document.getElementById('statusText').innerHTML = error;
+      console.log("error:" + error);
+    });
+  } 
+  else {
+    environmentSensor.disconnect(); 
+  }
+});
+
+/* Handle environment sensor */
+function handleEnvironmentSensor(event) {
+  let result = environmentSensor.parseSensorData(event.target.value);
+
+  if (sensorInfo.dataIsChanged != result.dataIsChanged) {
+    sensorInfo.dataIsChanged = result.dataIsChanged;
+    setSensorValue(result);
+    drawFgCanvasForAnimation(fgCanvasForeAnimation);
+  }
+  else {
+    // nothing
+  }
+}
+
+/* Set sensor value */
+function setSensorValue(data) {
+  // set value
+  sensorInfo.temperature.values[dataPosition]   = data.temperatureValue;
+  sensorInfo.humidity.values[dataPosition]      = data.humidityValue;
+  sensorInfo.co2.values[dataPosition]           = data.co2Value;
+  if (dataPosition < (dataMaxLength - 1)) {
+    dataPosition++;
+  }
+  else {
+    dataPosition = 0;
+  }
+  // set text
+  sensorInfo.temperature.text.value = String(data.temperatureValue);
+  sensorInfo.humidity.text.value    = String(data.humidityValue);
+  sensorInfo.co2.text.value         = String(data.co2Value); 
 }
 
 
@@ -249,11 +327,17 @@ function drawLineGraph(width, height) {
 // });
 
 /* Resize window */
-window.onresize = drawSensorData;
+window.onresize = redrawAllCanvas;
 
 /* Change visibility */ 
 document.addEventListener("visibilitychange", () => {
   if (!document.hidden) {
-    drawSensorData();
+    redrawAllCanvas();
   }
 });
+
+function redrawAllCanvas() {
+  drawBgCanvas(bgCanvas);
+  drawFgCanvasForValueText(fgCanvasForValueText);
+  drawFgCanvasForAnimation(fgCanvasForeAnimation);
+}
