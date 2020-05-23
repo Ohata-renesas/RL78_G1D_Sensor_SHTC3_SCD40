@@ -115,7 +115,7 @@ function drawFgCanvasForAnimation(canvas) {
     currentEndAngle[step] = startAngle + convertValueToAngle(step);
   }
   
-  drawFgGraph(context, canvas.width, canvas,height);
+  drawFgGraph(context, canvas.width, canvas.height);
 }
 
 // Draw foreground graph
