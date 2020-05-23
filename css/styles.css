@@ -23,10 +23,7 @@ header {
 }
 
 h1 {
-  margin-bottom: 0%;
-}
-
-.headaline {
+  margin: auto;
   margin-bottom: 0%;
 }
 
@@ -39,6 +36,7 @@ h1 {
 .headline-list-item {
   list-style: none;
   display: inline-block;
+  font-size: 90%;
 }
 
 #renesas {
