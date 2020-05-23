@@ -39,7 +39,7 @@ h1 {
 .headline-list-item {
   list-style: none;
   display: inline-block;
-  font-size: 90%;
+  /* font-size: 90%; */
 }
 
 #renesas {
