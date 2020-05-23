@@ -69,14 +69,17 @@ header {
 .text-wrapper #connectButton {
   position: relative;
   display: block;
-  width: 100%;
+  margin: 0 auto;
+  width: 50%;
   height: 70%;
+  cursor: pointer;
 }
 
 .text-wrapper #statusText {
   position: relative;
   display: block;
-  width: 100%;
+  margin: 0 auto;
+  width: 50%;
   height: 30%;
 }
 
