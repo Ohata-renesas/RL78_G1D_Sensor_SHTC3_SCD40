@@ -23,13 +23,13 @@ header {
 }
 
 .headaline {
-  margin: auto;
+  margin: 0 auto;
 }
 
 .headline-list {
   text-align: center;
-  margin: auto;
-  padding: 0%;
+  margin: 0 auto;
+  /* padding: 0%; */
 }
 
 .headline-list-item {
