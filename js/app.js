@@ -49,7 +49,7 @@ redrawAllCanvas();
 function drawBgCanvas(canvas) {
   canvas = updateWidthAndHeightOfCanvas(canvas);
   let context = canvas.getContext('2d');
-  // drawCanvas.clearAllFigure(context, canvas.width, canvas.height);
+  drawCanvas.clearAllFigure(context, canvas.width, canvas.height);
   drawBgGraph(context, canvas.width, canvas.height);
 }
 
@@ -120,7 +120,7 @@ function drawFgCanvasForAnimation() {
 
 // Draw foreground graph
 function drawFgGraph() {
-  // drawCanvas.clearAllFigure(fgContextForAnimation, fgCanvasForAnimation.width, fgCanvasForAnimation.height);
+  drawCanvas.clearAllFigure(fgContextForAnimation, fgCanvasForAnimation.width, fgCanvasForAnimation.height);
   
   if (graphMode === 'meter') {
     calculateCoordinates(fgContextForAnimation, fgCanvasForAnimation.width, fgCanvasForAnimation.height, drawFgMeterGraph);
@@ -196,7 +196,7 @@ function drawFgCanvasForValueText(canvas) {
   canvas = updateWidthAndHeightOfCanvas(canvas);
   let context = canvas.getContext('2d');
 
-  // drawCanvas.clearAllFigure(context, canvas.width, canvas.height);
+  drawCanvas.clearAllFigure(context, canvas.width, canvas.height);
   drawFgText(context, canvas.width, canvas.height);
 }
 
