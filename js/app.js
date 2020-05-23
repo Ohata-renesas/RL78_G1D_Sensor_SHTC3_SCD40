@@ -297,6 +297,7 @@ function handleEnvironmentSensor(event) {
   if (sensorInfo.dataIsChanged != result.dataIsChanged) {
     sensorInfo.dataIsChanged = result.dataIsChanged;
     setSensorValue(result);
+    drawFgCanvasForValueText(fgCanvasForValueText);
     drawFgCanvasForAnimation();
   }
   else {
