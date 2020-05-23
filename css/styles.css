@@ -1,5 +1,5 @@
 header {
-  position: relative;
+  /* position: relative; */
   background-color: white;  
   color: #333333;
   width: 100%;
@@ -28,7 +28,7 @@ header {
 }
 
 main {
-  position: relative;
+  /* position: relative; */
   background-color: white;  
   color: #333333;
   width: 100%;
