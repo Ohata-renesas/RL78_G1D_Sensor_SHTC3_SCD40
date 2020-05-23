@@ -1,10 +1,12 @@
-const dataMaxLength  = 10;
-const maxNumberOfSensor = 3;
+const CALIBRATION_NO        = 0;
+const CALIBRATION_YES       = 1;
+const dataMaxLength         = 10;
+const maxNumberOfSensor     = 3;
 const maxNumberOfRepetition = 15;
-const mathPI = Math.PI;
-const startAngle = mathPI / 2;
-const renesasBlue = "blue";
-const renesasGray = "gray";
+const mathPI                = Math.PI;
+const startAngle            = mathPI / 2;
+const renesasBlue           = "blue";
+const renesasGray           = "darkgray";
 let sensorInfo = {
   temperature     : {sensorID : 0,
                      maxValue : 100,
@@ -148,7 +150,6 @@ function drawFgGraph() {
       oldEndAngle[step] = currentEndAngle[step];
     }
     cancelAnimationFrame(requestID);
-    console.log(requestID);
   }  
 }
 
@@ -164,32 +165,26 @@ function drawFgMeterGraph(id, context, x0, y0, radius) {
 
 // Convert sensor value to angle
 function convertValueToAngle(id) {
-  let angle;
 
   switch (id) {
     case sensorInfo.temperature.sensorID :
-      angle = calculateAngle(parseFloat(sensorInfo.temperature.text.value),
-                                        sensorInfo.temperature.maxValue,
-                                        sensorInfo.temperature.minValue);
-    break;
+      return calculateAngle(parseFloat(sensorInfo.temperature.text.value),
+                                       sensorInfo.temperature.maxValue,
+                                       sensorInfo.temperature.minValue);
 
     case sensorInfo.humidity.sensorID :
-      angle = calculateAngle(parseFloat(sensorInfo.humidity.text.value),
-                                        sensorInfo.humidity.maxValue,
-                                        sensorInfo.humidity.minValue);
-    break;
+      return calculateAngle(parseFloat(sensorInfo.humidity.text.value),
+                                       sensorInfo.humidity.maxValue,
+                                       sensorInfo.humidity.minValue);
 
     case sensorInfo.co2.sensorID :
-      angle = calculateAngle(parseInt(sensorInfo.co2.text.value),
-                                      sensorInfo.co2.maxValue,
-                                      sensorInfo.co2.minValue);
-    break;
+      return calculateAngle(parseInt(sensorInfo.co2.text.value),
+                                     sensorInfo.co2.maxValue,
+                                     sensorInfo.co2.minValue);
 
     default :
-      angle = 0;
-    break;
+      return 0;
   }
-  return angle;
 }
 
 /* Calculate angle using sensor value */
@@ -272,6 +267,20 @@ function handleEnvironmentSensor(event) {
   }
   else {
     // nothing
+  }
+
+  switch (result.calibration) {
+    case CALIBRATION_NO :
+      document.getElementById('statusText').innerHTML = "Measurement";
+    break;
+
+    case CALIBRATION_YES :
+      document.getElementById('statusText').innerHTML = "Calibration";
+    break;
+
+    default :
+      document.getElementById('statusText').innerHTML = "Calibration Data Error";
+    break;
   }
 }
 
