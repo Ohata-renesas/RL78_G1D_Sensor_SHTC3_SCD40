@@ -27,7 +27,7 @@
         drawText(context, text, x, y, fontSize, boldIsTrue) {
             if (context) {
                 if (boldIsTrue) {
-                    context.font = "bold" + fontSize + "px" + " " + "sans-serif";
+                    context.font = "bold" + " " + fontSize + "px" + " " + "sans-serif";
                 }
                 else {
                     context.font = fontSize + "px" + " " + "sans-serif";
