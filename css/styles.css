@@ -69,10 +69,9 @@ header {
 .text-wrapper #connectButton {
   position: relative;
   display: block;
-  margin: 0 auto;
+  margin: 10% auto;
   width: 50%;
-  height: 70%;
-  top: 50%;
+  height: 50%;
   cursor: pointer;
 }
 
@@ -82,7 +81,6 @@ header {
   margin: 0 auto;
   width: 50%;
   height: 30%;
-  top: 50%;
 }
 
 /* #connectButton {
