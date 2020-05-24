@@ -98,7 +98,7 @@ function drawBgText(id, context, x0, y0, radius) {
     case sensorInfo.temperature.sensorID :
       context.fillStyle = renesasGray;
       drawCanvas.drawText(context, sensorInfo.temperature.text.name,  x0, yCoordinateOfName,  fontSizeOfName);
-      context.fillStyle = renesasBlue;
+      context.fillStyle = sensirionGreen;
       drawCanvas.drawText(context, sensorInfo.temperature.text.value, x0, yCoordinateOfValue, fontSizeOfValue);
       context.fillStyle = renesasGray;
       drawCanvas.drawText(context, sensorInfo.temperature.text.unit,  x0, yCoordinateOfUnit,  fontSizeOfUnit);
@@ -107,7 +107,7 @@ function drawBgText(id, context, x0, y0, radius) {
     case sensorInfo.humidity.sensorID :
       context.fillStyle = renesasGray;
       drawCanvas.drawText(context, sensorInfo.humidity.text.name,  x0, yCoordinateOfName,  fontSizeOfName);
-      context.fillStyle = renesasBlue;
+      context.fillStyle = sensirionGreen;
       drawCanvas.drawText(context, sensorInfo.humidity.text.value, x0, yCoordinateOfValue, fontSizeOfValue);
       context.fillStyle = renesasGray;
       drawCanvas.drawText(context, sensorInfo.humidity.text.unit,  x0, yCoordinateOfUnit,  fontSizeOfUnit);
@@ -116,7 +116,7 @@ function drawBgText(id, context, x0, y0, radius) {
     case sensorInfo.co2.sensorID :
       context.fillStyle = renesasGray;
       drawCanvas.drawText(context, sensorInfo.co2.text.name,  x0, yCoordinateOfName,  fontSizeOfName);
-      context.fillStyle = renesasBlue;
+      context.fillStyle = sensirionGreen;
       drawCanvas.drawText(context, sensorInfo.co2.text.value, x0, yCoordinateOfValue, fontSizeOfValue);
       context.fillStyle = renesasGray;
       drawCanvas.drawText(context, sensorInfo.co2.text.unit,  x0, yCoordinateOfUnit,  fontSizeOfUnit);
@@ -170,7 +170,7 @@ function drawFgMeterGraph(id, context, x0, y0, radius) {
   let rangeOfAngle    = (currentEndAngle[id] - oldEndAngle[id]) / maxNumberOfRepetition;
   radius             *= 0.85;
   context.lineWidth   = radius / 10;
-  context.strokeStyle = sensirionGreen;
+  context.strokeStyle = renesasBlue;
   drawCanvas.drawArc(context, x0, y0, radius, startAngle, oldEndAngle[id] + rangeOfAngle * (countOfRepetition + 1));
 }
 
