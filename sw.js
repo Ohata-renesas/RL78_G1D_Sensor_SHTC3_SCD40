@@ -3,19 +3,30 @@
 
 // const CACHE_VERSION = 'v1';
 // const CACHE_NAME = `${registration.scope}!${CACHE_VERSION}`;
-const CACHE_NAME      = 'static-cache-v1';
+const CACHE_NAME      = 'static-cache-v3';
 
 // キャッシュするファイルをセットする
+// const filesToCache = [
+//   '.',
+//   'index.html',
+//   'css/styles.css',
+//   'icons/icon-192x192.png',
+//   'icons/icon-512x512.png',
+//   'js/EnvironmentSensor.js',
+//   'js/DrawCanvas.js',
+//   'js/app.js'
+// ];
 const filesToCache = [
   '.',
-  'index.html',
-  'css/styles.css',
-  'icons/icon-192x192.png',
-  'icons/icon-512x512.png',
-  'js/EnvironmentSensor.js',
-  'js/DrawCanvas.js',
-  'js/app.js'
+  'https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/index.html',
+  'https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/css/styles.css',
+  'https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/icons/icon-192x192.png',
+  'https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/icons/icon-512x512.png',
+  'https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/js/EnvironmentSensor.js',
+  'https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/js/DrawCanvas.js',
+  'https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/js/app.js'
 ];
+
 
 self.addEventListener('install', (event) => {
   console.log('[ServiceWorker] Install');
