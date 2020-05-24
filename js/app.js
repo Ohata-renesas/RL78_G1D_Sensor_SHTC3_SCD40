@@ -49,6 +49,13 @@ let currentEndAngle   = new Array(maxNumberOfSensor).fill(startAngle);
 let countOfRepetition = 0;
 let requestID         = null;
 
+const ratioOfHeadlineText         = 0.2 * 0.75;
+const ratioOfRenesasText          = 0.2 * 0.25;
+const ratioOfcollaborationText    = 0.2 * 0.25;
+const ratioOfsensirionText        = 0.2 * 0.25;
+const ratioOfConnectButton        = 0.15 * 0.7;
+const rationOfStatusText          = 0.15 * 0.3;
+
 
 /* Initial drawing */
 resizeAllElement();
@@ -329,6 +336,13 @@ function redrawAllCanvas() {
 
 /* Change text font size */
 function changeTextFontSize() {
+  let height = document.documentElement.clientHeight;
+  headlineText.style.height = height * ratioOfHeadlineText;
+  headlineText.style.height = height * ratioOfRenesasText;
+  headlineText.style.height = height * ratioOfcollaborationText;
+  headlineText.style.height = height * ratioOfsensirionText;
+  headlineText.style.height = height * ratioOfConnectButton;
+  headlineText.style.height = height * rationOfStatusText;
   changeFontSize(headlineText);
   changeFontSize(renesasText);
   changeFontSize(collaborationText);
@@ -339,9 +353,8 @@ function changeTextFontSize() {
 
 /* Change font size */
 function changeFontSize(element) {
-  // element = calculateWidthAndHeight(element);
-  // element.height = parseInt(getComputedStyle(element).height.slice(0, -2)) / devicePixelRatio;
-  console.log(document.getElementById('container').style.height);
+  element.style.fontSize = element.style.height + "px";
+  console.log(element.style.fontSize);
 }
 
  /* Calculate width and height of element */
