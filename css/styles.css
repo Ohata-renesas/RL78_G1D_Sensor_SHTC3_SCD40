@@ -24,9 +24,9 @@ h1 {
   margin-bottom: 0%;
 }
 
-.headline {
+/* .headline {
   font-size: 200%;
-}
+} */
 
 .headline-list {
   text-align: center;
@@ -75,7 +75,7 @@ h1 {
   display: block;
   margin: 0 auto;
   font-size: 200%;
-  width: 30%;
+  width: 40%;
   height: 40%;
   cursor: pointer;  
   -webkit-user-select: none;
