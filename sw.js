@@ -3,11 +3,12 @@
 
 // const CACHE_VERSION = 'v1';
 // const CACHE_NAME = `${registration.scope}!${CACHE_VERSION}`;
-const CACHE_NAME      = 'static-cache-v1';
+const CACHE_NAME      = 'static-cache-v2';
 
 // キャッシュするファイルをセットする
 const filesToCache = [
   '.',
+  'index.html',
   'css/styles.css',
   'icons/icon-192x192.png',
   'icons/icon-512x512.png',
