@@ -49,7 +49,7 @@ let currentEndAngle   = new Array(maxNumberOfSensor).fill(startAngle);
 let countOfRepetition = 0;
 let requestID         = null;
 
-const ratioOfHeadlineText         = 0.2 * 0.75 * 0.5;
+const ratioOfHeadlineText         = 0.2 * 0.75;
 const ratioOfRenesasText          = 0.2 * 0.25;
 const ratioOfcollaborationText    = 0.2 * 0.25;
 const ratioOfsensirionText        = 0.2 * 0.25;
@@ -336,20 +336,22 @@ function redrawAllCanvas() {
 
 /* Change text font size */
 function changeTextFontSize() {
-  let height = document.documentElement.clientHeight;
-  console.log(height);
-  headlineText.style.height       = height * ratioOfHeadlineText      + "px";
-  renesasText.style.height        = height * ratioOfRenesasText       + "px";
-  collaborationText.style.height  = height * ratioOfcollaborationText + "px";
-  sensirionText.style.height      = height * ratioOfsensirionText     + "px";
-  connectButton.style.height      = height * ratioOfConnectButton     + "px";
-  statusText.style.height         = height * rationOfStatusText       + "px";
-  changeFontSize(headlineText);
-  changeFontSize(renesasText);
-  changeFontSize(collaborationText);
-  changeFontSize(sensirionText);
-  changeFontSize(connectButton);
-  changeFontSize(statusText);
+  let clientWidth = document.documentElement.clientWidth;
+  let clientHeight = document.documentElement.clientHeight;
+  let length = (clientWidth >= clientHeight) ? clientHeight : clientWidth;
+  console.log(length);
+  headlineText.style.fontSize       = length * ratioOfHeadlineText      + "px";
+  renesasText.style.fontSize        = length * ratioOfRenesasText       + "px";
+  collaborationText.style.fontSize  = length * ratioOfcollaborationText + "px";
+  sensirionText.style.fontSize      = length * ratioOfsensirionText     + "px";
+  connectButton.style.fontSize      = length * ratioOfConnectButton     + "px";
+  statusText.style.fontSize         = length * rationOfStatusText       + "px";
+  // changeFontSize(headlineText);
+  // changeFontSize(renesasText);
+  // changeFontSize(collaborationText);
+  // changeFontSize(sensirionText);
+  // changeFontSize(connectButton);
+  // changeFontSize(statusText);
 }
 
 /* Change font size */
