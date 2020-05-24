@@ -338,12 +338,12 @@ function redrawAllCanvas() {
 function changeTextFontSize() {
   let height = document.documentElement.clientHeight;
   console.log(height);
-  headlineText.style.height       = height * ratioOfHeadlineText;
-  renesasText.style.height        = height * ratioOfRenesasText;
-  collaborationText.style.height  = height * ratioOfcollaborationText;
-  sensirionText.style.height      = height * ratioOfsensirionText;
-  connectButton.style.height      = height * ratioOfConnectButton;
-  statusText.style.height         = height * rationOfStatusText;
+  headlineText.style.height       = height * ratioOfHeadlineText      + "px";
+  renesasText.style.height        = height * ratioOfRenesasText       + "px";
+  collaborationText.style.height  = height * ratioOfcollaborationText + "px";
+  sensirionText.style.height      = height * ratioOfsensirionText     + "px";
+  connectButton.style.height      = height * ratioOfConnectButton     + "px";
+  statusText.style.height         = height * rationOfStatusText       + "px";
   changeFontSize(headlineText);
   changeFontSize(renesasText);
   changeFontSize(collaborationText);
@@ -354,7 +354,7 @@ function changeTextFontSize() {
 
 /* Change font size */
 function changeFontSize(element) {
-  element.style.fontSize = element.style.height + "px";
+  element.style.fontSize = element.style.height;
   console.log(element.style.height);
 }
 
