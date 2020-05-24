@@ -340,6 +340,7 @@ function changeTextFontSize() {
 /* Change font size */
 function changeFontSize(element) {
   // element = calculateWidthAndHeight(element);
+  element.height = parseInt(getComputedStyle(element).height.slice(0, -2));
   element.style.fontSize = element.height + "px";
   // element.style.fontSize = parseInt(getComputedStyle(element).height.slice(0, -2)) + "px";
   // element.style.fontSize = parseInt(getComputedStyle(element).height.slice(0, -2)) / 2 + "px";
