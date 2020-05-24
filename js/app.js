@@ -340,12 +340,12 @@ function changeTextFontSize() {
   let clientHeight = document.documentElement.clientHeight;
   let length = Math.min(clientWidth, clientHeight);
   console.log(length);
-  headlineText.style.height       = clientHeight * ratioOfHeadlineText      + "px";
-  renesasText.style.height        = clientHeight * ratioOfRenesasText       + "px";
-  collaborationText.style.height  = clientHeight * ratioOfcollaborationText + "px";
-  sensirionText.style.height      = clientHeight * ratioOfsensirionText     + "px";
-  connectButton.style.height      = clientHeight * ratioOfConnectButton     + "px";
-  statusText.style.height         = clientHeight * rationOfStatusText       + "px";
+  // headlineText.style.height       = clientHeight * ratioOfHeadlineText      + "px";
+  // renesasText.style.height        = clientHeight * ratioOfRenesasText       + "px";
+  // collaborationText.style.height  = clientHeight * ratioOfcollaborationText + "px";
+  // sensirionText.style.height      = clientHeight * ratioOfsensirionText     + "px";
+  // connectButton.style.height      = clientHeight * ratioOfConnectButton     + "px";
+  // statusText.style.height         = clientHeight * rationOfStatusText       + "px";
 
   headlineText.style.fontSize       = length / 2 * ratioOfHeadlineText      + "px";
   renesasText.style.fontSize        = length / 2 * ratioOfRenesasText       + "px";
@@ -353,6 +353,13 @@ function changeTextFontSize() {
   sensirionText.style.fontSize      = length / 2 * ratioOfsensirionText     + "px";
   connectButton.style.fontSize      = length / 2 * ratioOfConnectButton     + "px";
   statusText.style.fontSize         = length / 2 * rationOfStatusText       + "px";
+
+  headlineText.style.height       = headlineText.style.fontSize;
+  renesasText.style.height        = renesasText.style.fontSize;
+  collaborationText.style.height  = collaborationText.style.fontSize;
+  sensirionText.style.height      = sensirionText.style.fontSize;
+  connectButton.style.height      = connectButton.style.fontSize;
+  statusText.style.height         = statusText.style.fontSize;
   // changeFontSize(headlineText);
   // changeFontSize(renesasText);
   // changeFontSize(collaborationText);
