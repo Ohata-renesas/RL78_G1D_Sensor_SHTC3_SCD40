@@ -19,6 +19,7 @@ const CACHE_NAME      = 'static-cache-v3';
 const filesToCache = [
   '.',
   'https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/index.html',
+  'https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/manifest.json',
   'https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/css/styles.css',
   'https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/icons/favicon-32x32.png',
   'https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/icons/favicon-48x48.png',

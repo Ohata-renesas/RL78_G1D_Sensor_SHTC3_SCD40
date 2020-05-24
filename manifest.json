@@ -10,7 +10,7 @@
         "sizes"         : "512x512",
         "type"          : "image/png"
     }],
-    "start_url"         : "index.html?utm_source=homescreen",
+    "start_url"         : "https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/index.html?utm_source=homescreen",
     "display"           : "standalone",
     "background_color"  : "#FFFFFF",
     "theme_color"       : "#FFFFFF"
