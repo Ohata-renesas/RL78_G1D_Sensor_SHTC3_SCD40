@@ -341,7 +341,7 @@ function changeTextFontSize() {
 function changeFontSize(element) {
   // element = calculateWidthAndHeight(element);
   // element.height = parseInt(getComputedStyle(element).height.slice(0, -2)) / devicePixelRatio;
-  console.log(element);
+  console.log(element.style);
   element.style.fontSize = parseInt(getComputedStyle(element).height.slice(0, -2)) / devicePixelRatio + "px";
   console.log(element.style.fontSize);
 }
