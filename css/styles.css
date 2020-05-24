@@ -33,6 +33,7 @@ h1 {
 .headline-list-item {
   list-style: none;
   display: inline-block;
+  font-weight: bold;
   font-size: 90%;
 }
 
@@ -71,7 +72,7 @@ h1 {
   display: block;
   margin: 0 auto;
   font-size: 200%;
-  font-weight: bold;
+  font-weight: bolder;
   width: 50%;
   height: 40%;
   cursor: pointer;  
