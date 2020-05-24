@@ -336,19 +336,15 @@ function changeTextFontSize() {
   connectButton     = changeFontSize(connectButton);
   statusText        = changeFontSize(statusText);
 
-  console.log("font start");
-  console.log(headlineText.style);
-  console.log(renesasText.style);
-  console.log(collaborationText.style);
-  console.log(sensirionText.style);
-  console.log(connectButton.style);
-  console.log(statusText.style);
 }
 
 /* Change font size */
 function changeFontSize(element) {
   element = calculateWidthAndHeight(element);
   element.style.fontSize = element.height;
+  console.log("size start")
+  console.log("height:"   + element.height          + "px");
+  console.log("fontSize:" + element.style.fontSize  + "px");
   return element;
 }
 
