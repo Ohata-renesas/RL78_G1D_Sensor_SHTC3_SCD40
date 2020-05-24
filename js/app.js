@@ -322,8 +322,7 @@ function redrawAllCanvas() {
 
  /* Calculate width and height of canvas */
  function calculateWidthAndHeightOfCanvas(canvas) {
-   // slice(0, -2)で単位のpxを取り除く
-   canvas.width  = environmentSensor.calculateWidth(canvas);
-   canvas.height = environmentSensor.calculateHeight(canvas);
+   canvas.width  = drawCanvas.calculateWidth(canvas);
+   canvas.height = drawCanvas.calculateHeight(canvas);
    return canvas;
 }
