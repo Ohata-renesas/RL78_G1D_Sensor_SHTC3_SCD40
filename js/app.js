@@ -337,6 +337,7 @@ function redrawAllCanvas() {
 /* Change text font size */
 function changeTextFontSize() {
   let height = document.documentElement.clientHeight;
+  console.log(height);
   headlineText.style.height = height * ratioOfHeadlineText;
   headlineText.style.height = height * ratioOfRenesasText;
   headlineText.style.height = height * ratioOfcollaborationText;
