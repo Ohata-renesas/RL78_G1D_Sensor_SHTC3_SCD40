@@ -49,7 +49,7 @@ let currentEndAngle   = new Array(maxNumberOfSensor).fill(startAngle);
 let countOfRepetition = 0;
 let requestID         = null;
 
-const ratioOfHeadlineText         = 0.2 * 0.75;
+const ratioOfHeadlineText         = 0.2 * 0.75 * 0.5;
 const ratioOfRenesasText          = 0.2 * 0.25;
 const ratioOfcollaborationText    = 0.2 * 0.25;
 const ratioOfsensirionText        = 0.2 * 0.25;
