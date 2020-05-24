@@ -355,7 +355,7 @@ function changeTextFontSize() {
 /* Change font size */
 function changeFontSize(element) {
   element.style.fontSize = element.style.height + "px";
-  console.log(element.style.fontSize);
+  console.log(element.style.height);
 }
 
  /* Calculate width and height of element */
