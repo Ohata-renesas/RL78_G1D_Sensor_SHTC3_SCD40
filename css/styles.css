@@ -18,7 +18,7 @@ header {
   height: 20%;
   margin: 0 auto;
   text-align: center;
-  font-family: sans-serif;
+  /* font-family: sans-serif; */
   display: block;
 }
 
@@ -26,9 +26,9 @@ h1 {
   margin-bottom: 0%;
 }
 
-.headline {
+/* .headline {
   font-size: 200%;
-}
+} */
 
 .headline-list {
   text-align: center;
@@ -39,14 +39,14 @@ h1 {
 .headline-list-item {
   list-style: none;
   display: inline-block;
-  font-size: 90%;
+  /* font-size: 90%; */
 }
 
-#renesas {
+.headline-list #renesasText {
   color: #2A289D;
 }
 
-#sensirion {
+.headline-list #sensirionText {
   color: #66CC33;
 }
 
@@ -77,21 +77,17 @@ h1 {
   display: block;
   margin: 0 auto;
   width: 50%;
-  height: 50%;
+  height: 70%;
   cursor: pointer;
-  font-size: 200%;
+  /* font-size: 200%; */
   -webkit-user-select: none;
 }
 
 .text-wrapper #statusText {
   position: relative;
   display: block;
-  /* margin-top: 2%;
-  margin-left: auto;
-  margin-bottom: 0%;
-  margin-right: auto; */
   margin: 0 auto;
   width: 100%;
-  height: 50%;
-  font-size: 80%;
+  height: 30%;
+  /* font-size: 80%; */
 }

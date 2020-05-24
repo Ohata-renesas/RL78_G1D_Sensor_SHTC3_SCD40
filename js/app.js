@@ -32,7 +32,12 @@ let sensorInfo = {
   calibration     : 0,
   dataIsChanged   : 1,
 };
+let headlineText      = document.getElementById('headlineText');
+let renesasText       = document.getElementById('renesasText');
+let collaborationText = document.getElementById('collaborationText');
+let sensirionText     = document.getElementById('sensirionText');
 let connectButton     = document.getElementById('connectButton');
+let statusText        = document.getElementById('statusText');
 let bgCanvas          = document.getElementById('backgroundCanvas');
 let fgCanvas          = document.getElementById('foregroundCanvas');
 let bgContext         = bgCanvas.getContext('2d');
@@ -47,11 +52,12 @@ let requestID         = null;
 
 /* Initial drawing */
 redrawAllCanvas();
+changeTextFontSize();
 
 /* Backgroud Canvas */
 // Draw background canvas
 function drawBgCanvas() {
-  bgCanvas  = updateWidthAndHeightOfCanvas(bgCanvas);
+  bgCanvas  = calculateWidthAndHeight(bgCanvas);
   bgContext = bgCanvas.getContext('2d');
   drawCanvas.clearCanvas(bgContext, bgCanvas.width, bgCanvas.height);
   drawBgGraph(bgContext, bgCanvas.width, bgCanvas.height);
@@ -119,7 +125,7 @@ function drawBgText(id, context, x0, y0, radius) {
 /* Foreground Canvas */
 // Draw foreground canvas
 function drawFgCanvas() {
-  fgCanvas   = updateWidthAndHeightOfCanvas(fgCanvas);
+  fgCanvas   = calculateWidthAndHeight(fgCanvas);
   fgContext  = fgCanvas.getContext('2d');
 
   for (let step = 0; step < maxNumberOfSensor; step++) {
@@ -194,13 +200,6 @@ function calculateAngle(currentValue, maxValue, minValue) {
   else                                  return (currentValue - minValue) * 2 * mathPI / (maxValue - minValue);
 }
 
- /* Update width and height of canvas */
-function updateWidthAndHeightOfCanvas(canvas) {
-  canvas.width  = drawCanvas.getWidth(canvas);
-  canvas.height = drawCanvas.getHeight(canvas);
-  return canvas;
-}
-
 /* Calculate coordinates and call a function */
 function calculateCoordinates(context, width, height, func) {
   let heightIsLonger = (width <= height) ? 1 : 0;
@@ -246,7 +245,7 @@ connectButton.addEventListener('click', function() {
       environmentSensor.characteristic.addEventListener('characteristicvaluechanged', handleEnvironmentSensor);
     })
     .catch(error => {
-      document.getElementById('statusText').innerHTML = "Status: " + error;
+      statusText.innerHTML = "Status: " + error;
       console.log("error:" + error);
     });
   } 
@@ -270,15 +269,15 @@ function handleEnvironmentSensor(event) {
 
   switch (result.calibration) {
     case CALIBRATION_NO :
-      document.getElementById('statusText').innerHTML = "Status: Measurement";
+      statusText.innerHTML = "Status: Measurement";
     break;
 
     case CALIBRATION_YES :
-      document.getElementById('statusText').innerHTML = "Status: Calibration";
+      statusText.innerHTML = "Status: Calibration";
     break;
 
     default :
-      document.getElementById('statusText').innerHTML = "Status: Calibration Data Error";
+      statusText.innerHTML = "Status: Calibration Data Error";
     break;
   }
 }
@@ -309,7 +308,7 @@ function setSensorValue(data) {
 // });
 
 /* Resize window */
-window.onresize = redrawAllCanvas;
+window.onresize = resizeAll;
 
 /* Change visibility */ 
 document.addEventListener("visibilitychange", () => {
@@ -318,7 +317,38 @@ document.addEventListener("visibilitychange", () => {
   }
 });
 
+function resizeAll() {
+  redrawAllCanvas();
+  changeTextFontSize();
+}
+
+/* Draw all canvas */ 
 function redrawAllCanvas() {
   drawBgCanvas();
   drawFgCanvas();
+}
+
+/* Change text font size */
+function changeTextFontSize() {
+  headlineText      = changeFontSize(headlineText);
+  renesasText       = changeFontSize(renesasText);
+  collaborationText = changeFontSize(collaborationText);
+  sensirionText     = changeFontSize(sensirionText);
+  connectButton     = changeFontSize(connectButton);
+  statusText        = changeFontSize(statusText);
+}
+
+/* Change font size */
+function changeFontSize(element) {
+  element = calculateWidthAndHeight(element);
+  element.style.fontSize = element.height;
+  return element;
+}
+
+ /* Calculate width and height of element */
+ function calculateWidthAndHeight(element) {
+   // slice(0, -2)で単位のpxを取り除く
+   element.width  = parseInt(getComputedStyle(element).width.slice(0, -2))  * devicePixelRatio;
+   element.height = parseInt(getComputedStyle(element).height.slice(0, -2)) * devicePixelRatio;
+   return element;
 }

@@ -4,25 +4,25 @@
     class DrawCanvas {
         constructor() {}
     
-        getWidth(canvas) {
-            if (canvas) {
-                // slice(0, -2)で単位のpxを削除
-                return parseInt(getComputedStyle(canvas).width.slice(0, -2)) * devicePixelRatio;
-            } 
-            else {
-                console.log("Canvas is not set.");
-            }
-        }
+        // getWidth(canvas) {
+        //     if (canvas) {
+        //         // slice(0, -2)で単位のpxを削除
+        //         return parseInt(getComputedStyle(canvas).width.slice(0, -2)) * devicePixelRatio;
+        //     } 
+        //     else {
+        //         console.log("Canvas is not set.");
+        //     }
+        // }
     
-        getHeight(canvas) {
-            if (canvas) {
-                // slice(0, -2)で単位のpxを削除
-                return parseInt(getComputedStyle(canvas).height.slice(0, -2)) * devicePixelRatio;
-            } 
-            else {
-                console.log("Canvas is not set.");
-            }
-        }
+        // getHeight(canvas) {
+        //     if (canvas) {
+        //         // slice(0, -2)で単位のpxを削除
+        //         return parseInt(getComputedStyle(canvas).height.slice(0, -2)) * devicePixelRatio;
+        //     } 
+        //     else {
+        //         console.log("Canvas is not set.");
+        //     }
+        // }
 
         drawText(context, text, x, y, fontSize) {
             if (context) {
