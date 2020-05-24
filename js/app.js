@@ -7,6 +7,7 @@ const mathPI                = Math.PI;
 const startAngle            = mathPI / 2;
 const renesasBlue           = "#2A289D";
 const renesasGray           = "#333333";
+const sensirionGreen        = "#66CC33";
 let sensorInfo = {
   temperature     : {sensorID : 0,
                      maxValue : 100,
@@ -78,7 +79,8 @@ function drawBgMeterGraph(id, context, x0, y0, radius) {
 // Draw background circle
 function drawBgCircle(context, x0, y0, radius) {
   context.lineWidth   = radius / 30;
-  context.strokeStyle = renesasGray;
+  // context.strokeStyle = renesasGray;
+  context.strokeStyle = sensirionGreen;
   drawCanvas.drawCircle(context, x0, y0, radius);
 }
 
