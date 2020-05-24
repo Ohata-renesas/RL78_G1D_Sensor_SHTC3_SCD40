@@ -338,7 +338,7 @@ function redrawAllCanvas() {
 function changeTextFontSize() {
   let clientWidth = document.documentElement.clientWidth;
   let clientHeight = document.documentElement.clientHeight;
-  let length = (clientWidth >= clientHeight) ? clientHeight : clientWidth;
+  let length = Math.min(clientWidth, clientHeight);
   console.log(length);
   headlineText.style.height       = clientHeight * ratioOfHeadlineText      + "px";
   renesasText.style.height        = clientHeight * ratioOfRenesasText       + "px";
