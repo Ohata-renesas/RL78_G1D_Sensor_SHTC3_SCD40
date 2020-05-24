@@ -2,11 +2,11 @@
     "name"              : "Environment Sensor Demo",
     "short_name"        : "EnvSensorDemo",
     "icons" : [{
-        "src"           : "/icons/icon-192x192.png",
+        "src"           : "https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/icons/icon-192x192.png",
         "sizes"         : "192x192",
         "type"          : "image/png"
     }, {
-        "src"           : "/icons/icon-512x512.png",
+        "src"           : "https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/icons/icon-512x512.png",
         "sizes"         : "512x512",
         "type"          : "image/png"
     }],
