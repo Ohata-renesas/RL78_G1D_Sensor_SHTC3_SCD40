@@ -1,5 +1,5 @@
-const CALIBRATION_NO        = 0;
-const CALIBRATION_YES       = 1;
+const isNotInCalibration    = 0;
+const isInCalibration       = 1;
 const dataMaxLength         = 10;
 const maxNumberOfSensor     = 3;
 const maxNumberOfRepetition = 15;
@@ -93,32 +93,24 @@ function drawBgText(id, context, x0, y0, radius) {
   let yCoordinateOfUnit  = y0 + radius / 3 + parseInt(fontSizeOfUnit)  / 2;
 
   context.textAlign = "center";
+  context.fillStyle = renesasGray;
 
   switch(id) {
-    case sensorInfo.temperature.sensorID :
-      context.fillStyle = renesasGray;
+    case sensorInfo.temperature.sensorID :      
       drawCanvas.drawText(context, sensorInfo.temperature.text.name,  x0, yCoordinateOfName,  fontSizeOfName);
-      context.fillStyle = renesasGray;
       drawCanvas.drawText(context, sensorInfo.temperature.text.value, x0, yCoordinateOfValue, fontSizeOfValue);
-      context.fillStyle = renesasGray;
       drawCanvas.drawText(context, sensorInfo.temperature.text.unit,  x0, yCoordinateOfUnit,  fontSizeOfUnit);
     break;
 
     case sensorInfo.humidity.sensorID :
-      context.fillStyle = renesasGray;
       drawCanvas.drawText(context, sensorInfo.humidity.text.name,  x0, yCoordinateOfName,  fontSizeOfName);
-      context.fillStyle = renesasGray;
       drawCanvas.drawText(context, sensorInfo.humidity.text.value, x0, yCoordinateOfValue, fontSizeOfValue);
-      context.fillStyle = renesasGray;
       drawCanvas.drawText(context, sensorInfo.humidity.text.unit,  x0, yCoordinateOfUnit,  fontSizeOfUnit);
     break;
 
     case sensorInfo.co2.sensorID :
-      context.fillStyle = renesasGray;
       drawCanvas.drawText(context, sensorInfo.co2.text.name,  x0, yCoordinateOfName,  fontSizeOfName);
-      context.fillStyle = renesasGray;
       drawCanvas.drawText(context, sensorInfo.co2.text.value, x0, yCoordinateOfValue, fontSizeOfValue);
-      context.fillStyle = renesasGray;
       drawCanvas.drawText(context, sensorInfo.co2.text.unit,  x0, yCoordinateOfUnit,  fontSizeOfUnit);
     break;
 
@@ -273,11 +265,11 @@ function handleEnvironmentSensor(event) {
   }
 
   switch (result.calibration) {
-    case CALIBRATION_NO :
+    case isNotInCalibration :
       statusText.innerHTML = "Status: Measurement";
     break;
 
-    case CALIBRATION_YES :
+    case isInCalibration :
       statusText.innerHTML = "Status: Calibration";
     break;
 

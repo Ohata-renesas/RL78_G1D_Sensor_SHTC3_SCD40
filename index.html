@@ -5,7 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Environment Sensor Demo</title>
   <meta name="description" content="Monitor a environment sensor data with a Web Bluetooth app.">
+  <meta name="theme-color" content="#2A289D" />
   <link rel="stylesheet" href="https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/css/styles.css">
+  <link rel="manifest" href="https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/css/manifest.json">
+  <!-- CODELAB: Add iOS meta tags and icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Environment Sensor Demo PWA">
+  <link rel="apple-touch-icon" href="https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/icons/icon-152x152.png">
 </head>
 <body>
   <div id="container">
@@ -35,6 +42,27 @@
   <script src="https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/js/EnvironmentSensor.js"></script>
   <script src="https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/js/DrawCanvas.js"></script>
   <script src="https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/js/app.js"></script>
+  <script>
+    // if ('serviceWorker' in navigator) {
+    //   navigator.serviceWorker.register('sw.js').then(function(registration) {
+    //     // 登録成功
+    //     console.log('ServiceWorker の登録に成功しました。スコープ: ', registration.scope);
+    //   }).catch(function(err) {
+    //     // 登録失敗
+    //     console.log('ServiceWorker の登録に失敗しました。', err);
+    // });
+    // }
+
+    if('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js')
+      .then(function(registration) {
+        console.log("Service Worker Registered");
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+    }
+  </script>
 </body>
 </html>
 <!doctype html>
