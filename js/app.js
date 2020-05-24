@@ -336,12 +336,13 @@ function changeTextFontSize() {
   connectButton     = changeFontSize(connectButton);
   statusText        = changeFontSize(statusText);
 
-  console.log("headlineText font: "       + headlineText.style.fontSize);
-  console.log("renesasText font: "        + renesasText.style.fontSize);
-  console.log("collaborationText font: "  + collaborationText.style.fontSize);
-  console.log("sensirionText font: "      + sensirionText.style.fontSize);
-  console.log("connectButton font: "      + connectButton.style.fontSize);
-  console.log("statusText font: "         + statusText.style.fontSize);
+  console.log("font start");
+  console.log(headlineText);
+  console.log(renesasText);
+  console.log(collaborationText);
+  console.log(sensirionText);
+  console.log(connectButton);
+  console.log(statusText);
 }
 
 /* Change font size */
