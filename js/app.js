@@ -291,7 +291,8 @@ function setSensorValue(data) {
     dataPosition = 0;
   }
   // set text
-  sensorInfo.temperature.text.value = String(data.temperatureValue);
+  // sensorInfo.temperature.text.value = String(data.temperatureValue);
+  sensorInfo.temperature.text.value = String(120);
   sensorInfo.humidity.text.value    = String(data.humidityValue);
   sensorInfo.co2.text.value         = String(data.co2Value); 
 }
