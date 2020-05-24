@@ -18,6 +18,7 @@ header {
   margin: 0 auto;
   text-align: center;
   display: block;
+  font-weight: bold;
 }
 
 h1 {
@@ -33,7 +34,6 @@ h1 {
 .headline-list-item {
   list-style: none;
   display: inline-block;
-  font-weight: bold;
   font-size: 90%;
 }
 
