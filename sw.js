@@ -18,17 +18,17 @@ const CACHE_NAME      = 'static-cache-v3';
 // ];
 const filesToCache = [
   '.',
-  'https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/index.html',
-  'https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/css/styles.css',
-  'https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/icons/favicon-32x32.png',
-  'https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/icons/favicon-48x48.png',
-  'https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/icons/favicon-96x96.png',
-  'https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/icons/favicon-144x144.png',
-  'https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/icons/icon-192x192.png',
-  'https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/icons/icon-512x512.png',
-  'https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/js/EnvironmentSensor.js',
-  'https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/js/DrawCanvas.js',
-  'https://ohata-renesas.github.io/RL78_G1D_Sensor_SHTC3_SCD40/js/app.js'
+  '/index.html',
+  '/css/styles.css',
+  '/icons/favicon-32x32.png',
+  '/icons/favicon-48x48.png',
+  '/icons/favicon-96x96.png',
+  '/icons/favicon-144x144.png',
+  '/icons/icon-192x192.png',
+  '/icons/icon-512x512.png',
+  '/js/EnvironmentSensor.js',
+  '/js/DrawCanvas.js',
+  '/js/app.js'
 ];
 
 
