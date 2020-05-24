@@ -329,20 +329,20 @@ function redrawAllCanvas() {
 
 /* Change text font size */
 function changeTextFontSize() {
-  headlineText      = changeFontSize(headlineText);
-  renesasText       = changeFontSize(renesasText);
-  collaborationText = changeFontSize(collaborationText);
-  sensirionText     = changeFontSize(sensirionText);
-  connectButton     = changeFontSize(connectButton);
-  statusText        = changeFontSize(statusText);
+  changeFontSize(headlineText);
+  changeFontSize(renesasText);
+  changeFontSize(collaborationText);
+  changeFontSize(sensirionText);
+  changeFontSize(connectButton);
+  changeFontSize(statusText);
 }
 
 /* Change font size */
 function changeFontSize(element) {
   // element = calculateWidthAndHeight(element);
   // element.style.fontSize = (element.height / devicePixelRatio) + "px";
-  element.style.fontSize = parseInt(getComputedStyle(element).height.slice(0, -2)) + "px";
-  return element;
+  element.style.fontSize = parseInt(getComputedStyle(element).height);
+  // return element;
 }
 
  /* Calculate width and height of element */
