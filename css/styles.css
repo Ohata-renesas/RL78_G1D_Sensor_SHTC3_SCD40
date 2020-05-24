@@ -24,9 +24,9 @@ h1 {
   margin-bottom: 0%;
 }
 
-/* .headline {
+.headline {
   font-size: 200%;
-} */
+}
 
 .headline-list {
   text-align: center;
@@ -37,7 +37,7 @@ h1 {
 .headline-list-item {
   list-style: none;
   display: inline-block;
-  /* font-size: 90%; */
+  font-size: 90%;
 }
 
 .headline-list #renesasText {
@@ -77,15 +77,15 @@ h1 {
   width: 50%;
   height: 70%;
   cursor: pointer;
-  /* font-size: 200%; */
+  font-size: 200%;
   -webkit-user-select: none;
 }
 
 .text-wrapper #statusText {
   position: relative;
   display: block;
-  margin: 0 auto;
+  margin: 10px auto;
   width: 50%;
   height: 30%;
-  /* font-size: 80%; */
+  font-size: 80%;
 }

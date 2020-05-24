@@ -32,10 +32,7 @@ let sensorInfo = {
   calibration     : 0,
   dataIsChanged   : 1,
 };
-let headlineText      = document.getElementById('headlineText');
-let renesasText       = document.getElementById('renesasText');
-let collaborationText = document.getElementById('collaborationText');
-let sensirionText     = document.getElementById('sensirionText');
+
 let connectButton     = document.getElementById('connectButton');
 let statusText        = document.getElementById('statusText');
 let bgCanvas          = document.getElementById('backgroundCanvas');
@@ -49,21 +46,14 @@ let currentEndAngle   = new Array(maxNumberOfSensor).fill(startAngle);
 let countOfRepetition = 0;
 let requestID         = null;
 
-const ratioOfHeadlineText         = 0.2 * 0.75;
-const ratioOfRenesasText          = 0.2 * 0.25;
-const ratioOfcollaborationText    = 0.2 * 0.25;
-const ratioOfsensirionText        = 0.2 * 0.25;
-const ratioOfConnectButton        = 0.15 * 0.7;
-const rationOfStatusText          = 0.15 * 0.3;
-
 
 /* Initial drawing */
-resizeAllElement();
+redrawAllCanvas();
 
 /* Backgroud Canvas */
 // Draw background canvas
 function drawBgCanvas() {
-  bgCanvas  = calculateWidthAndHeight(bgCanvas);
+  bgCanvas  = calculateWidthAndHeightOfCanvas(bgCanvas);
   bgContext = bgCanvas.getContext('2d');
   drawCanvas.clearCanvas(bgContext, bgCanvas.width, bgCanvas.height);
   drawBgGraph(bgContext, bgCanvas.width, bgCanvas.height);
@@ -131,7 +121,7 @@ function drawBgText(id, context, x0, y0, radius) {
 /* Foreground Canvas */
 // Draw foreground canvas
 function drawFgCanvas() {
-  fgCanvas   = calculateWidthAndHeight(fgCanvas);
+  fgCanvas   = calculateWidthAndHeightOfCanvas(fgCanvas);
   fgContext  = fgCanvas.getContext('2d');
 
   for (let step = 0; step < maxNumberOfSensor; step++) {
@@ -314,7 +304,7 @@ function setSensorValue(data) {
 // });
 
 /* Resize window */
-window.onresize = resizeAllElement;
+window.onresize = redrawAllCanvas;
 
 /* Change visibility */ 
 document.addEventListener("visibilitychange", () => {
@@ -323,10 +313,6 @@ document.addEventListener("visibilitychange", () => {
   }
 });
 
-function resizeAllElement() {
-  redrawAllCanvas();
-  changeTextFontSize();
-}
 
 /* Draw all canvas */ 
 function redrawAllCanvas() {
@@ -334,50 +320,10 @@ function redrawAllCanvas() {
   drawFgCanvas();
 }
 
-/* Change text font size */
-function changeTextFontSize() {
-  let clientWidth = document.documentElement.clientWidth;
-  let clientHeight = document.documentElement.clientHeight;
-  let length = Math.min(clientWidth, clientHeight);
-  console.log(length);
-  // headlineText.style.height       = clientHeight * ratioOfHeadlineText      + "px";
-  // renesasText.style.height        = clientHeight * ratioOfRenesasText       + "px";
-  // collaborationText.style.height  = clientHeight * ratioOfcollaborationText + "px";
-  // sensirionText.style.height      = clientHeight * ratioOfsensirionText     + "px";
-  // connectButton.style.height      = clientHeight * ratioOfConnectButton     + "px";
-  // statusText.style.height         = clientHeight * rationOfStatusText       + "px";
-
-  headlineText.style.fontSize       = length / 2 * ratioOfHeadlineText      + "px";
-  renesasText.style.fontSize        = length / 2 * ratioOfRenesasText       + "px";
-  collaborationText.style.fontSize  = length / 2 * ratioOfcollaborationText + "px";
-  sensirionText.style.fontSize      = length / 2 * ratioOfsensirionText     + "px";
-  connectButton.style.fontSize      = length / 2 * ratioOfConnectButton     + "px";
-  statusText.style.fontSize         = length / 2 * rationOfStatusText       + "px";
-
-  headlineText.style.height       = headlineText.style.fontSize;
-  renesasText.style.height        = renesasText.style.fontSize;
-  collaborationText.style.height  = collaborationText.style.fontSize;
-  sensirionText.style.height      = sensirionText.style.fontSize;
-  connectButton.style.height      = connectButton.style.fontSize;
-  statusText.style.height         = statusText.style.fontSize;
-  // changeFontSize(headlineText);
-  // changeFontSize(renesasText);
-  // changeFontSize(collaborationText);
-  // changeFontSize(sensirionText);
-  // changeFontSize(connectButton);
-  // changeFontSize(statusText);
-}
-
-/* Change font size */
-function changeFontSize(element) {
-  element.style.fontSize = element.style.height;
-  console.log(element.style.height);
-}
-
- /* Calculate width and height of element */
- function calculateWidthAndHeight(element) {
+ /* Calculate width and height of canvas */
+ function calculateWidthAndHeightOfCanvas(canvas) {
    // slice(0, -2)で単位のpxを取り除く
-   element.width  = parseInt(getComputedStyle(element).width.slice(0, -2))  * devicePixelRatio;
-   element.height = parseInt(getComputedStyle(element).height.slice(0, -2)) * devicePixelRatio;
-   return element;
+   canvas.width  = environmentSensor.calculateWidth(canvas);
+   canvas.height = environmentSensor.calculateHeight(canvas);
+   return canvas;
 }
