@@ -347,12 +347,12 @@ function changeTextFontSize() {
   connectButton.style.height      = clientHeight * ratioOfConnectButton     + "px";
   statusText.style.height         = clientHeight * rationOfStatusText       + "px";
 
-  headlineText.style.fontSize       = length * ratioOfHeadlineText      + "px";
-  renesasText.style.fontSize        = length * ratioOfRenesasText       + "px";
-  collaborationText.style.fontSize  = length * ratioOfcollaborationText + "px";
-  sensirionText.style.fontSize      = length * ratioOfsensirionText     + "px";
-  connectButton.style.fontSize      = length * ratioOfConnectButton     + "px";
-  statusText.style.fontSize         = length * rationOfStatusText       + "px";
+  headlineText.style.fontSize       = length / 2 * ratioOfHeadlineText      + "px";
+  renesasText.style.fontSize        = length / 2 * ratioOfRenesasText       + "px";
+  collaborationText.style.fontSize  = length / 2 * ratioOfcollaborationText + "px";
+  sensirionText.style.fontSize      = length / 2 * ratioOfsensirionText     + "px";
+  connectButton.style.fontSize      = length / 2 * ratioOfConnectButton     + "px";
+  statusText.style.fontSize         = length / 2 * rationOfStatusText       + "px";
   // changeFontSize(headlineText);
   // changeFontSize(renesasText);
   // changeFontSize(collaborationText);
