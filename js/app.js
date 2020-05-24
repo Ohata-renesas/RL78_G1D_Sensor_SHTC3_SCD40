@@ -51,8 +51,7 @@ let requestID         = null;
 
 
 /* Initial drawing */
-redrawAllCanvas();
-changeTextFontSize();
+resizeAllElement();
 
 /* Backgroud Canvas */
 // Draw background canvas
@@ -308,7 +307,7 @@ function setSensorValue(data) {
 // });
 
 /* Resize window */
-window.onresize = resizeAll;
+window.onresize = resizeAllElement;
 
 /* Change visibility */ 
 document.addEventListener("visibilitychange", () => {
@@ -317,7 +316,7 @@ document.addEventListener("visibilitychange", () => {
   }
 });
 
-function resizeAll() {
+function resizeAllElement() {
   redrawAllCanvas();
   changeTextFontSize();
 }
@@ -336,6 +335,13 @@ function changeTextFontSize() {
   sensirionText     = changeFontSize(sensirionText);
   connectButton     = changeFontSize(connectButton);
   statusText        = changeFontSize(statusText);
+
+  console.log("headlineText font: "       + headlineText.style.fontSize);
+  console.log("renesasText font: "        + renesasText.style.fontSize);
+  console.log("collaborationText font: "  + collaborationText.style.fontSize);
+  console.log("sensirionText font: "      + sensirionText.style.fontSize);
+  console.log("connectButton font: "      + connectButton.style.fontSize);
+  console.log("statusText font: "         + statusText.style.fontSize);
 }
 
 /* Change font size */
