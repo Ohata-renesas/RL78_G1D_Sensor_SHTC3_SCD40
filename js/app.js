@@ -337,12 +337,12 @@ function changeTextFontSize() {
   statusText        = changeFontSize(statusText);
 
   console.log("font start");
-  console.log(headlineText);
-  console.log(renesasText);
-  console.log(collaborationText);
-  console.log(sensirionText);
-  console.log(connectButton);
-  console.log(statusText);
+  console.log(headlineText.style);
+  console.log(renesasText.style);
+  console.log(collaborationText.style);
+  console.log(sensirionText.style);
+  console.log(connectButton.style);
+  console.log(statusText.style);
 }
 
 /* Change font size */
