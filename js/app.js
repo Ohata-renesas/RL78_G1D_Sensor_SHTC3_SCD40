@@ -335,13 +335,12 @@ function changeTextFontSize() {
   sensirionText     = changeFontSize(sensirionText);
   connectButton     = changeFontSize(connectButton);
   statusText        = changeFontSize(statusText);
-
 }
 
 /* Change font size */
 function changeFontSize(element) {
   element = calculateWidthAndHeight(element);
-  element.style.fontSize = element.height;
+  element.style.fontSize = element.height + "px";
   console.log("size start")
   console.log("height:"   + element.height          + "px");
   console.log("fontSize:" + element.style.fontSize  + "px");
