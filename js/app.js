@@ -343,6 +343,7 @@ function changeFontSize(element) {
   element.style.fontSize = element.height + "px";
   // element.style.fontSize = parseInt(getComputedStyle(element).height.slice(0, -2)) + "px";
   // element.style.fontSize = parseInt(getComputedStyle(element).height.slice(0, -2)) / 2 + "px";
+  console.log(element.style.fontSize);
 }
 
  /* Calculate width and height of element */
