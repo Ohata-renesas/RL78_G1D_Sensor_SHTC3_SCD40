@@ -340,6 +340,13 @@ function changeTextFontSize() {
   let clientHeight = document.documentElement.clientHeight;
   let length = (clientWidth >= clientHeight) ? clientHeight : clientWidth;
   console.log(length);
+  headlineText.style.height       = clientHeight * ratioOfHeadlineText      + "px";
+  renesasText.style.height        = clientHeight * ratioOfRenesasText       + "px";
+  collaborationText.style.height  = clientHeight * ratioOfcollaborationText + "px";
+  sensirionText.style.height      = clientHeight * ratioOfsensirionText     + "px";
+  connectButton.style.height      = clientHeight * ratioOfConnectButton     + "px";
+  statusText.style.height         = clientHeight * rationOfStatusText       + "px";
+
   headlineText.style.fontSize       = length * ratioOfHeadlineText      + "px";
   renesasText.style.fontSize        = length * ratioOfRenesasText       + "px";
   collaborationText.style.fontSize  = length * ratioOfcollaborationText + "px";
