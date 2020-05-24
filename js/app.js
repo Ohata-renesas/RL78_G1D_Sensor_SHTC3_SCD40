@@ -339,8 +339,9 @@ function changeTextFontSize() {
 
 /* Change font size */
 function changeFontSize(element) {
-  element = calculateWidthAndHeight(element);
-  element.style.fontSize = element.height / devicePixelRatio + "px";
+  // element = calculateWidthAndHeight(element);
+  // element.style.fontSize = (element.height / devicePixelRatio) + "px";
+  element.style.fontSize = element.height;
   return element;
 }
 
