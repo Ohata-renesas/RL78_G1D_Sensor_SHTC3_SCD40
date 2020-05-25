@@ -1,9 +1,10 @@
 
 'use strict';
 
-// const CACHE_VERSION = 'v1';
-// const CACHE_NAME = `${registration.scope}!${CACHE_VERSION}`;
-const CACHE_NAME      = 'static-cache-v5';
+const CACHE_VERSION = 'v6';
+const CACHE_NAME      = 'static-cache-' + CACHE_VERSION;
+
+console.log(CACHE_NAME);
 
 // キャッシュするファイルをセットする
 const filesToCache = [

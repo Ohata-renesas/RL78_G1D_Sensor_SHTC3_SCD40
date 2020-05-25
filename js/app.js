@@ -162,7 +162,20 @@ function drawFgMeterGraph(id, context, x0, y0, radius) {
   let rangeOfAngle    = (currentEndAngle[id] - oldEndAngle[id]) / maxNumberOfRepetition;
   radius             *= 0.85;
   context.lineWidth   = radius / 10;
-  context.strokeStyle = renesasBlue;
+  switch (sensorInfo.calibration) {
+    case isInCalibration :
+      context.strokeStyle = sensirionGreen;
+    break;
+
+    case isNotInCalibration :
+      context.strokeStyle = renesasBlue;
+    break;
+
+    default :
+      context.strokeStyle = renesasGray;
+      console.log("Calibration Data Error");
+    break;
+  }
   drawCanvas.drawArc(context, x0, y0, radius, startAngle, oldEndAngle[id] + rangeOfAngle * (countOfRepetition + 1));
 }
 
@@ -242,7 +255,7 @@ connectButton.addEventListener('click', function() {
       environmentSensor.characteristic.addEventListener('characteristicvaluechanged', handleEnvironmentSensor);
     })
     .catch(error => {
-      statusText.innerHTML = "Status: " + error;
+      statusText.innerHTML = error;
       console.log("error:" + error);
     });
   } 
@@ -258,13 +271,14 @@ function handleEnvironmentSensor(event) {
   if (sensorInfo.dataIsChanged != result.dataIsChanged) {
     sensorInfo.dataIsChanged = result.dataIsChanged;
     setSensorValue(result);
-    redrawAllCanvas();
   }
   else {
     // nothing
   }
 
-  switch (result.calibration) {
+  sensorInfo.calibration = result.calibration;
+
+  switch (sensorInfo.calibration) {
     case isNotInCalibration :
       statusText.innerHTML = "Status: Measurement";
     break;
@@ -277,6 +291,8 @@ function handleEnvironmentSensor(event) {
       statusText.innerHTML = "Status: Calibration Data Error";
     break;
   }
+
+  redrawAllCanvas();
 }
 
 /* Set sensor value */
