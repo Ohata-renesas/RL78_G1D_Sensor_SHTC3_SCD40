@@ -1,9 +1,3 @@
-@media all and (display-mode: standalone) {
-  body {
-    background-color: yellow;
-  }
-}
-
 #container {
   position: absolute;
   background-color: white;
