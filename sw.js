@@ -1,7 +1,7 @@
 
 'use strict';
 
-const CACHE_VERSION   = 'v6';
+const CACHE_VERSION   = 'v0.8.0';
 const CACHE_NAME      = 'static-cache-' + CACHE_VERSION;
 
 console.log(CACHE_NAME);
@@ -19,7 +19,8 @@ const filesToCache = [
   './icons/icon-512x512.png',
   './js/EnvironmentSensor.js',
   './js/DrawCanvas.js',
-  './js/app.js'
+  './js/app.js',
+  './js/install.js'
 ];
 
 
