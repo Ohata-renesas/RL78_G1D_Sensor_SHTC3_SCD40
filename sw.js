@@ -1,7 +1,7 @@
 
 'use strict';
 
-const CACHE_VERSION   = 'v0.8.1';
+const CACHE_VERSION   = 'v0.8.2';
 const CACHE_NAME      = 'static-cache-' + CACHE_VERSION;
 
 console.log(CACHE_NAME);
