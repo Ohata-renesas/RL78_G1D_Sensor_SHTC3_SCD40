@@ -1,7 +1,7 @@
 
 'use strict';
 
-const CACHE_VERSION   = 'v0.8.4';
+const CACHE_VERSION   = 'v0.8.5';
 const CACHE_NAME      = 'static-cache-' + CACHE_VERSION;
 
 // キャッシュするファイルをセットする
@@ -16,7 +16,7 @@ const filesToCache = [
   './icons/favicon-144x144.png',
   './icons/icon-192x192.png',
   './icons/icon-512x512.png',
-  './js/EnvironmentSensor.js',
+  './js/EnvironmentalSensor.js',
   './js/DrawCanvas.js',
   './js/app.js',
 ];

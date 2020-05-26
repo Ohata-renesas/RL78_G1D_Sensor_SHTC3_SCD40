@@ -4,7 +4,7 @@
   const DISCONNECT      = 0;
   const CONNECT         = 1;
 
-  class EnvironmentSensor {
+  class EnvironmentalSensor {
     constructor() {
       this.device                   = null;
       this.server                   = null;
@@ -120,6 +120,6 @@
     }
   }
 
-  window.environmentSensor    = new EnvironmentSensor();
+  window.EnvironmentalSensor    = new EnvironmentalSensor();
 
 })();
