@@ -34,10 +34,10 @@
             }
         }
     
-        drawCircle(context, x, y, r) {
+        drawCircle(context, x, y, radius) {
             if (context) {         
                 context.beginPath();       
-                context.arc(x, y, r, 0, Math.PI * 2);
+                context.arc(x, y, radius, 0, Math.PI * 2);
                 context.stroke();
             }
             else {
@@ -45,10 +45,10 @@
             }
         }
           
-        drawArc(context, x, y, r, startAngle, endAngle) {
+        drawArc(context, x, y, radius, startAngle, endAngle) {
             if (context) {
                 context.beginPath();
-                context.arc(x, y, r, startAngle, endAngle);
+                context.arc(x, y, radius, startAngle, endAngle);
                 context.stroke();
             }
             else {
@@ -57,13 +57,27 @@
 
         }
           
-        drawLine(x0, y0, x1, y1) {
-            
-        
+        drawLine(context, startX, startY, endX, endY) {
+            if (context) {
+                context.beginPath();
+                context.moveTo(startX, startY);
+                context.lineTo(endX, endY);
+                context.stroke();
+            }
+            else {
+                console.log("Context is not sest.");
+            }
         }
         
-        drawLineWithDot(x0, y0, x1, y1) {
-        
+        drawPoint(context, x, y, radius) {
+            if (context) {
+                context.beginPath();
+                context.arc(x, y, radius, 0, Math.PI* 2);
+                context.fill();
+            }
+            else {
+                console.log("Context is not set.");
+            }
         }
         
         clearCanvas(context, width, height) {

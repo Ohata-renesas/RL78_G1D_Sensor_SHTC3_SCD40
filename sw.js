@@ -1,15 +1,14 @@
 
 'use strict';
 
-const CACHE_VERSION   = 'v0.8.3';
+const CACHE_VERSION   = 'v0.8.4';
 const CACHE_NAME      = 'static-cache-' + CACHE_VERSION;
-
-console.log(CACHE_NAME);
 
 // キャッシュするファイルをセットする
 const filesToCache = [
   '.',
   './index.html',
+  './manifest.json',
   './css/styles.css',
   './icons/favicon-32x32.png',
   './icons/favicon-48x48.png',

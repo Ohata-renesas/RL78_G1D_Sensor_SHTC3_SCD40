@@ -106,14 +106,14 @@
       result.temperatureValue   = (value.getUint8(0) << 8) + value.getUint8(1) + (value.getUint8(2) * 0.01);
       result.humidityValue      = (value.getUint8(3) << 8) + value.getUint8(4) + (value.getUint8(5) * 0.01);
       result.co2Value           = (value.getUint8(6) << 8) + value.getUint8(7);
-      result.calibration        =  value.getUint8(8);
+      result.statusData         =  value.getUint8(8);
       result.dataIsChanged      =  value.getUint8(9);
 
       // Log
       console.log("Temperature: " + result.temperatureValue);
       console.log("Humidity: "    + result.humidityValue);
       console.log("CO2: "         + result.co2Value);
-      console.log("Calibration: " + result.calibration);
+      console.log("Status: "      + result.statusData);
       console.log("dataISChanged: " + result.dataIsChanged);
 
       return result;
