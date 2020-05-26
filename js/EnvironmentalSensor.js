@@ -120,6 +120,6 @@
     }
   }
 
-  window.EnvironmentalSensor    = new EnvironmentalSensor();
+  window.environmentalSensor    = new EnvironmentalSensor();
 
 })();

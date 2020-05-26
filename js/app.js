@@ -48,10 +48,108 @@ let countOfRepetition = 0;
 let requestID         = null;
 
 
-/* Initial drawing */
+/** Initial drawing */
 redrawAllCanvas();
 
-/* Backgroud Canvas */
+/** Click connect button */
+connectButton.addEventListener('click', function() {
+
+  if (!environmentalSensor.isConnected()) {
+    dataPosition = 0;
+    environmentalSensor.connect()
+    .then(_ => {    
+      environmentalSensor.changeConnectionStatus();
+      environmentalSensor.characteristic.addEventListener('characteristicvaluechanged', handleenvironmentalSensor);
+    })
+    .catch(error => {
+      statusText.innerHTML = error;
+      console.log("error:" + error);
+    });
+  } 
+  else {
+    environmentalSensor.disconnect(); 
+  }
+});
+
+/** Handle environmental sensor */
+function handleenvironmentalSensor(event) {
+  let result = environmentalSensor.parseSensorData(event.target.value);
+
+  if (sensorInfo.dataIsChanged != result.dataIsChanged) {
+    sensorInfo.dataIsChanged = result.dataIsChanged;
+    setSensorValue(result);
+  }
+  else {
+    // nothing
+  }
+
+  sensorInfo.statusData = result.statusData;
+
+  switch (sensorInfo.statusData) {
+    case isInMeasurement :
+      statusText.innerHTML = "Status: Measurement";
+    break;
+
+    case isInCalibration :
+      statusText.innerHTML = "Status: Calibration";
+    break;
+
+    default :
+      statusText.innerHTML = "Status: I2C Error";
+    break;
+  }
+  redrawAllCanvas();  
+}
+
+/** Set sensor value */
+function setSensorValue(data) {
+  sensorInfo.temperature.text.value = String(data.temperatureValue);
+  sensorInfo.humidity.text.value    = String(data.humidityValue);
+  sensorInfo.co2.text.value         = String(data.co2Value); 
+
+  for (let position = dataCount; position > 0; position--) {
+    sensorInfo.temperature.values[position] = sensorInfo.temperature.values[position - 1];
+    sensorInfo.humidity.values[position]    = sensorInfo.humidity.values[position - 1];
+    sensorInfo.co2.values[position]         = sensorInfo.co2.values[position - 1];
+  }
+
+  sensorInfo.temperature.values[0]  = data.temperatureValue;
+  sensorInfo.humidity.values[0]     = data.humidityValue;
+  sensorInfo.co2.values[0]          = data.co2Value;
+
+  if (dataCount < maxDataLength) {
+    dataCount++;
+  }
+  else {
+    dataCount = maxDataLength;
+  }
+}
+
+/** Click canvas */
+fgCanvas.addEventListener('click', event => {
+  graphMode = graphMode === 'meter' ? 'line' : 'meter';
+  redrawAllCanvas();
+});
+
+/** Resize window */
+window.onresize = redrawAllCanvas;
+
+/** Change visibility */ 
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden) {
+    redrawAllCanvas();
+  }
+});
+
+
+/** Draw all canvas */ 
+function redrawAllCanvas() {
+  drawBgCanvas();
+  drawFgCanvas();
+}
+
+/** Backgroud Canvas */
+
 // Draw background canvas
 function drawBgCanvas() {
   bgCanvas  = calculateWidthAndHeightOfCanvas(bgCanvas);
@@ -128,33 +226,13 @@ function drawBgText(id, context, graphInfo) {
 }
 
 // Draw background line graph
-function drawLineGraph(context, width, height, func) {
-  let graphInfo = {};
-
-  graphInfo.yAxisLength     = height / 5;
-  graphInfo.yMargin         = graphInfo.yAxisLength / 2;
-  graphInfo.xMargin         = width / 10;
-  graphInfo.xAxisLength     = graphInfo.xMargin * 7;
-
-  graphInfo.originX         = graphInfo.xMargin * 2;
-  graphInfo.centerX         = graphInfo.xMargin;     
-  graphInfo.radius          = graphInfo.yAxisLength / 2;
-
-  for (let id = 0; id < maxNumberOfSensor; id++) {
-    graphInfo.originY = (graphInfo.yMargin + graphInfo.yAxisLength) * (id + 1);
-    graphInfo.centerY =  graphInfo.originY - graphInfo.radius;
-    func(id, context, graphInfo);
-  }  
-}
-
-// Draw background line graph
 function drawBgLineGraph(id, context, graphInfo) {
   drawBgText(id, context, graphInfo);
   drawBgAxis(context, graphInfo);
   drawBgPointsAndLines(id, context, graphInfo);
 }
 
-// Draw Axis In background line graph
+// Draw axis in background line graph
 function drawBgAxis(context, graphInfo) {
   let xAxisLength = graphInfo.xAxisLength;
   let yAxisLength = graphInfo.yAxisLength;
@@ -168,6 +246,7 @@ function drawBgAxis(context, graphInfo) {
   drawCanvas.drawLine(context, x0, y0, x0 + xAxisLength, y0);
 }
 
+// Draw points and line in background canvas
 function drawBgPointsAndLines(id, context, graphInfo) {
   let xAxisLength = graphInfo.xAxisLength;
   let yAxisLength = graphInfo.yAxisLength;
@@ -213,7 +292,8 @@ function drawBgPointsAndLines(id, context, graphInfo) {
   }
 }
 
-/* Foreground Canvas */
+/**  Foreground Canvas */
+
 // Draw foreground canvas
 function drawFgCanvas() {
   fgCanvas   = calculateWidthAndHeightOfCanvas(fgCanvas);
@@ -232,7 +312,7 @@ function drawFgCanvas() {
   drawFgGraph();
 }
 
-// Draw foreground graph
+// Draw foreground graph with animation
 function drawFgGraph() {
   drawCanvas.clearCanvas(fgContext, fgCanvas.width, fgCanvas.height);
   
@@ -290,7 +370,9 @@ function drawFgMeterGraph(id, context, graphInfo) {
   drawCanvas.drawArc(context, x0, y0, radius, startAngle, oldEndAngle[id] + rangeOfAngle * countOfRepetition);
 }
 
-/* Calculate coordinates and call a function */
+/** common */
+
+// Draw meter graph
 function drawMeterGraph(context, width, height, func) {
   let heightIsLonger = (width <= height) ? 1 : 0;
   let graphInfo = {};
@@ -319,6 +401,26 @@ function drawMeterGraph(context, width, height, func) {
       graphInfo.centerX += graphInfo.radius;
     }
   }
+}
+
+// Draw line graph
+function drawLineGraph(context, width, height, func) {
+  let graphInfo = {};
+
+  graphInfo.yAxisLength     = height / 5;
+  graphInfo.yMargin         = graphInfo.yAxisLength / 2;
+  graphInfo.xMargin         = width / 10;
+  graphInfo.xAxisLength     = graphInfo.xMargin * 7;
+
+  graphInfo.originX         = graphInfo.xMargin * 2;
+  graphInfo.centerX         = graphInfo.xMargin;     
+  graphInfo.radius          = graphInfo.yAxisLength / 2;
+
+  for (let id = 0; id < maxNumberOfSensor; id++) {
+    graphInfo.originY = (graphInfo.yMargin + graphInfo.yAxisLength) * (id + 1);
+    graphInfo.centerY =  graphInfo.originY - graphInfo.radius;
+    func(id, context, graphInfo);
+  }  
 }
 
 // Get something value converted from sensor value.
@@ -358,106 +460,10 @@ function convertSrcToSth(sourceCurrent, sourceMax, sourceMin, somethingMax, some
   else                                  return (sourceCurrent - sourceMin) * (somethingMax - somethingMin) / (sourceMax - sourceMin);
 }
 
-/* Click connect button */
-connectButton.addEventListener('click', function() {
-
-  if (!environmentSensor.isConnected()) {
-    dataPosition = 0;
-    environmentSensor.connect()
-    .then(_ => {    
-      environmentSensor.changeConnectionStatus();
-      environmentSensor.characteristic.addEventListener('characteristicvaluechanged', handleEnvironmentSensor);
-    })
-    .catch(error => {
-      statusText.innerHTML = error;
-      console.log("error:" + error);
-    });
-  } 
-  else {
-    environmentSensor.disconnect(); 
-  }
-});
-
-/* Handle environment sensor */
-function handleEnvironmentSensor(event) {
-  let result = environmentSensor.parseSensorData(event.target.value);
-
-  if (sensorInfo.dataIsChanged != result.dataIsChanged) {
-    sensorInfo.dataIsChanged = result.dataIsChanged;
-    setSensorValue(result);
-  }
-  else {
-    // nothing
-  }
-
-  sensorInfo.statusData = result.statusData;
-
-  switch (sensorInfo.statusData) {
-    case isInMeasurement :
-      statusText.innerHTML = "Status: Measurement";
-    break;
-
-    case isInCalibration :
-      statusText.innerHTML = "Status: Calibration";
-    break;
-
-    default :
-      statusText.innerHTML = "Status: I2C Error";
-    break;
-  }
-  redrawAllCanvas();  
-}
-
-/* Set sensor value */
-function setSensorValue(data) {
-  sensorInfo.temperature.text.value = String(data.temperatureValue);
-  sensorInfo.humidity.text.value    = String(data.humidityValue);
-  sensorInfo.co2.text.value         = String(data.co2Value); 
-
-  for (let position = dataCount; position > 0; position--) {
-    sensorInfo.temperature.values[position] = sensorInfo.temperature.values[position - 1];
-    sensorInfo.humidity.values[position]    = sensorInfo.humidity.values[position - 1];
-    sensorInfo.co2.values[position]         = sensorInfo.co2.values[position - 1];
-  }
-
-  sensorInfo.temperature.values[0]  = data.temperatureValue;
-  sensorInfo.humidity.values[0]     = data.humidityValue;
-  sensorInfo.co2.values[0]          = data.co2Value;
-
-  if (dataCount < maxDataLength) {
-    dataCount++;
-  }
-  else {
-    dataCount = maxDataLength;
-  }
-}
-
-/* Click canvas */
-fgCanvas.addEventListener('click', event => {
-  graphMode = graphMode === 'meter' ? 'line' : 'meter';
-  redrawAllCanvas();
-});
-
-/* Resize window */
-window.onresize = redrawAllCanvas;
-
-/* Change visibility */ 
-document.addEventListener("visibilitychange", () => {
-  if (!document.hidden) {
-    redrawAllCanvas();
-  }
-});
-
-
-/* Draw all canvas */ 
-function redrawAllCanvas() {
-  drawBgCanvas();
-  drawFgCanvas();
-}
-
- /* Calculate width and height of canvas */
+ // Calculate width and height of canvas
  function calculateWidthAndHeightOfCanvas(canvas) {
-   canvas.width  = drawCanvas.calculateWidth(canvas);
-   canvas.height = drawCanvas.calculateHeight(canvas);
-   return canvas;
+  canvas.width  = drawCanvas.calculateWidth(canvas);
+  canvas.height = drawCanvas.calculateHeight(canvas);
+  return canvas;
 }
+
