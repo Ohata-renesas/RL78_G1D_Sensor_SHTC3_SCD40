@@ -1,6 +1,6 @@
 const isInMeasurement       = 0;
 const isInCalibration       = 1;
-const maxDataLength         = 50;
+const maxDataLength         = 30;
 const maxNumberOfSensor     = 3;
 const maxNumberOfRepetition = 15;
 const mathPI                = Math.PI;
@@ -12,21 +12,21 @@ let sensorInfo = {
   temperature     : {sensorID : 0,
                      maxValue : 100,
                      minValue : 0, 
-                     values   : new Array(maxDataLength),
+                     values   : new Array(maxDataLength).fill(null),
                      text     : {name  : "Temperature", 
                                  value : "000.00", 
                                  unit  : "[°C]"}},
   humidity        : {sensorID : 1, 
                      maxValue : 100,    
                      minValue : 0,
-                     values   : new Array(maxDataLength), 
+                     values   : new Array(maxDataLength).fill(null), 
                      text     : {name  : "Humidity", 
                                  value : "000.00", 
                                  unit  : "[%RH]"}},
   co2             : {sensorID : 2, 
                      maxValue : 10000,  
                      minValue : 0,
-                     values   : new Array(maxDataLength), 
+                     values   : new Array(maxDataLength).fill(null), 
                      text     : {name  : "CO2", 
                                  value : "00000", 
                                  unit  : "[ppm]"}},
@@ -190,12 +190,12 @@ function drawBgCircle(context, graphInfo) {
 
 // Draw background text
 function drawBgText(id, context, graphInfo) {
-  let fontSizeOfName     = String(Math.round(graphInfo.radius / 6));
-  let fontSizeOfValue    = String(Math.round(graphInfo.radius / 3));
-  let fontSizeOfUnit     = String(Math.round(graphInfo.radius / 6));
-  let yCoordinateOfName  = graphInfo.centerY - graphInfo.radius / 3 + parseInt(fontSizeOfName)  / 2;
-  let yCoordinateOfValue = graphInfo.centerY                        + parseInt(fontSizeOfValue) / 2;
-  let yCoordinateOfUnit  = graphInfo.centerY + graphInfo.radius / 3 + parseInt(fontSizeOfUnit)  / 2;
+  let fontSizeOfName     = String(Math.round(graphInfo.fontSize / 2));
+  let fontSizeOfValue    = String(Math.round(graphInfo.fontSize));
+  let fontSizeOfUnit     = String(Math.round(graphInfo.fontSize / 2));
+  let yCoordinateOfName  = graphInfo.centerY - graphInfo.fontSize + parseInt(fontSizeOfName)  / 2;
+  let yCoordinateOfValue = graphInfo.centerY                      + parseInt(fontSizeOfValue) / 2;
+  let yCoordinateOfUnit  = graphInfo.centerY + graphInfo.fontSize + parseInt(fontSizeOfUnit)  / 2;
   let x                  = graphInfo.centerX;
 
   context.textAlign = "center";
@@ -378,10 +378,11 @@ function drawMeterGraph(context, width, height, func) {
   let graphInfo = {};
 
   if (heightIsLonger) {
-    graphInfo.radius  = Math.min(height / 8, width / 2);
-    graphInfo.margin  = graphInfo.radius / 2;
-    graphInfo.centerX = width / 2;
-    graphInfo.centerY = 0;
+    graphInfo.radius   = Math.min(height / 8, width / 2);
+    graphInfo.margin   = graphInfo.radius / 2;
+    graphInfo.centerX  = width / 2;
+    graphInfo.centerY  = 0;
+    graphInfo.fontSize = graphInfo.radius / 3;
 
     for (let id = 0; id < maxNumberOfSensor; id++) {
       graphInfo.centerY += (graphInfo.margin + graphInfo.radius);
@@ -390,10 +391,11 @@ function drawMeterGraph(context, width, height, func) {
     }
   }
   else {
-    graphInfo.radius  = Math.min(width / 8, height / 2);
-    graphInfo.margin  = graphInfo.radius / 2;
-    graphInfo.centerX = 0;
-    graphInfo.centerY = height / 2;
+    graphInfo.radius   = Math.min(width / 8, height / 2);
+    graphInfo.margin   = graphInfo.radius / 2;
+    graphInfo.centerX  = 0;
+    graphInfo.centerY  = height / 2;
+    graphInfo.fontSize = graphInfo.radius / 3;
 
     for (let id = 0; id < maxNumberOfSensor; id++) {
       graphInfo.centerX += (graphInfo.margin + graphInfo.radius);
@@ -407,14 +409,15 @@ function drawMeterGraph(context, width, height, func) {
 function drawLineGraph(context, width, height, func) {
   let graphInfo = {};
 
-  graphInfo.yAxisLength     = height / 5;
-  graphInfo.yMargin         = graphInfo.yAxisLength / 2;
-  graphInfo.xMargin         = width / 10;
-  graphInfo.xAxisLength     = graphInfo.xMargin * 7;
+  graphInfo.yAxisLength = height / 5;
+  graphInfo.yMargin     = graphInfo.yAxisLength / 2;
+  graphInfo.xMargin     = width / 10;
+  graphInfo.xAxisLength = graphInfo.xMargin * 7;
 
-  graphInfo.originX         = graphInfo.xMargin * 2;
-  graphInfo.centerX         = graphInfo.xMargin;     
-  graphInfo.radius          = graphInfo.yAxisLength / 2;
+  graphInfo.originX     = graphInfo.xMargin * 2;
+  graphInfo.centerX     = graphInfo.xMargin;     
+  graphInfo.radius      = graphInfo.yAxisLength / 2;
+  graphInfo.fontSize    = graphInfo.radius / 2;
 
   for (let id = 0; id < maxNumberOfSensor; id++) {
     graphInfo.originY = (graphInfo.yMargin + graphInfo.yAxisLength) * (id + 1);

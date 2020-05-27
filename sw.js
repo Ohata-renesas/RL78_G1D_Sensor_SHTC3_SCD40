@@ -1,7 +1,7 @@
 
 'use strict';
 
-const CACHE_VERSION   = 'v0.8.5';
+const CACHE_VERSION   = 'v0.8.6';
 const CACHE_NAME      = 'static-cache-' + CACHE_VERSION;
 
 // キャッシュするファイルをセットする
