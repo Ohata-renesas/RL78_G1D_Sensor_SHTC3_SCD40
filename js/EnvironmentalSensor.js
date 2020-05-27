@@ -3,6 +3,8 @@
 
   const DISCONNECT      = 0;
   const CONNECT         = 1;
+  const renesasBlue     = "#2A289D";
+  const renesasGray     = "#333333";
 
   class EnvironmentalSensor {
     constructor() {
@@ -23,21 +25,25 @@
         optionalServices: [this.userServiceUUID]      
         })
       .then(device => {
+        document.getElementById('statusText').style.color = renesasGray;
         document.getElementById('statusText').innerHTML = "Status: Connect the device";
         this.device = device;
         this.device.addEventListener('gattserverdisconnected', this.onDisconnected);
         return device.gatt.connect();
       })
       .then(server => {
+        document.getElementById('statusText').style.color = renesasGray;
         document.getElementById('statusText').innerHTML = "Status: Get the service";
         return server.getPrimaryService(this.userServiceUUID);
       })
       .then(service => {
+        document.getElementById('statusText').style.color = renesasGray;
         document.getElementById('statusText').innerHTML = "Status: Get the characateristic";
         return service.getCharacteristic(this.userCharacteristicUUID);
       })
       .then(characteristic => {
         this.characteristic = characteristic;
+        document.getElementById('statusText').style.color = renesasGray;
         document.getElementById('statusText').innerHTML = "Status: Start notification";
         return characteristic.startNotifications();
       })      
@@ -46,6 +52,7 @@
     disconnect() {   
       if (!this.device) {
         var error = "No Bluetooth Device";
+        document.getElementById('statusText').style.color = renesasGray;
         document.getElementById('statusText').innerHTML = "Status: " + error;
         console.log('Error : ' + error);
         return;
@@ -61,6 +68,7 @@
        var error = "Please click again.";
        this.connectionStatus = DISCONNECT;
        document.getElementById('connectButton').innerHTML = "CONNECT";
+       document.getElementById('statusText').style.color = renesasGray;
        document.getElementById('statusText').innerHTML = "Status: " + error;
        console.log('Error : ' + error);
        return;
@@ -70,6 +78,7 @@
 
     onDisconnected(event) {
       document.getElementById('connectButton').innerHTML = "CONNECT";
+      document.getElementById('statusText').style.color = renesasGray;
       document.getElementById('statusText').innerHTML = "Status: Disconnect the device";
     }
 
@@ -83,12 +92,14 @@
         case CONNECT :
           this.connectionStatus = DISCONNECT;
           document.getElementById('connectButton').innerHTML = "CONNECT";
+          document.getElementById('statusText').style.color = renesasGray;
           document.getElementById('statusText').innerHTML = "Status: Disconnect the device";
         break;
 
         case DISCONNECT :
           this.connectionStatus = CONNECT;
           document.getElementById('connectButton').innerHTML = "DISCONNECT";
+          document.getElementById('statusText').style.color = renesasBlue;
           document.getElementById('statusText').innerHTML = "Status: Measurement";
          break;
 

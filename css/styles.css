@@ -60,7 +60,6 @@ h1 {
 
 .text-wrapper {
   position: relative;
-  color: #333333;
   display: block;
   width: 100%;
   height: 15%;
@@ -78,7 +77,7 @@ h1 {
   cursor: pointer;  
   -webkit-user-select: none;
   color: white;
-  text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black, -1px -1px 1px black;
+  text-shadow: 1px 1px 3px #333333, 1px -1px 3px #333333, -1px 1px 3px #333333, -1px -1px 3px #333333;
 }
 
 .text-wrapper #statusText {
@@ -88,4 +87,5 @@ h1 {
   width: 100%;
   height: 30%;
   font-size: 80%;
+  color: #2A289D;
 }

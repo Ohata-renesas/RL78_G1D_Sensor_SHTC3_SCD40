@@ -36,6 +36,7 @@ let sensorInfo = {
 
 let connectButton     = document.getElementById('connectButton');
 let statusText        = document.getElementById('statusText');
+let statusTextStyle   = statusText.style;
 let bgCanvas          = document.getElementById('backgroundCanvas');
 let fgCanvas          = document.getElementById('foregroundCanvas');
 let bgContext         = bgCanvas.getContext('2d');
@@ -48,14 +49,14 @@ let countOfRepetition = 0;
 let requestID         = null;
 
 
-/** Initial drawing */
-redrawAllCanvas();
+/** Initialization Process */
+InitializationProcess();
 
 /** Click connect button */
 connectButton.addEventListener('click', function() {
 
   if (!environmentalSensor.isConnected()) {
-    dataPosition = 0;
+    InitializationProcess();
     environmentalSensor.connect()
     .then(_ => {    
       environmentalSensor.changeConnectionStatus();
@@ -87,14 +88,17 @@ function handleenvironmentalSensor(event) {
 
   switch (sensorInfo.statusData) {
     case isInMeasurement :
+      statusTextStyle.color = renesasBlue;
       statusText.innerHTML = "Status: Measurement";
     break;
 
     case isInCalibration :
+      statusTextStyle.color = sensirionGreen;
       statusText.innerHTML = "Status: Calibration";
     break;
 
     default :
+    statusTextStyle.color = renesasGray;
       statusText.innerHTML = "Status: I2C Error";
     break;
   }
@@ -141,6 +145,26 @@ document.addEventListener("visibilitychange", () => {
   }
 });
 
+/** Initialization Process */
+function InitializationProcess() {
+
+  sensorInfo.temperature.values     = new Array(maxDataLength).fill(null);
+  sensorInfo.temperature.text.value = "000.00"; 
+  sensorInfo.humidity.values        = new Array(maxDataLength).fill(null);
+  sensorInfo.humidity.text.value    = "000.00"; 
+  sensorInfo.co2.values             = new Array(maxDataLength).fill(null);
+  sensorInfo.co2.text.value         = "00000"; 
+  sensorInfo.statusData             = 0;
+  sensorInfo.dataIsChanged          = 0;
+
+  dataCount                         = 0;
+  oldEndAngle                       = new Array(maxNumberOfSensor).fill(startAngle);
+  currentEndAngle                   = new Array(maxNumberOfSensor).fill(startAngle);
+  countOfRepetition                 = 0;
+  requestID                         = null;
+
+  redrawAllCanvas();
+}
 
 /** Draw all canvas */ 
 function redrawAllCanvas() {
