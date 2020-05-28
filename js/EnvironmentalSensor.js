@@ -4,7 +4,7 @@
   const isDisconnected  = 0;
   const isConnected     = 1;
   const backgroundColor = "white";
-  const textShadow      = "1px 1px 5px #333333, 1px -1px 5px #333333, -1px 1px 5px #333333, -1px -1px 5px #333333"; 
+  const textShadow      = "1px 1px 3px #333333, 1px -1px 3px #333333, -1px 1px 3px #333333, -1px -1px 3px #333333"; 
 
   class EnvironmentalSensor {
     constructor() {
