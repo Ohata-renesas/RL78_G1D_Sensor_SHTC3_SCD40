@@ -60,6 +60,7 @@ connectButton.addEventListener('click', function() {
     environmentalSensor.connect()
     .then(_ => {    
       connectButtonStyle.color = renesasBlue;
+      connectButtonStyle.textShadow = "none";
       environmentalSensor.changeConnectionStatus();
       environmentalSensor.characteristic.addEventListener('characteristicvaluechanged', handleenvironmentalSensor);
     })
@@ -69,7 +70,8 @@ connectButton.addEventListener('click', function() {
     });
   } 
   else {
-    connectButtonStyle.color = sensirionGreen;
+    connectButtonStyle.color = "white";
+    connectButtonStyle.textShadow = "1px 1px 2px #2A289D, 1px -1px 2px #2A289D, -1px 1px 2px #2A289D, -1px -1px 2px #2A289D";
     environmentalSensor.disconnect(); 
   }
 });
@@ -90,14 +92,20 @@ function handleenvironmentalSensor(event) {
 
   switch (sensorInfo.statusData) {
     case isInMeasurement :
+      connectButtonStyle.color = renesasBlue;
+      connectButtonStyle.textShadow = "none";
       statusText.innerHTML = "Status: Measurement";
     break;
 
     case isInCalibration :
+      connectButtonStyle.color = sensirionGreen;
+      connectButtonStyle.textShadow = "none";
       statusText.innerHTML = "Status: Calibration";
     break;
 
     default :
+    connectButtonStyle.color = "white";
+    connectButtonStyle.textShadow = "1px 1px 2px #2A289D, 1px -1px 2px #2A289D, -1px 1px 2px #2A289D, -1px -1px 2px #2A289D";
       statusText.innerHTML = "Status: I2C Error";
     break;
   }
