@@ -42,7 +42,7 @@ let fgCanvas          = document.getElementById('foregroundCanvas');
 let bgContext         = bgCanvas.getContext('2d');
 let fgContext         = fgCanvas.getContext('2d');
 let graphMode         = 'meter';
-let dataCount         = 0;
+let countOfData         = 0;
 let oldEndAngle       = new Array(maxNumberOfSensor).fill(startAngle);
 let currentEndAngle   = new Array(maxNumberOfSensor).fill(startAngle);
 let countOfRepetition = 0;
@@ -63,6 +63,7 @@ connectButton.addEventListener('click', function() {
       environmentalSensor.characteristic.addEventListener('characteristicvaluechanged', handleenvironmentalSensor);
     })
     .catch(error => {
+      statusTextStyle.color = renesasGray;
       statusText.innerHTML = error;
       console.log("error:" + error);
     });
@@ -111,7 +112,7 @@ function setSensorValue(data) {
   sensorInfo.humidity.text.value    = String(data.humidityValue);
   sensorInfo.co2.text.value         = String(data.co2Value); 
 
-  for (let position = dataCount; position > 0; position--) {
+  for (let position = countOfData; position > 0; position--) {
     sensorInfo.temperature.values[position] = sensorInfo.temperature.values[position - 1];
     sensorInfo.humidity.values[position]    = sensorInfo.humidity.values[position - 1];
     sensorInfo.co2.values[position]         = sensorInfo.co2.values[position - 1];
@@ -121,11 +122,11 @@ function setSensorValue(data) {
   sensorInfo.humidity.values[0]     = data.humidityValue;
   sensorInfo.co2.values[0]          = data.co2Value;
 
-  if (dataCount < maxDataLength) {
-    dataCount++;
+  if (countOfData < maxDataLength) {
+    countOfData++;
   }
   else {
-    dataCount = maxDataLength;
+    countOfData = maxDataLength;
   }
 }
 
@@ -157,7 +158,7 @@ function InitializationProcess() {
   sensorInfo.statusData             = 0;
   sensorInfo.dataIsChanged          = 0;
 
-  dataCount                         = 0;
+  countOfData                       = 0;
   oldEndAngle                       = new Array(maxNumberOfSensor).fill(startAngle);
   currentEndAngle                   = new Array(maxNumberOfSensor).fill(startAngle);
   countOfRepetition                 = 0;
@@ -278,7 +279,7 @@ function drawBgPointsAndLines(id, context, graphInfo) {
   let y0          = graphInfo.originY;
   let radius      = Math.min(xAxisLength, yAxisLength) / 15;
   let xInterval   = Math.max(xAxisLength / (maxDataLength - 1), 0);
-  let dataLength  = dataCount;
+  let dataLength  = countOfData;
   let yCoordinates = new Array(dataLength).fill(null);
 
   context.lineWidth   = radius / 2;

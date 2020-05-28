@@ -121,11 +121,11 @@
       result.dataIsChanged      =  value.getUint8(9);
 
       // Log
-      console.log("Temperature: " + result.temperatureValue);
-      console.log("Humidity: "    + result.humidityValue);
-      console.log("CO2: "         + result.co2Value);
-      console.log("Status: "      + result.statusData);
-      console.log("dataISChanged: " + result.dataIsChanged);
+      console.log("Temperature: "   + result.temperatureValue);
+      console.log("Humidity: "      + result.humidityValue);
+      console.log("CO2: "           + result.co2Value);
+      console.log("Status: "        + result.statusData);
+      console.log("dataIsChanged: " + result.dataIsChanged);
 
       return result;
     }
