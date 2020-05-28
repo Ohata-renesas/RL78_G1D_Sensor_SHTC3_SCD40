@@ -68,7 +68,6 @@ h1 {
   display: block;
   margin: 0 auto;
   font-weight: bold;
-  width: 60%;
   cursor: pointer;  
   -webkit-user-select: none;
   color: #66CC33;
@@ -103,6 +102,7 @@ h1 {
   
   .text-wrapper #connectButton {
     font-size: 250%;
+    width: 80%;
     height: 40%;
   }
   
@@ -133,6 +133,7 @@ h1 {
   
   .text-wrapper #connectButton {
     font-size: 200%;
+    width: 40%;
     height: 40%;
   }
   
@@ -163,6 +164,7 @@ h1 {
   
   .text-wrapper #connectButton {
     font-size: 250%;
+    width: 40%;
     height: 40%;
   }
   
@@ -193,6 +195,7 @@ h1 {
   
   .text-wrapper #connectButton {
     font-size: 250%;
+    width: 40%;
     height: 40%;
   }
   
@@ -223,6 +226,7 @@ h1 {
   
   .text-wrapper #connectButton {
     font-size: 300%;
+    width: 20%;
     height: 40%;
   }
   
