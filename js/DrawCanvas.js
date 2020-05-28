@@ -6,7 +6,7 @@
     
         calculateWidth(canvas) {
             if (canvas) {
-                // slice(0, -2)で単位のpxを削除
+                // slice(0, -2) => remove unit[px]
                 return parseInt(getComputedStyle(canvas).width.slice(0, -2)) * devicePixelRatio;
             } 
             else {
@@ -16,7 +16,7 @@
     
         calculateHeight(canvas) {
             if (canvas) {
-                // slice(0, -2)で単位のpxを削除
+                // slice(0, -2) => remove unit[px]
                 return parseInt(getComputedStyle(canvas).height.slice(0, -2)) * devicePixelRatio;
             } 
             else {

@@ -14,7 +14,7 @@ header {
   position: relative;
   color: #333333;
   width: 100%;
-  height: 20%;
+  height: 15%;
   margin: 0 auto;
   text-align: center;
   display: block;
@@ -34,7 +34,6 @@ h1 {
 .headline-list-item {
   list-style: none;
   display: inline-block;
-  font-size: 90%;
 }
 
 .headline-list #renesasText {
@@ -45,24 +44,22 @@ h1 {
   color: #66CC33;
 }
 
-.canvas-wrapper {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 65%;
-}
-
 .canvas-wrapper canvas {
   position: absolute;
   width: 100%;
   height: 100%
 }
 
+.canvas-wrapper {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
 .text-wrapper {
   position: relative;
   display: block;
   width: 100%;
-  height: 15%;
   text-align: center;
 }
 
@@ -70,14 +67,11 @@ h1 {
   position: relative;
   display: block;
   margin: 0 auto;
-  font-size: 200%;
   font-weight: bold;
-  width: 50%;
-  height: 40%;
+  width: 60%;
   cursor: pointer;  
   -webkit-user-select: none;
-  color: white;
-  text-shadow: 1px 1px 3px #333333, 1px -1px 3px #333333, -1px 1px 3px #333333, -1px -1px 3px #333333;
+  color: #66CC33;
 }
 
 .text-wrapper #statusText {
@@ -85,7 +79,157 @@ h1 {
   display: block;
   margin: 10px auto;
   width: 100%;
-  height: 30%;
-  font-size: 80%;
-  color: #2A289D;
+  color: #333333;
 }
+
+/* smartphone portrait */
+@media screen and (min-width:0px) {
+  
+  h1 {
+    font-size: 150%;
+  }
+  
+  .headline-list {
+    font-size: 80%;
+  }
+  
+  .canvas-wrapper {
+    height: 65%;
+  }
+  
+  .text-wrapper {
+    height: 20%;
+  }
+  
+  .text-wrapper #connectButton {
+    font-size: 250%;
+    height: 40%;
+  }
+  
+  .text-wrapper #statusText {
+    height: 30%;
+    font-size: 120%;
+  }
+}
+
+/* smartphone landscape */
+@media screen and (min-width:480px) {
+  
+  h1 {
+    font-size: 200%;
+  }
+  
+  .headline-list {
+    font-size: 90%;
+  }
+  
+  .canvas-wrapper {
+    height: 60%;
+  }
+  
+  .text-wrapper {
+    height: 25%;
+  }
+  
+  .text-wrapper #connectButton {
+    font-size: 200%;
+    height: 40%;
+  }
+  
+  .text-wrapper #statusText {
+    height: 30%;
+    font-size: 90%;
+  }
+}
+
+/* tablet */
+@media screen and (min-width: 768px) {
+  
+  h1 {
+    font-size: 200%;
+  }
+  
+  .headline-list {
+    font-size: 90%;
+  }
+  
+  .canvas-wrapper {
+    height: 60%;
+  }
+  
+  .text-wrapper {
+    height: 20%;
+  }
+  
+  .text-wrapper #connectButton {
+    font-size: 250%;
+    height: 40%;
+  }
+  
+  .text-wrapper #statusText {
+    height: 30%;
+    font-size: 120%;
+  }
+}
+
+/* laptop */
+@media screen and (min-width: 1024px) {
+  
+  h1 {
+    font-size: 200%;
+  }
+  
+  .headline-list {
+    font-size: 90%;
+  }
+  
+  .canvas-wrapper {
+    height: 65%;
+  }
+  
+  .text-wrapper {
+    height: 20%;
+  }
+  
+  .text-wrapper #connectButton {
+    font-size: 250%;
+    height: 40%;
+  }
+  
+  .text-wrapper #statusText {
+    height: 30%;
+    font-size: 120%;
+  }
+}
+
+/* monitor */
+@media screen and (min-width: 1920px) {
+  
+  h1 {
+    font-size: 250%;
+  }
+  
+  .headline-list {
+    font-size: 120%;
+  }
+  
+  .canvas-wrapper {
+    height: 65%;
+  }
+  
+  .text-wrapper {
+    height: 20%;
+  }
+  
+  .text-wrapper #connectButton {
+    font-size: 300%;
+    height: 40%;
+  }
+  
+  .text-wrapper #statusText {
+    height: 30%;
+    font-size: 150%;
+  }
+}
+
+

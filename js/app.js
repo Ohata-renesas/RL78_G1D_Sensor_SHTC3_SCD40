@@ -34,19 +34,19 @@ let sensorInfo = {
   dataIsChanged   : 0,
 };
 
-let connectButton     = document.getElementById('connectButton');
-let statusText        = document.getElementById('statusText');
-let statusTextStyle   = statusText.style;
-let bgCanvas          = document.getElementById('backgroundCanvas');
-let fgCanvas          = document.getElementById('foregroundCanvas');
-let bgContext         = bgCanvas.getContext('2d');
-let fgContext         = fgCanvas.getContext('2d');
-let graphMode         = 'meter';
+let connectButton       = document.getElementById('connectButton');
+let connectButtonStyle  = connectButton.style;
+let statusText          = document.getElementById('statusText');
+let bgCanvas            = document.getElementById('backgroundCanvas');
+let fgCanvas            = document.getElementById('foregroundCanvas');
+let bgContext           = bgCanvas.getContext('2d');
+let fgContext           = fgCanvas.getContext('2d');
+let graphMode           = 'meter';
 let countOfData         = 0;
-let oldEndAngle       = new Array(maxNumberOfSensor).fill(startAngle);
-let currentEndAngle   = new Array(maxNumberOfSensor).fill(startAngle);
-let countOfRepetition = 0;
-let requestID         = null;
+let oldEndAngle         = new Array(maxNumberOfSensor).fill(startAngle);
+let currentEndAngle     = new Array(maxNumberOfSensor).fill(startAngle);
+let countOfRepetition   = 0;
+let requestID           = null;
 
 
 /** Initialization Process */
@@ -59,16 +59,17 @@ connectButton.addEventListener('click', function() {
     InitializationProcess();
     environmentalSensor.connect()
     .then(_ => {    
+      connectButtonStyle.color = renesasBlue;
       environmentalSensor.changeConnectionStatus();
       environmentalSensor.characteristic.addEventListener('characteristicvaluechanged', handleenvironmentalSensor);
     })
     .catch(error => {
-      statusTextStyle.color = renesasGray;
       statusText.innerHTML = error;
       console.log("error:" + error);
     });
   } 
   else {
+    connectButtonStyle.color = sensirionGreen;
     environmentalSensor.disconnect(); 
   }
 });
@@ -89,17 +90,14 @@ function handleenvironmentalSensor(event) {
 
   switch (sensorInfo.statusData) {
     case isInMeasurement :
-      statusTextStyle.color = renesasBlue;
       statusText.innerHTML = "Status: Measurement";
     break;
 
     case isInCalibration :
-      statusTextStyle.color = sensirionGreen;
       statusText.innerHTML = "Status: Calibration";
     break;
 
     default :
-    statusTextStyle.color = renesasGray;
       statusText.innerHTML = "Status: I2C Error";
     break;
   }
