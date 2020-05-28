@@ -35,8 +35,8 @@ let sensorInfo = {
 };
 
 let connectButton       = document.getElementById('connectButton');
-let connectButtonStyle  = connectButton.style;
 let statusText          = document.getElementById('statusText');
+let statusTextStyle     = statusText.style;
 let bgCanvas            = document.getElementById('backgroundCanvas');
 let fgCanvas            = document.getElementById('foregroundCanvas');
 let bgContext           = bgCanvas.getContext('2d');
@@ -50,17 +50,15 @@ let requestID           = null;
 
 
 /** Initialization Process */
-InitializationProcess();
+initializationProcess();
 
 /** Click connect button */
 connectButton.addEventListener('click', function() {
 
   if (!environmentalSensor.isConnected()) {
-    InitializationProcess();
+    initializationProcess();
     environmentalSensor.connect()
     .then(_ => {    
-      connectButtonStyle.color = renesasBlue;
-      connectButtonStyle.textShadow = "none";
       environmentalSensor.changeConnectionStatus();
       environmentalSensor.characteristic.addEventListener('characteristicvaluechanged', handleenvironmentalSensor);
     })
@@ -70,8 +68,6 @@ connectButton.addEventListener('click', function() {
     });
   } 
   else {
-    connectButtonStyle.color = "white";
-    connectButtonStyle.textShadow = "1px 1px 2px #2A289D, 1px -1px 2px #2A289D, -1px 1px 2px #2A289D, -1px -1px 2px #2A289D";
     environmentalSensor.disconnect(); 
   }
 });
@@ -92,20 +88,17 @@ function handleenvironmentalSensor(event) {
 
   switch (sensorInfo.statusData) {
     case isInMeasurement :
-      connectButtonStyle.color = renesasBlue;
-      connectButtonStyle.textShadow = "none";
+      statusTextStyle.color = renesasBlue;
       statusText.innerHTML = "Status: Measurement";
     break;
 
     case isInCalibration :
-      connectButtonStyle.color = sensirionGreen;
-      connectButtonStyle.textShadow = "none";
+      statusTextStyle.color = sensirionGreen;
       statusText.innerHTML = "Status: Calibration";
     break;
 
     default :
-    connectButtonStyle.color = "white";
-    connectButtonStyle.textShadow = "1px 1px 2px #2A289D, 1px -1px 2px #2A289D, -1px 1px 2px #2A289D, -1px -1px 2px #2A289D";
+      statusTextStyle.color = renesasGray;
       statusText.innerHTML = "Status: I2C Error";
     break;
   }
@@ -153,7 +146,7 @@ document.addEventListener("visibilitychange", () => {
 });
 
 /** Initialization Process */
-function InitializationProcess() {
+function initializationProcess() {
 
   sensorInfo.temperature.values     = new Array(maxDataLength).fill(null);
   sensorInfo.temperature.text.value = "000.00"; 
@@ -169,6 +162,8 @@ function InitializationProcess() {
   currentEndAngle                   = new Array(maxNumberOfSensor).fill(startAngle);
   countOfRepetition                 = 0;
   requestID                         = null;
+
+  statusTextStyle.color             = renesasGray;
 
   redrawAllCanvas();
 }

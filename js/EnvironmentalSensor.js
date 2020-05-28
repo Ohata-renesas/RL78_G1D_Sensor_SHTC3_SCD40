@@ -1,8 +1,10 @@
 (function() {
   'use strict';
 
-  const DISCONNECT      = 0;
-  const CONNECT         = 1;
+  const isDisconnected  = 0;
+  const isConnected     = 1;
+  const backgroundColor = "white";
+  const textShadow      = "1px 1px 5px #333333, 1px -1px 5px #333333, -1px 1px 5px #333333, -1px -1px 5px #333333"; 
 
   class EnvironmentalSensor {
     constructor() {
@@ -12,7 +14,7 @@
       this.userDeviceName           = 'RL78G1D';
       this.userServiceUUID          = '92b60060-fa5f-4dcc-9312-d8f3dad1675f';
       this.userCharacteristicUUID   = '92b60125-fa5f-4dcc-9312-d8f3dad1675f';
-      this.connectionStatus         = DISCONNECT;
+      this.connectionStatus         = isDisconnected;
     }
 
     connect() {   
@@ -69,7 +71,7 @@
       } 
       else {
        var error = "Please click again.";
-       this.connectionStatus = DISCONNECT;
+       this.connectionStatus = isDisconnected;
        document.getElementById('connectButton').innerHTML = "CONNECT";
        document.getElementById('statusText').innerHTML = "Status: " + error;
        console.log('Error : ' + error);
@@ -79,7 +81,10 @@
     }
 
     onDisconnected(event) {
+      document.getElementById('connectButton').style.color = backgroundColor;
+      document.getElementById('connectButton').style.textShadow = textShadow;
       document.getElementById('connectButton').innerHTML = "CONNECT";
+      document.getElementById('statusText').style.color = renesasGray;
       document.getElementById('statusText').innerHTML = "Status: Disconnect the device";
     }
 
@@ -90,15 +95,21 @@
     changeConnectionStatus() {
       
       switch (this.connectionStatus) {
-        case CONNECT :
-          this.connectionStatus = DISCONNECT;
+        case isConnected :
+          this.connectionStatus = isDisconnected;
+          document.getElementById('connectButton').style.color = backgroundColor;
+          document.getElementById('connectButton').style.textShadow = textShadow;
           document.getElementById('connectButton').innerHTML = "CONNECT";
+          document.getElementById('statusText').style.color = renesasGray;
           document.getElementById('statusText').innerHTML = "Status: Disconnect the device";
         break;
 
-        case DISCONNECT :
-          this.connectionStatus = CONNECT;
+        case isDisconnected :
+          this.connectionStatus = isConnected;
+          document.getElementById('connectButton').style.color = renesasGray;
+          document.getElementById('connectButton').style.textShadow = "none";
           document.getElementById('connectButton').innerHTML = "DISCONNECT";
+          document.getElementById('statusText').style.color = renesasBlue;
           document.getElementById('statusText').innerHTML = "Status: Measurement";
          break;
 
