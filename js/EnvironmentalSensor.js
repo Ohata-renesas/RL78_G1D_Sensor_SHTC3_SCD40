@@ -21,21 +21,25 @@
       return this.connectDevice()
       .then(server => {
         document.getElementById('statusText').innerHTML = "Status: Get the service";
+        console.log("Get the service");
         return server.getPrimaryService(this.userServiceUUID);
       })
       .then(service => {
         document.getElementById('statusText').innerHTML = "Status: Get the characateristic";
+        console.log("Get the Characteristic");
         return service.getCharacteristic(this.userCharacteristicUUID);
       })
       .then(characteristic => {
         this.characteristic = characteristic;
         document.getElementById('statusText').innerHTML = "Status: Start notification";
+        console.log("Start notification");
         return characteristic.startNotifications();
       })      
     }
 
     connectDevice() {
       if (!this.device) {
+        console.log("Search the device");
         return navigator.bluetooth.requestDevice({
           filters: [{
             name:  this.userDeviceName
@@ -51,6 +55,7 @@
       }
       else {
         document.getElementById('statusText').innerHTML = "Status: Connect the device";
+        console.log("Use the device information that you already have");
         return this.device.gatt.connect();
       }
     }
@@ -66,7 +71,6 @@
       if (this.device.gatt.connected) {
         this.changeConnectionStatus();
         console.log('Execute : disconnect');
-        
         return this.device.gatt.disconnect();
       } 
       else {
@@ -77,7 +81,6 @@
        console.log('Error : ' + error);
        return;
       }   
-
     }
 
     onDisconnected(event) {

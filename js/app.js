@@ -48,29 +48,35 @@ let currentEndAngle     = new Array(maxNumberOfSensor).fill(startAngle);
 let countOfRepetition   = 0;
 let requestID           = null;
 
-
-/** Initialization Process */
-initializationProcess();
-
-/** Click connect button */
-connectButton.addEventListener('click', function() {
-
+/** Click connect button event */
+const clickConnectButton = () => {
   if (!environmentalSensor.isConnected()) {
-    initializationProcess();
+    connectButton.removeEventListener('click', clickConnectButton);
+    initializationProcess();    
     environmentalSensor.connect()
     .then(_ => {    
+      connectButton.addEventListener('click', clickConnectButton);
       environmentalSensor.changeConnectionStatus();
       environmentalSensor.characteristic.addEventListener('characteristicvaluechanged', handleenvironmentalSensor);
     })
     .catch(error => {
+      connectButton.addEventListener('click', clickConnectButton);
       statusText.innerHTML = error;
       console.log("error:" + error);
     });
   } 
   else {
+    connectButton.removeEventListener('click', clickConnectButton);
     environmentalSensor.disconnect(); 
+    connectButton.addEventListener('click', clickConnectButton);
   }
-});
+};
+
+/** Add click event  */
+connectButton.addEventListener('click', clickConnectButton);
+
+/** Initialization Process */
+initializationProcess();
 
 /** Handle environmental sensor */
 function handleenvironmentalSensor(event) {
