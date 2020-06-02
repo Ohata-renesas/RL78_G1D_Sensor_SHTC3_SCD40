@@ -30,8 +30,8 @@ let sensorInfo = {
                      text     : {name  : "CO2", 
                                  value : "00000", 
                                  unit  : "[ppm]"}},
-  statusData      : 0,
-  dataIsChanged   : 0,
+  statusData      : isInMeasurement,
+  dataIsChanged   : null,
 };
 
 let connectButton       = document.getElementById('connectButton');
@@ -160,8 +160,8 @@ function initializationProcess() {
   sensorInfo.humidity.text.value    = "000.00"; 
   sensorInfo.co2.values             = new Array(maxDataLength).fill(null);
   sensorInfo.co2.text.value         = "00000"; 
-  sensorInfo.statusData             = 0;
-  sensorInfo.dataIsChanged          = 0;
+  sensorInfo.statusData             = isInMeasurement;
+  sensorInfo.dataIsChanged          = null;
 
   countOfData                       = 0;
   oldEndAngle                       = new Array(maxNumberOfSensor).fill(startAngle);
