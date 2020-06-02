@@ -1,5 +1,7 @@
 const isInMeasurement       = 0;
 const isInCalibration       = 1;
+const isI2cError            = 2;
+const isDataError           = 3;
 const maxDataLength         = 30;
 const maxNumberOfSensor     = 3;
 const maxNumberOfRepetition = 15;
@@ -95,17 +97,27 @@ function handleenvironmentalSensor(event) {
   switch (sensorInfo.statusData) {
     case isInMeasurement :
       statusTextStyle.color = renesasBlue;
-      statusText.innerHTML = "Status: Measurement";
+      statusText.innerHTML  = "Status: Measurement";
     break;
 
     case isInCalibration :
       statusTextStyle.color = sensirionGreen;
-      statusText.innerHTML = "Status: Calibration";
+      statusText.innerHTML  = "Status: Calibration";
+    break;
+
+    case isI2cError :
+      statusTextStyle.color = renesasGray;
+      statusText.innerHTML  = "Status: I2C Error";
+    break;
+
+    case isDataError :
+      statusTextStyle.color = renesasGray;
+      statusText.innerHTML  = "Status: Data Error";
     break;
 
     default :
       statusTextStyle.color = renesasGray;
-      statusText.innerHTML = "Status: I2C Error";
+      statusText.innerHTML  = "Status: Unknown Error";
     break;
   }
   redrawAllCanvas();  
@@ -300,9 +312,17 @@ function drawBgPointsAndLines(id, context, graphInfo) {
       context.fillStyle = sensirionGreen;
     break;
 
+    case isI2cError :
+      context.fillStyle = renesasGray;
+    break;
+  
+    case isDataError :
+      context.fillStyle = renesasGray;
+    break;
+  
     default :
       context.fillStyle = renesasGray;
-      console.log("I2C Error");
+      console.log("Unknown Error");
     break;
   }
 
@@ -393,9 +413,17 @@ function drawFgMeterGraph(id, context, graphInfo) {
       context.strokeStyle = sensirionGreen;
     break;
 
+    case isI2cError :
+      context.strokeStyle = renesasGray;
+    break;
+  
+    case isDataError :
+      context.strokeStyle = renesasGray;
+    break;
+  
     default :
       context.strokeStyle = renesasGray;
-      console.log("I2C Error");
+      console.log("Unknown Error");
     break;
   }
 
