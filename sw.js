@@ -1,10 +1,10 @@
 
 'use strict';
 
-const CACHE_VERSION   = 'v0.8.2';
+const CACHE_VERSION   = 'v0.8.5';
 const CACHE_NAME      = 'static-cache-' + CACHE_VERSION;
 
-// キャッシュするファイルをセットする
+// Set files that need to be cached
 const filesToCache = [
   '.',
   './index.html',
@@ -21,7 +21,7 @@ const filesToCache = [
   './js/app.js',
 ];
 
-
+/** Add install event */
 self.addEventListener('install', (event) => {
   console.log('[ServiceWorker] Install');
   event.waitUntil(
@@ -34,6 +34,7 @@ self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
 
+/** Add activate event */
 self.addEventListener('activate', (event) => {
   console.log('[ServiceWorker] Activate');
   event.waitUntil(
@@ -49,6 +50,7 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
+/** Add fetch event */
 self.addEventListener('fetch', (event) => {
   console.log('[ServiceWorker] Fetch', event.request.url);
   event.respondWith(

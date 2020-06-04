@@ -1,9 +1,13 @@
 (function() {
     'use strict';
 
+    /** Class that draw canvas */
     class DrawCanvas {
-        constructor() {}
+        constructor() {
+            // nothing
+        }
     
+        /** Calcuate canvas width */
         calculateWidth(canvas) {
             if (canvas) {
                 // slice(0, -2) => remove unit[px]
@@ -14,6 +18,7 @@
             }
         }
     
+        /** Calculate canvas height */
         calculateHeight(canvas) {
             if (canvas) {
                 // slice(0, -2) => remove unit[px]
@@ -24,6 +29,7 @@
             }
         }
 
+        /** Draw a text */
         drawText(context, text, x, y, fontSize) {
             if (context) {
                 context.font = fontSize + "px" + " " + "sans-serif";
@@ -34,6 +40,7 @@
             }
         }
     
+        /** Draw a circle */
         drawCircle(context, x, y, radius) {
             if (context) {         
                 context.beginPath();       
@@ -45,6 +52,7 @@
             }
         }
           
+        /** Draw a arc */
         drawArc(context, x, y, radius, startAngle, endAngle) {
             if (context) {
                 context.beginPath();
@@ -57,6 +65,7 @@
 
         }
           
+        /** Draw a line */
         drawLine(context, startX, startY, endX, endY) {
             if (context) {
                 context.beginPath();
@@ -69,6 +78,7 @@
             }
         }
         
+        /** Draw a point */
         drawPoint(context, x, y, radius) {
             if (context) {
                 context.beginPath();
@@ -80,6 +90,7 @@
             }
         }
         
+        /** Clear canvas */
         clearCanvas(context, width, height) {
             if (context) {
                 context.clearRect(0, 0, width, height);
@@ -90,6 +101,7 @@
         }
     }
     
+    // Set class as window property
     window.drawCanvas = new DrawCanvas();
 
 })();

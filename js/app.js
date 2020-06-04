@@ -52,36 +52,45 @@ let requestID           = null;
 
 /** Click connect button event */
 const clickConnectButton = () => {
-  if (!environmentalSensor.isConnected()) {
-    connectButton.removeEventListener('click', clickConnectButton);
-    initializationProcess();    
-    environmentalSensor.connect()
-    .then(_ => {    
+  connectButton.removeEventListener('click', clickConnectButton);
+
+  switch (environmentalSensor.connectionStatus) {
+    case window.isDisconnected :
+      initializationProcessing();  
+      environmentalSensor.connect()
+      .then(_ => {    
+        connectButton.addEventListener('click', clickConnectButton);
+      })
+      .catch(error => {
+        connectButton.addEventListener('click', clickConnectButton);
+        statusText.innerHTML = error;
+        console.log("error:" + error);
+      });
+    break;
+
+    case window.isConnected :
+      environmentalSensor.disconnect(); 
       connectButton.addEventListener('click', clickConnectButton);
-      environmentalSensor.changeConnectionStatus();
-      environmentalSensor.characteristic.addEventListener('characteristicvaluechanged', handleenvironmentalSensor);
-    })
-    .catch(error => {
+    break;
+
+    case window.isInReconnection :
+      environmentalSensor.reset();
       connectButton.addEventListener('click', clickConnectButton);
-      statusText.innerHTML = error;
-      console.log("error:" + error);
-    });
-  } 
-  else {
-    connectButton.removeEventListener('click', clickConnectButton);
-    environmentalSensor.disconnect(); 
-    connectButton.addEventListener('click', clickConnectButton);
+    break;
+
+    default:
+      connectButton.addEventListener('click', clickConnectButton);
+    break;
   }
 };
 
-/** Add click event  */
+/** Initial Processing */
 connectButton.addEventListener('click', clickConnectButton);
-
-/** Initialization Process */
-initializationProcess();
+environmentalSensor.setHandler(handleEnvironmentalSensor);
+initializationProcessing();
 
 /** Handle environmental sensor */
-function handleenvironmentalSensor(event) {
+function handleEnvironmentalSensor(event) {
   let result = environmentalSensor.parseSensorData(event.target.value);
 
   if (sensorInfo.dataIsChanged != result.dataIsChanged) {
@@ -164,7 +173,7 @@ document.addEventListener("visibilitychange", () => {
 });
 
 /** Initialization Process */
-function initializationProcess() {
+function initializationProcessing() {
 
   sensorInfo.temperature.values     = new Array(maxDataLength).fill(null);
   sensorInfo.temperature.text.value = "000.00"; 
